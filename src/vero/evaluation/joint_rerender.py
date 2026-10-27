@@ -33,6 +33,7 @@ from vero.generation.extractor import (
     slots_by,
     solution_slot,
 )
+from vero.generation.proof_materialize import _spec_import
 
 JointStatus = Literal[
     "no_claim",
@@ -79,9 +80,10 @@ def _parse_spec_list(solution_body: list[str]) -> tuple[str, ...] | None:
 
 
 def _spec_to_module(bench: Benchmark, spec: str) -> str | None:
+    """Resolve the actual Spec import, exactly as the proof stubs do."""
     for m in bench.iter_modules():
         if spec in m.specs:
-            return m.name
+            return _spec_import(m.package, m.name, m.spec_rel)
     return None
 
 
@@ -103,7 +105,7 @@ def _render_joint_check(
     # claim (a twin definition of the same theorem → name collision).
     import_lines = [f"import {pkg}.Harness"]
     for m in sorted(needed_modules):
-        import_lines.append(f"import {pkg}.Spec.{m}")
+        import_lines.append(f"import {m}")
 
     lines: list[str] = list(import_lines) + [""]
 
@@ -125,8 +127,7 @@ def _render_joint_check(
     # Indent each body line by 2 spaces ONLY if not already indented at all.
     # Simpler: pass through verbatim — tactic blocks in Lean accept arbitrary indent
     # as long as it's consistent and greater than the `by` column.
-    for ln in proof_body:
-        lines.append(ln)
+    lines.extend(proof_body)
     lines.append("")
     lines.append(f"#print axioms {thm_name}")
 
