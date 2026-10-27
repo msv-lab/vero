@@ -1,12 +1,11 @@
 # Resolve joint-check imports from the manifest
 
-Joint checks currently compose imports from the root package and module name. This fails for nested layouts such as Flocq/Core/Spec/FLT.lean and for modules in another package.
+Joint checks compose imports from the root package and module name, breaking nested layouts and modules in another package. Reuse the existing proof materializer resolver; preserve specifications, proof bodies and grading rules.
 
-Reuse the existing proof materializer path resolver. Preserve the selected specifications, proof bodies, grading rules and flat-layout fallback. Add regression coverage over every real benchmark specification module and a two-package fixture. Run focused generation/evaluation tests and formatting checks. No benchmark edits, model calls, publishing or changes to Alaya PR #81 are included.
+Keep four focused import-rendering cases: Flocq, Json, flat-layout fallback, and same-named modules in different packages. Keep the equivalent list.extend cleanup. No benchmark or Alaya changes.
 
 ## Validation
 
-- The new tests fail on the original code: 28 failures and 144 passes, including 27 real nested specification modules and the multi-package fixture.
-- After the fix, the joint-check and proof-materialization tests pass: 183 tests.
-- Ruff check, Ruff format check and git diff --check pass for the changed files.
-- This validates rendered imports and materialization; it does not claim a full Mathlib compilation or an experiment rerun.
+- The initial full-corpus probe found 27 real nested-module failures and a multi-package failure on the original code; the initial fixed suite passed 183 tests. These are historical results, not the size of the narrowed suite.
+- The narrowed cases give 3 failures and 1 pass on the original renderer (flat fallback remains compatible). With the fix, all 20 joint/proof-materialization tests pass; changed-file Ruff, formatting and git diff --check pass.
+- Validation covers generated imports and materialization, not a full Mathlib build or an experiment rerun.
