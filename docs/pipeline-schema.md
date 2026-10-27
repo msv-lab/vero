@@ -577,14 +577,14 @@ Key fields:
 - `source.*` fields are placeholder-nullable for hand-crafted references. Curated benchmarks populate them from upstream.
 - `files` block lists benchmark-singleton paths (not per-package). Paths are relative to the Lean project directory (same dir as `lakefile.toml`).
 - `packages[].modules[].apis[]` entries carry `name` (fn name as `Bank.<name>`), `sig` (sig abbrev), `type` (the abbrev's body), and an optional `kind` which is `"api"` (default) or `"api_helper"`. An `api_helper` entry has no sig abbrev requirement and no `!benchmark code` slot requirement, and the LLM writes its body free-form.
-- `packages[].modules[].api_helpers[]` (optional, default `[]`) is an alternative home for `api_helper` entries when you want them clearly separated from the signature-constrained `apis`. Each entry is `{"name": "<fn>"}`; no sig or type required. Entries classified as `spec_helper` with `disposition: "provided"` are fixed definitions: keep their bodies and required support predicates outside editable markers so codeproof blanking preserves them. Listing a helper here does not add an implementation slot to the submission schedule.
+- `packages[].modules[].api_helpers[]` (optional, default `[]`) is an alternative home for `api_helper` entries when you want them clearly separated from the signature-constrained `apis`. Each entry is `{"name": "<fn>"}`; no sig or type required.
 - `packages[].modules[].specs[]` lists proof-obligation names (strings). Entries may also be `{"name": "<spec>", "kind": "spec"}`; helpers referenced by specs go in `spec_helpers`.
 - `packages[].modules[].spec_helpers[]` (optional, default `[]`) lists predicate/property definitions used inside specs or APIs. Strings or `{"name": ..., "kind": "spec_helper"}` objects. These are not proof obligations; the validator skips them.
 - `packages[].modules[].apis[]` and `specs[]` may carry the same
   role/disposition/source metadata as `plan.json`. The validator uses
   it to reject unreviewed axiomization and weakened source-theorem
   translations.
-- Files with zero `apis[]` entries (no fillable APIs) are treated as frozen context. The validator will not require `!benchmark` markers on such files and will warn if any markers are present. The submission schedule includes only `imports` / `global_aux` headers actually present in the trusted benchmark source; a marker-free file contributes no Impl slots. Existing header slots remain editable, but agent-added markers cannot grant new permissions. Modules with APIs still require both headers and each manifest API's `code_aux` / `code` slots.
+- Files with zero `apis[]` entries (no fillable APIs) are treated as frozen context. The validator will not require `!benchmark` markers on such files and will warn if any markers are present (the agent cannot modify a marker-free file by convention).
 - `packages[].bundle_type` and `repo_impl_field` let generators know the Lean identifiers without inferring from filenames.
 - `trusted_axioms` (optional; default `[]`) lists fully-qualified axiom names declared anywhere in the benchmark (e.g. in `Impl/Core.lean`) that the evaluator should treat as trusted. Proofs depending on these axioms grade as `passed` alongside the standard Lean trio (`Classical.choice`, `propext`, `Quot.sound`). The axiom check still rejects `sorryAx` and any axiom not in the allowlist.
 
