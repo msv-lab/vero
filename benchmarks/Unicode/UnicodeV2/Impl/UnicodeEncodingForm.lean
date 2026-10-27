@@ -70,13 +70,14 @@ abbrev UefDecodeCodeUnitSequenceCheckedSig :=
 
 end Unicode
 
--- !benchmark @start global_aux
+-- Fixed support for the provided well-formedness predicate.
 -- Helper: test whether a Nat is a valid scalar value code point.
 private def isValidScalarCodePoint (n : Nat) : Bool :=
   n ≤ 0x10FFFF &&
   !(HIGH_SURROGATE_MIN ≤ n && n ≤ HIGH_SURROGATE_MAX) &&
   !(LOW_SURROGATE_MIN  ≤ n && n ≤ LOW_SURROGATE_MAX)
 
+-- !benchmark @start global_aux
 -- Fallback scalar value: U+0000 (NULL character).
 private def nullScalarValue : ScalarValue :=
   ⟨⟨0, by omega⟩,
@@ -97,16 +98,12 @@ private def natToScalarValue (n : Nat) : ScalarValue :=
 
 -- ── Implementation stubs ───────────────────────────────────────────────
 
--- !benchmark @start code_aux def=uefIsMinimalWellFormedCodeUnitSubsequence
--- !benchmark @end code_aux def=uefIsMinimalWellFormedCodeUnitSubsequence
-
+-- Provided spec predicate (fixed vocabulary; not a fillable API).
 def Unicode.uefIsMinimalWellFormedCodeUnitSubsequence : Unicode.UefIsMinimalWellFormedCodeUnitSubsequenceSig :=
--- !benchmark @start code def=uefIsMinimalWellFormedCodeUnitSubsequence
   fun s =>
     match s with
     | [n] => isValidScalarCodePoint n
     | _   => false
--- !benchmark @end code def=uefIsMinimalWellFormedCodeUnitSubsequence
 
 -- !benchmark @start code_aux def=uefSplitPrefixMinimalWellFormedCodeUnitSubsequence
 -- !benchmark @end code_aux def=uefSplitPrefixMinimalWellFormedCodeUnitSubsequence
