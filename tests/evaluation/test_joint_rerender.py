@@ -2,7 +2,11 @@
 
 from __future__ import annotations
 
-from vero.evaluation.joint_rerender import _parse_spec_list
+from types import SimpleNamespace
+
+import pytest
+
+from vero.evaluation.joint_rerender import _parse_spec_list, _render_joint_check
 
 
 def test_default_placeholder_returns_none() -> None:
@@ -37,3 +41,36 @@ def test_list_can_span_lines() -> None:
     result = _parse_spec_list(body)
     # Either parses both or just the first (acceptable v1 behavior).
     assert result is None or result[0] == "spec_a"
+
+
+@pytest.mark.parametrize(
+    ("root", "module_paths", "expected"),
+    [
+        (
+            "Flocq",
+            [("Flocq", "Core/FLT", "Flocq/Core/Spec/FLT.lean")],
+            ["Flocq.Core.Spec.FLT"],
+        ),
+        ("Root", [("Root", "Core", None)], ["Root.Spec.Core"]),
+    ],
+    ids=["flocq", "flat-fallback"],
+)
+def test_joint_imports(root, module_paths, expected) -> None:
+    # The pure renderer needs only these manifest fields; no files or Lean setup.
+    modules = [
+        SimpleNamespace(package=package, name=name, spec_rel=path, specs=(f"spec_{i}",))
+        for i, (package, name, path) in enumerate(module_paths)
+    ]
+    bench = SimpleNamespace(root_package=root, iter_modules=lambda: iter(modules))
+    text, _ = _render_joint_check(
+        bench,
+        tuple(module.specs[0] for module in modules),
+        proof_body=["  exact joint_proof"],
+        proof_aux_body=[],
+        global_aux_body=[],
+        imports_body=[],
+    )
+    assert [line for line in text.splitlines() if line.startswith("import ")] == [
+        f"import {root}.Harness",
+        *[f"import {name}" for name in expected],
+    ]
