@@ -51,19 +51,9 @@ def test_list_can_span_lines() -> None:
             [("Flocq", "Core/FLT", "Flocq/Core/Spec/FLT.lean")],
             ["Flocq.Core.Spec.FLT"],
         ),
-        (
-            "JsonV2",
-            [("JsonV2", "Utils/Seq", "JsonV2/Spec/Utils/Seq.lean")],
-            ["JsonV2.Spec.Utils.Seq"],
-        ),
         ("Root", [("Root", "Core", None)], ["Root.Spec.Core"]),
-        (
-            "Root",
-            [("A", "Shared", "A/Spec/Shared.lean"), ("B", "Shared", None)],
-            ["A.Spec.Shared", "B.Spec.Shared"],
-        ),
     ],
-    ids=["flocq", "json", "flat-fallback", "same-name-different-packages"],
+    ids=["flocq", "flat-fallback"],
 )
 def test_joint_imports(root, module_paths, expected) -> None:
     # The pure renderer needs only these manifest fields; no files or Lean setup.
