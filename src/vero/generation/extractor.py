@@ -169,23 +169,16 @@ def expected_slots(bench: Benchmark, mode: Mode) -> list[ExpectedSlot]:
     for m in bench.iter_modules():
         if m.impl_rel is None:
             continue
-        # No-API modules may be frozen vocabulary, with no markers or only
-        # an imports slot. Read their permissions from the trusted source,
-        # never from the agent's sandbox. API modules retain strict headers.
-        headers = {"imports", "global_aux"}
-        if not m.apis:
-            headers = {
-                slot.key
-                for slot in load_slots(bench.root / m.impl_rel)
-                if slot.prefix == "benchmark" and slot.def_name is None
-            }
-        for key in ("imports", "global_aux"):
-            if key in headers:
-                out.append(
-                    ExpectedSlot(
-                        file=m.impl_rel, prefix="benchmark", key=key, def_name=None
-                    )
-                )
+        out.append(
+            ExpectedSlot(
+                file=m.impl_rel, prefix="benchmark", key="imports", def_name=None
+            )
+        )
+        out.append(
+            ExpectedSlot(
+                file=m.impl_rel, prefix="benchmark", key="global_aux", def_name=None
+            )
+        )
         for api in m.apis:
             out.append(
                 ExpectedSlot(
