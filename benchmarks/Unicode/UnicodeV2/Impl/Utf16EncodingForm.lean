@@ -13,9 +13,7 @@ A UTF-16 code unit is a 16-bit unsigned integer. Scalar values in the BMP
 values in supplementary planes (U+10000–U+10FFFF) are encoded as a high-surrogate
 / low-surrogate pair (Table 3-5).
 
-Types and signatures are fixed vocabulary (DO NOT MODIFY). Function bodies are
-the curator's reference implementations; the pipeline replaces them with `sorry`
-inside the `code` markers before presenting the benchmark to the LLM.
+Types, signatures, and the provided well-formedness predicate are fixed vocabulary (DO NOT MODIFY). Reference implementations inside `code` markers become `sorry` in codeproof mode.
 -/
 
 -- ── Type (DO NOT MODIFY) ─────────────────────────────────────────────────────
@@ -51,12 +49,9 @@ end Unicode
 
 -- ── Implementation stubs (LLM task) ──────────────────────────────────────────
 
--- !benchmark @start code_aux def=utf16IsMinimalWellFormedCodeUnitSubsequence
--- !benchmark @end code_aux def=utf16IsMinimalWellFormedCodeUnitSubsequence
-
+-- Provided spec predicate (fixed vocabulary; not a fillable API).
 def Unicode.utf16IsMinimalWellFormedCodeUnitSubsequence
     : Unicode.Utf16IsMinimalWellFormedCodeUnitSubsequenceSig :=
--- !benchmark @start code def=utf16IsMinimalWellFormedCodeUnitSubsequence
   fun s =>
     match s with
     | [w] =>
@@ -69,7 +64,6 @@ def Unicode.utf16IsMinimalWellFormedCodeUnitSubsequence
       let v2 := w2.toNat
       decide (0xD800 ≤ v1 ∧ v1 ≤ 0xDBFF) && decide (0xDC00 ≤ v2 ∧ v2 ≤ 0xDFFF)
     | _ => false
--- !benchmark @end code def=utf16IsMinimalWellFormedCodeUnitSubsequence
 
 -- !benchmark @start code_aux def=utf16SplitPrefixMinimalWellFormedCodeUnitSubsequence
 -- !benchmark @end code_aux def=utf16SplitPrefixMinimalWellFormedCodeUnitSubsequence

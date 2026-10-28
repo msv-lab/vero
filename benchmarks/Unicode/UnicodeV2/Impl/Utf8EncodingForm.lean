@@ -11,9 +11,7 @@ Maps each Unicode scalar value to a byte sequence of one to four unsigned
 bytes. Well-formedness checks follow the bit patterns in Table 3-7 of the
 Unicode Standard, Section 3.9.
 
-Types and signatures are fixed vocabulary (DO NOT MODIFY). Function bodies
-are the curator's reference implementations; the pipeline replaces them with
-`sorry` inside the `code` markers before presenting the benchmark to the LLM.
+Types, signatures, and the provided well-formedness predicate are fixed vocabulary (DO NOT MODIFY). Reference implementations inside `code` markers become `sorry` in codeproof mode.
 -/
 
 -- ── Type (DO NOT MODIFY) ──────────────────────────────────────────────────────
@@ -39,14 +37,7 @@ abbrev Utf8DecodeMinimalWellFormedCodeUnitSubsequenceSig :=
 
 end Unicode
 
--- !benchmark @start global_aux
-
-/-- The Unicode scalar value U+0000 (null), used as a fallback return value when
-    the UTF-8 decode input is not a valid minimal well-formed sequence. -/
-private def nullSV : ScalarValue :=
-  ⟨⟨0, by decide⟩,
-   ⟨Or.inl (by decide), Or.inl (by decide)⟩⟩
-
+-- Fixed support for the provided well-formedness predicate.
 /-- Check that a 1-element byte list is a well-formed 1-byte UTF-8 sequence.
     Valid range for the leading byte: 0x00–0x7F. -/
 private def utf8WellFormed1 : List UInt8 → Bool
@@ -95,17 +86,20 @@ private def utf8WellFormed4 : List UInt8 → Bool
     Nat.ble 0x80 n3 && n3.ble 0xBF
   | _ => false
 
+-- !benchmark @start global_aux
+/-- The Unicode scalar value U+0000 (null), used as a fallback return value when
+    the UTF-8 decode input is not a valid minimal well-formed sequence. -/
+private def nullSV : ScalarValue :=
+  ⟨⟨0, by decide⟩,
+   ⟨Or.inl (by decide), Or.inl (by decide)⟩⟩
+
 -- !benchmark @end global_aux
 
--- !benchmark @start code_aux def=utf8IsMinimalWellFormedCodeUnitSubsequence
--- !benchmark @end code_aux def=utf8IsMinimalWellFormedCodeUnitSubsequence
-
+-- Provided spec predicate (fixed vocabulary; not a fillable API).
 def Unicode.utf8IsMinimalWellFormedCodeUnitSubsequence :
     Unicode.Utf8IsMinimalWellFormedCodeUnitSubsequenceSig :=
--- !benchmark @start code def=utf8IsMinimalWellFormedCodeUnitSubsequence
   fun s =>
     utf8WellFormed1 s || utf8WellFormed2 s || utf8WellFormed3 s || utf8WellFormed4 s
--- !benchmark @end code def=utf8IsMinimalWellFormedCodeUnitSubsequence
 
 -- !benchmark @start code_aux def=utf8SplitPrefixMinimalWellFormedCodeUnitSubsequence
 -- !benchmark @end code_aux def=utf8SplitPrefixMinimalWellFormedCodeUnitSubsequence
