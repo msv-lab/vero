@@ -45,7 +45,6 @@ end Flocq
 -- !benchmark @start global_aux
 -- !benchmark @end global_aux
 
--- !benchmark @start code_aux def=zdigitsAux
 -- Helper: iterate at most `fuel` steps, counting the number of base-`beta`
 -- digits needed to represent `absN`.  `nb` is the current digit count and
 -- `pow` is `beta ^ nb`.  Returns `nb` as soon as `absN < pow`.
@@ -54,6 +53,7 @@ def zdigitsAuxCore (absN beta nb pow : Int) : Nat → Int
   | k + 1 =>
     if absN < pow then nb
     else zdigitsAuxCore absN beta (nb + 1) (beta * pow) k
+-- !benchmark @start code_aux def=zdigitsAux
 -- !benchmark @end code_aux def=zdigitsAux
 
 -- !benchmark @start code_aux def=digits2Pnat
