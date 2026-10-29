@@ -73,9 +73,9 @@ noncomputable def RleBool (x y : ℝ) : Bool :=
 noncomputable def ReqBool (x y : ℝ) : Bool :=
   if x = y then true else false
 
+-- !benchmark @end global_aux
 noncomputable def Zaway (x : ℝ) : Int :=
   if x < 0 then Zfloor x else Zceil x
--- !benchmark @end global_aux
 
 -- !benchmark @start code_aux def=rcompare
 -- !benchmark @end code_aux def=rcompare
