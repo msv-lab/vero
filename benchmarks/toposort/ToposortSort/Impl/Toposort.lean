@@ -118,6 +118,7 @@ def Toposort.kahnLoop
       -- Remove ordered items; strip them from remaining dependency sets.
       let newData := Toposort.removeReadyLayer ordered data
       Toposort.kahnLoop newData (ordered :: acc) fuel'
+-- !benchmark @end global_aux
 
 /-- Convert a layer set to the list used by `toposort_flatten`.  Python's
     `sort=True` uses `sorted(d)`, while `sort=False` uses the set's
@@ -130,7 +131,6 @@ def Toposort.layerElems [Ord α] (sort : Bool) (s : Std.HashSet α) : List α :=
     public `toposort_flatten` API. -/
 def Toposort.flattenLayers [Ord α] (sort : Bool) (levels : List (Std.HashSet α)) : List α :=
   levels.flatMap (Toposort.layerElems sort)
--- !benchmark @end global_aux
 
 -- ── API implementations (LLM task inside code markers) ────────────
 --

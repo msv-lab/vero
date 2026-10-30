@@ -97,6 +97,7 @@ end Huffman
 
 axiom Huffman.huffman_witness : Huffman.HuffmanSig
 
+noncomputable def Huffman.huffman : Huffman.HuffmanSig :=
 -- !benchmark @start code def=huffman
-noncomputable def Huffman.huffman : Huffman.HuffmanSig := Huffman.huffman_witness
+  Huffman.huffman_witness
 -- !benchmark @end code def=huffman

@@ -50,8 +50,9 @@ end Huffman
 
 axiom Huffman.build_fun_witness : Huffman.BuildFunSig
 
+noncomputable def Huffman.build_fun : Huffman.BuildFunSig :=
 -- !benchmark @start code def=build_fun
-noncomputable def Huffman.build_fun : Huffman.BuildFunSig := Huffman.build_fun_witness
+  Huffman.build_fun_witness
 -- !benchmark @end code def=build_fun
 
 -- !benchmark @start code_aux def=buildf
@@ -59,8 +60,9 @@ noncomputable def Huffman.build_fun : Huffman.BuildFunSig := Huffman.build_fun_w
 
 axiom Huffman.buildf_witness : Huffman.BuildfSig
 
+noncomputable def Huffman.buildf : Huffman.BuildfSig :=
 -- !benchmark @start code def=buildf
-noncomputable def Huffman.buildf : Huffman.BuildfSig := Huffman.buildf_witness
+  Huffman.buildf_witness
 -- !benchmark @end code def=buildf
 
 -- !benchmark @start code_aux def=obuildf
@@ -68,6 +70,7 @@ noncomputable def Huffman.buildf : Huffman.BuildfSig := Huffman.buildf_witness
 
 axiom Huffman.obuildf_witness : Huffman.ObuildfSig
 
+noncomputable def Huffman.obuildf : Huffman.ObuildfSig :=
 -- !benchmark @start code def=obuildf
-noncomputable def Huffman.obuildf : Huffman.ObuildfSig := Huffman.obuildf_witness
+  Huffman.obuildf_witness
 -- !benchmark @end code def=obuildf
