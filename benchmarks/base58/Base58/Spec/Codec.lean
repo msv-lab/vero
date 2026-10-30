@@ -134,6 +134,10 @@ def isCanonicalByteEncodingGT (s : String) : Bool :=
 -- decodeInt: the positional-value oracle and its laws.
 -- ════════════════════════════════════════════════════════════════
 
+end Base58Spec
+
+open Base58Spec
+
 /-- Positional value: `decodeInt s` equals the frozen positional value of `s`
     over the frozen alphabet — `Σ idx(cᵢ) · 58^(k-1-i)`. Exactly one correct
     value for each string. -/
@@ -520,6 +524,8 @@ def spec_decode_byte_length_band (impl : RepoImpl) : Prop :=
 -- quantities.
 -- ════════════════════════════════════════════════════════════════
 
+namespace Base58Spec
+
 /-- The frozen fixed-width base58 numeral for `n` in `k` digits: the base-58
     digit-value expansion of `n` left-padded with `'1'` (zero) digits to width
     `k`, mapped through the frozen alphabet. -/
@@ -579,6 +585,8 @@ def validNumeralCanonicalFormGT (s : String) : String :=
   match rest.toList with
   | [] => "1"
   | _ => rest
+
+end Base58Spec
 
 /-- Concatenation Horner law: for valid numerals `s` (value `p`) and `t` (value
     `q`), `decodeInt (s ++ t) = p · 58^|t| + q` — appending `t` shifts `s` by one
@@ -673,5 +681,3 @@ def spec_decode_int_reencode_valid_canonical_form (impl : RepoImpl) : Prop :=
     allValid s = true →
       impl.base58.decodeInt s = some n →
         impl.base58.encodeInt n = validNumeralCanonicalFormGT s
-
-end Base58Spec
