@@ -1,11 +1,11 @@
 import DedekindReals.Bundle
 
-namespace DedekindReals
+open DedekindReals
 
 structure RepoImpl where
   dedekindReals : DedekindRealsBundle
 
-def canonicalDedekindReals : DedekindRealsBundle where
+def DedekindReals.canonicalDedekindReals : DedekindRealsBundle where
   Rlt := Rlt
   Rle := Rle
   Req := Req
@@ -26,6 +26,8 @@ def canonicalDedekindReals : DedekindRealsBundle where
 
 def canonical : RepoImpl where
   dedekindReals := canonicalDedekindReals
+
+namespace DedekindReals
 
 syntax "joint_unsat" : tactic
 

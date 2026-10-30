@@ -118,6 +118,10 @@ def rootXorSumRef (nsym : Nat) : Nat :=
 -- gfMul: the carry-less anchor + the field laws
 -- ════════════════════════════════════════════════════════════════
 
+end Reedsolo
+
+open Reedsolo
+
 /-- Carry-less multiply anchor: `gfMul a b = clmulModPrimRef a b` for all byte
     pairs, pinning `gfMul` to the GF(2⁸) multiplication of the field of `0x11d`. -/
 def spec_gf_mul_carryless_anchored (impl : RepoImpl) : Prop :=
@@ -407,6 +411,8 @@ def spec_encode_syndromes_vanish (impl : RepoImpl) : Prop :=
 
 -- ── Frozen list references for the code-geometry laws (DO NOT MODIFY) ──
 
+namespace Reedsolo
+
 /-- Frozen single-symbol perturbation: XOR `mag` into position `pos` of `xs`. -/
 def xorAtRef (xs : List Nat) (pos mag : Nat) : List Nat :=
   xs.set pos ((xs.getD pos 0) ^^^ mag)
@@ -427,6 +433,8 @@ def hammingWeightRef : List Nat → Nat
 -- ════════════════════════════════════════════════════════════════
 -- Primitivity, subfields, trace, code geometry
 -- ════════════════════════════════════════════════════════════════
+
+end Reedsolo
 
 /-- Primitive-element order and discrete logarithm: `α` has exact
     multiplicative order 255 (`gfPow α 255 = 1`, and no `0 < d < 255` returns
@@ -524,5 +532,3 @@ def spec_subfield_alpha_exponent_characterization (impl : RepoImpl) : Prop :=
     (impl.reedsolo.gfPow (impl.reedsolo.gfPow alphaRef j) (2 ^ k)
         = impl.reedsolo.gfPow alphaRef j
       ↔ (255 / (2 ^ k - 1)) ∣ j)
-
-end Reedsolo

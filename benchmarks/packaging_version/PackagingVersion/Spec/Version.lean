@@ -27,6 +27,10 @@ def Sorted (R : Ver → Ver → Prop) : List Ver → Prop
 
 -- ── total-order axioms ─────────────────────────────────────────
 
+end PackagingVersion.Spec
+
+open PackagingVersion.Spec
+
 /-- Totality: any two versions are comparable. -/
 def spec_le_total (impl : RepoImpl) : Prop :=
   ∀ (a b : Ver),
@@ -651,11 +655,15 @@ def spec_sort_eq_of_sorted_stable_perm (impl : RepoImpl) : Prop :=
         = xs.filter (fun z => impl.packagingVersion.verEq r z)) →
       impl.packagingVersion.sortVers xs = ys
 
+namespace PackagingVersion.Spec
+
 /-- Alternating merge used by the interleave sort law. -/
 def interleaveVers : List Ver → List Ver → List Ver
   | [], ys => ys
   | xs, [] => xs
   | x :: xs, y :: ys => x :: y :: interleaveVers xs ys
+
+end PackagingVersion.Spec
 
 /-- DISJOINT INTERLEAVE SORT EQUALITY. If no version in `xs` is order-equal to
     any version in `ys`, sorting an alternating interleave is the same as sorting
@@ -668,6 +676,8 @@ def spec_sort_interleave_disjoint_eq_append (impl : RepoImpl) : Prop :=
         = impl.packagingVersion.sortVers (xs ++ ys)
 
 -- ── canonical-form / lex-tower / order-statistic layer ──────────
+
+namespace PackagingVersion.Spec
 
 /-- Spec-side strict-order helper: `a` is below `b` and not order-equal. -/
 def strictBelow (impl : RepoImpl) (a b : Ver) : Bool :=
@@ -701,6 +711,8 @@ def mergeFuel (impl : RepoImpl) : Nat → List Ver → List Ver → List Ver
 /-- Spec-side stable merge with fuel `length xs + length ys`. -/
 def mergeVers (impl : RepoImpl) (xs ys : List Ver) : List Ver :=
   mergeFuel impl (xs.length + ys.length) xs ys
+
+end PackagingVersion.Spec
 
 /-- CANONICAL NORMAL FORM of order-equality: `verEq a b` holds iff the two
     versions agree on all three frozen axes — the epoch is equal, the releases
@@ -882,5 +894,3 @@ def spec_sort_class_nodup_pairwise_strict (impl : RepoImpl) : Prop :=
       List.Pairwise (fun a b => impl.packagingVersion.verLe a b = true ∧
                                 impl.packagingVersion.verEq a b = false)
         (impl.packagingVersion.sortVers xs)
-
-end PackagingVersion.Spec

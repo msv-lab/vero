@@ -70,8 +70,6 @@ def preFieldCmpRef : List Ident → List Ident → Ordering
   | _ :: _,  []      => .lt
   | x :: xs, y :: ys => preCmpRef (x :: xs) (y :: ys)
 
-namespace Semver.Spec
-
 -- ── total-order axioms (compareV / lt / eq) ────────────────────
 
 /-- `compareV` is total: it never fails to decide, and swapping the arguments
@@ -618,5 +616,3 @@ def spec_le_lt_le_tower (impl : RepoImpl) : Prop :=
     impl.semver.versionLt b c = true →
     impl.semver.compareV c d ≠ Ordering.gt →
       impl.semver.versionLt a d = true ∧ impl.semver.compareV a d = Ordering.lt
-
-end Semver.Spec
