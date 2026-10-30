@@ -139,7 +139,7 @@ def spec_Rmult_assoc (impl : RepoImpl) : Prop :=
 
 /-- The inverse of a positive nonzero real is positive. -/
 def spec_Rinv_0_lt_compat (impl : RepoImpl) : Prop :=
-  ∀ (x : R) (xNZ : impl.dedekindReals.Rneq x (impl.dedekindReals.R_of_Q 0)),
+  ∀ (x : R) (xNZ : DedekindReals.Rneq x (DedekindReals.R_of_Q 0)),
     impl.dedekindReals.Rlt (impl.dedekindReals.R_of_Q 0) x →
       impl.dedekindReals.Rlt
         (impl.dedekindReals.R_of_Q 0)
@@ -147,15 +147,15 @@ def spec_Rinv_0_lt_compat (impl : RepoImpl) : Prop :=
 
 /-- Inverse commutes with additive inverse. -/
 def spec_Ropp_inv_permute (impl : RepoImpl) : Prop :=
-  ∀ (x : R) (xNZ : impl.dedekindReals.Rneq x (impl.dedekindReals.R_of_Q 0))
-      (mxNZ : impl.dedekindReals.Rneq (impl.dedekindReals.Ropp x) (impl.dedekindReals.R_of_Q 0)),
+  ∀ (x : R) (xNZ : DedekindReals.Rneq x (DedekindReals.R_of_Q 0))
+      (mxNZ : DedekindReals.Rneq (impl.dedekindReals.Ropp x) (DedekindReals.R_of_Q 0)),
     impl.dedekindReals.Req
       (impl.dedekindReals.Ropp (impl.dedekindReals.Rinv x xNZ))
       (impl.dedekindReals.Rinv (impl.dedekindReals.Ropp x) mxNZ)
 
 /-- The inverse is a left inverse for positive reals. -/
 def spec_Rinv_l_pos (impl : RepoImpl) : Prop :=
-  ∀ (x : R) (xNZ : impl.dedekindReals.Rneq x (impl.dedekindReals.R_of_Q 0)),
+  ∀ (x : R) (xNZ : DedekindReals.Rneq x (DedekindReals.R_of_Q 0)),
     impl.dedekindReals.Rlt (impl.dedekindReals.R_of_Q 0) x →
       impl.dedekindReals.Req
         (impl.dedekindReals.Rmult (impl.dedekindReals.Rinv x xNZ) x)
@@ -163,7 +163,7 @@ def spec_Rinv_l_pos (impl : RepoImpl) : Prop :=
 
 /-- The inverse is a left inverse for negative reals. -/
 def spec_Rinv_l_neg (impl : RepoImpl) : Prop :=
-  ∀ (x : R) (xNZ : impl.dedekindReals.Rneq x (impl.dedekindReals.R_of_Q 0)),
+  ∀ (x : R) (xNZ : DedekindReals.Rneq x (DedekindReals.R_of_Q 0)),
     impl.dedekindReals.Rlt x (impl.dedekindReals.R_of_Q 0) →
       impl.dedekindReals.Req
         (impl.dedekindReals.Rmult (impl.dedekindReals.Rinv x xNZ) x)
@@ -171,14 +171,14 @@ def spec_Rinv_l_neg (impl : RepoImpl) : Prop :=
 
 /-- The inverse is a left inverse for nonzero reals. -/
 def spec_Rinv_l (impl : RepoImpl) : Prop :=
-  ∀ (x : R) (xNZ : impl.dedekindReals.Rneq x (impl.dedekindReals.R_of_Q 0)),
+  ∀ (x : R) (xNZ : DedekindReals.Rneq x (DedekindReals.R_of_Q 0)),
     impl.dedekindReals.Req
       (impl.dedekindReals.Rmult (impl.dedekindReals.Rinv x xNZ) x)
       (impl.dedekindReals.R_of_Q 1)
 
 /-- The inverse is a right inverse for nonzero reals. -/
 def spec_Rinv_r (impl : RepoImpl) : Prop :=
-  ∀ (x : R) (xNZ : impl.dedekindReals.Rneq x (impl.dedekindReals.R_of_Q 0)),
+  ∀ (x : R) (xNZ : DedekindReals.Rneq x (DedekindReals.R_of_Q 0)),
     impl.dedekindReals.Req
       (impl.dedekindReals.Rmult x (impl.dedekindReals.Rinv x xNZ))
       (impl.dedekindReals.R_of_Q 1)
