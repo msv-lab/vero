@@ -99,14 +99,14 @@ def create_sandbox(
     # Load manifest from the *sandbox* copy from here on so all edits are local.
     bench = Benchmark(sandbox_dir)
 
-    # Drop sidecar illustrations — they're not imported and only confuse agents.
-    for dirname in (
-        f"{bench.root_package}/Proof_modeproof",
-        f"{bench.root_package}/Proof_modecodeproof",
-    ):
-        side = sandbox_dir / dirname
-        if side.is_dir():
-            shutil.rmtree(side)
+    # Proofs are generated below, never inherited from a curator's working
+    # tree. Delete the whole old layer, including undeclared helper modules
+    # an agent could otherwise import. Cover every package, not only the root.
+    for package in bench.packages:
+        for dirname in ("Proof", "Proof_modeproof", "Proof_modecodeproof"):
+            side = sandbox_dir / package.name / dirname
+            if side.is_dir():
+                shutil.rmtree(side)
 
     # Materialize Proof/ into the sandbox per mode.
     materialize_proof(sandbox_dir, mode=mode)
@@ -202,7 +202,20 @@ def _copy_benchmark(src: Path, dst: Path) -> None:
     def ignore(dir: str, names: list[str]) -> list[str]:
         out: list[str] = []
         for n in names:
-            if n in {".lake", "build", ".git", "__pycache__", "upstream_source"}:
+            # Direct `lean -o` builds can leave compiled reference bodies next
+            # to the sources, outside .lake. Never ship those to an agent or
+            # reuse them while grading a freshly rendered answer.
+            if n.endswith((".olean", ".olean.private", ".olean.server", ".ilean", ".ir")):
+                out.append(n)
+                continue
+            if n in {
+                ".lake",
+                "build",
+                ".git",
+                "__pycache__",
+                "upstream_source",
+                "certificates",
+            }:
                 # ``upstream_source`` holds prefetched upstream Python for
                 # source_context=full — it is AGENT CONTEXT ONLY. Never copy it
                 # via the benchmark copytree (that render also backs grading +
