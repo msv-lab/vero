@@ -235,10 +235,10 @@ def directoryConstraints (constraints : NameConstraints) (name : DistinguishedNa
       | .directoryName _ => true
       | _ => false) ||
     constraints.permitted.any (fun entry => match entry with
-      | .directoryName permitted => isSubtreeOf permitted name false
+      | .directoryName permitted => Verdict.Policy.Reference.isSubtreeOf permitted name false
       | _ => false)) &&
   constraints.excluded.all fun entry => match entry with
-    | .directoryName excluded => !isSubtreeOf excluded name false
+    | .directoryName excluded => !Verdict.Policy.Reference.isSubtreeOf excluded name false
     | _ => true
 
 def dnsConstraints (constraints : NameConstraints) (name : String) : Bool :=
@@ -257,10 +257,10 @@ def ipConstraints (constraints : NameConstraints) (addr : ByteArray) : Bool :=
       | .ipAddr _ => true
       | _ => false) ||
     constraints.permitted.any (fun entry => match entry with
-      | .ipAddr permitted => ipAddrInRange permitted addr
+      | .ipAddr permitted => Verdict.Policy.Reference.ipAddrInRange permitted addr
       | _ => false)) &&
   constraints.excluded.all fun entry => match entry with
-    | .ipAddr excluded => !ipAddrInRange excluded addr
+    | .ipAddr excluded => !Verdict.Policy.Reference.ipAddrInRange excluded addr
     | _ => true
 
 def nameConstraints (parent target : AbstractCertificate) (isLeaf : Bool) : Bool :=

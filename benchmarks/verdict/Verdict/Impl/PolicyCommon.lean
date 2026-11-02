@@ -330,6 +330,40 @@ def hasIpAddrNameConstraint (cert : AbstractCertificate) : Bool :=
 end Verdict.Policy
 
 -- !benchmark @start global_aux
+namespace Verdict.Policy.Reference
+
+-- Keep Rust's non-ASCII case folding behind the existing opaque primitive.
+def lowerChar (c : Char) : List Char :=
+  if c.toNat < 128 then [c.toLower] else Verdict.charLower c
+
+def normalizeName (name : String) : String :=
+  let rec go : List Char -> Bool -> Bool -> List Char
+    | [], _, _ => []
+    | c :: cs, seenNonspace, seenSpace =>
+      if c == ' ' then go cs seenNonspace true
+      else
+        let rest := lowerChar c ++ go cs true false
+        if seenNonspace && seenSpace then ' ' :: rest else rest
+  String.ofList (go name.toList false false)
+
+-- Original common.rs:261-270 uses prefix RDNs and attribute containment.
+def isSubtreeRDN (constraint target : List Attribute) (normalize : Bool) : Bool :=
+  constraint.length <= target.length &&
+  constraint.all (fun attr => target.any (fun candidate =>
+    candidate.oid == attr.oid &&
+    if normalize then normalizeName candidate.value == normalizeName attr.value
+    else candidate.value == attr.value))
+
+def isSubtreeOf (constraint target : DistinguishedName) (normalize : Bool) : Bool :=
+  constraint.rdns.length <= target.rdns.length &&
+  (constraint.rdns.zip target.rdns).all (fun (c, t) => isSubtreeRDN c t normalize)
+
+-- Original common.rs:322-337 admits only IPv4 and IPv6 address/range pairs.
+def ipAddrInRange (range addr : ByteArray) : Bool :=
+  ((range.size == 8 && addr.size == 4) || (range.size == 32 && addr.size == 16)) &&
+  Verdict.Policy.ipAddrInRange range addr
+
+end Verdict.Policy.Reference
 -- !benchmark @end global_aux
 
 -- No benchmark APIs in this module — all content is curator-given

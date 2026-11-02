@@ -277,10 +277,10 @@ def checkIpNameConstraints (constraints : NameConstraints) (addr : ByteArray) : 
       | .ipAddr _ => true
       | _ => false)) ||
     constraints.permitted.any (fun entry => match entry with
-      | .ipAddr permitted => ipAddrInRange permitted addr
+      | .ipAddr permitted => Verdict.Policy.Reference.ipAddrInRange permitted addr
       | _ => false)) &&
     constraints.excluded.all (fun entry => match entry with
-      | .ipAddr excluded => !ipAddrInRange excluded addr
+      | .ipAddr excluded => !Verdict.Policy.Reference.ipAddrInRange excluded addr
       | _ => true)
 
 def checkDirectoryNameConstraints (constraints : NameConstraints)
@@ -289,10 +289,10 @@ def checkDirectoryNameConstraints (constraints : NameConstraints)
       | .directoryName _ => true
       | _ => false)) ||
     constraints.permitted.any (fun entry => match entry with
-      | .directoryName permitted => isSubtreeOf permitted name true
+      | .directoryName permitted => Verdict.Policy.Reference.isSubtreeOf permitted name true
       | _ => false)) &&
     constraints.excluded.all (fun entry => match entry with
-      | .directoryName excluded => !isSubtreeOf excluded name true
+      | .directoryName excluded => !Verdict.Policy.Reference.isSubtreeOf excluded name true
       | _ => true)
 
 def checkNameConstraints (cert target : AbstractCertificate) : Bool :=

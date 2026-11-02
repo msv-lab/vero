@@ -206,8 +206,9 @@ def matchDnsName (pattern name : String) : Bool :=
 def isGeneralSubtreeOf (constraint name : GeneralName) : Bool :=
   match constraint, name with
   | .dnsName pattern, .dnsName name => matchDnsName pattern name
-  | .directoryName constraint, .directoryName name => isSubtreeOf constraint name true
-  | .ipAddr range, .ipAddr addr => ipAddrInRange range addr
+  | .directoryName constraint, .directoryName name =>
+    Verdict.Policy.Reference.isSubtreeOf constraint name true
+  | .ipAddr range, .ipAddr addr => Verdict.Policy.Reference.ipAddrInRange range addr
   | _, _ => false
 
 def sameGeneralNameType (a b : GeneralName) : Bool :=

@@ -15,7 +15,7 @@ from vero.generation.sandbox import create_sandbox
 
 ROOT = Path(__file__).resolve().parents[2]
 VERDICT = ROOT / "benchmarks" / "verdict"
-MODULES = ("PolicyChrome", "PolicyFirefox", "PolicyOpenSSL", "Hex")
+MODULES = ("PolicyCommon", "PolicyChrome", "PolicyFirefox", "PolicyOpenSSL", "Hex")
 
 
 @pytest.mark.parametrize("mode", ["proof", "codeproof"])

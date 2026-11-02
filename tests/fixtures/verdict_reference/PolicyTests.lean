@@ -53,6 +53,26 @@ private def excluded : Option NameConstraints :=
 private def blocked := { leaf with extSubjectAltName := san "blocked.test" }
 private def constrained := { interm with extNameConstraints := excluded }
 
+-- Results are in Chrome / Firefox / OpenSSL order; the target is not self-issued.
+private def ncChecks (target : AbstractCertificate)
+    (permitted excluded : List GeneralName) : List Bool :=
+  let parent := { interm with extNameConstraints := some ⟨some true, permitted, excluded⟩ }
+  [chromeCheckAllNameConstraints [target, parent, root],
+   firefoxCheckAllNameConstraints [target, parent, root],
+   opensslCheckNameConstraints [target, parent, root]]
+
+private def dnPrefix : DistinguishedName :=
+  ⟨[[⟨"2.5.4.6", "US"⟩], [⟨"2.5.4.10", "Acme"⟩]]⟩
+private def dnTarget : DistinguishedName :=
+  ⟨[[⟨"2.5.4.6", "US"⟩], [⟨"2.5.4.7", "Town"⟩, ⟨"2.5.4.10", "Acme"⟩],
+    [⟨"2.5.4.3", "service"⟩]]⟩
+private def ipTarget (addr : ByteArray) : AbstractCertificate :=
+  { leaf with extSubjectAltName := some ⟨none, [.ipAddr addr]⟩ }
+private def ipv4Range : ByteArray := ⟨#[192, 0, 2, 0, 255, 255, 255, 0]⟩
+private def ipv6Range : ByteArray :=
+  ⟨#[32, 1, 13, 184, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+     255, 255, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]⟩
+
 -- Empty/singleton chains fail validation, but constraint-checker empty behavior differs.
 #guard !chromeValidChain chrome [] task && !chromeValidChain chrome [leaf] task &&
   !firefoxValidChain firefox [] task && !firefoxValidChain firefox [leaf] task &&
@@ -171,6 +191,57 @@ private def constrained := { interm with extNameConstraints := excluded }
     [{ leaf with subject := dn "blocked.test", extSubjectAltName := some ⟨none, [.unsupported]⟩ }, constrained] &&
   !opensslCheckNameConstraints
     [{ leaf with subject := dn "blocked.test", extSubjectAltName := some ⟨none, [.unsupported]⟩ }, constrained]
+
+-- Directory constraints use the original RDN prefix, including permitted/excluded paths.
+#guard
+  let constraintDn : DistinguishedName := ⟨dnTarget.rdns.take 2⟩
+  ncChecks { leaf with subject := dnTarget } [.directoryName constraintDn] [] == [true, true, true] &&
+  ncChecks { leaf with subject := dnTarget } [] [.directoryName constraintDn] == [false, false, false]
+-- Attributes within each prefix RDN are a subset, independent of attribute order.
+#guard ([dnPrefix,
+    ⟨[[⟨"2.5.4.6", "US"⟩], [⟨"2.5.4.10", "Acme"⟩, ⟨"2.5.4.7", "Town"⟩]]⟩] :
+    List DistinguishedName).all (fun constraintDn =>
+  ncChecks { leaf with subject := dnTarget } [.directoryName constraintDn] [] == [true, true, true] &&
+  ncChecks { leaf with subject := dnTarget } [] [.directoryName constraintDn] == [false, false, false])
+-- Reversing the relation, or matching a later RDN instead of the prefix, fails.
+#guard ([(dnPrefix, dnTarget), (dn "service", dnTarget),
+    (dnTarget, dn "service")] : List (DistinguishedName × DistinguishedName)).all
+    (fun (target, constraint) =>
+  ncChecks { leaf with subject := target } [.directoryName constraint] [] == [false, false, false] &&
+  ncChecks { leaf with subject := target } [] [.directoryName constraint] == [true, true, true])
+-- Chrome/OpenSSL normalize DN values; Firefox compares the original values.
+#guard ncChecks { leaf with subject := dn "service name" }
+    [.directoryName (dn " SERVICE  NAME ")] [] == [true, false, true] &&
+  ncChecks { leaf with subject := dn "service name" }
+    [] [.directoryName (dn " SERVICE  NAME ")] == [false, true, false]
+
+-- Non-ASCII case folding is delegated, preserving the existing opaque abstraction.
+example : Verdict.Policy.Reference.lowerChar 'É' = Verdict.charLower 'É' := rfl
+example : Verdict.Policy.Reference.lowerChar 'İ' = Verdict.charLower 'İ' := rfl
+
+-- Both IP families apply the mask, accepting an in-range host and rejecting another subnet.
+#guard ([((⟨#[192, 0, 2, 123]⟩ : ByteArray), true), (⟨#[192, 0, 3, 123]⟩, false)]).all
+    (fun (addr, isMatch) =>
+  ncChecks (ipTarget addr) [.ipAddr ipv4Range] [] == [isMatch, isMatch, isMatch] &&
+  ncChecks (ipTarget addr) [] [.ipAddr ipv4Range] == [!isMatch, !isMatch, !isMatch])
+#guard ([((⟨#[32, 1, 13, 184, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1]⟩ : ByteArray), true),
+    (⟨#[32, 1, 13, 185, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1]⟩, false)]).all
+    (fun (addr, isMatch) =>
+  ncChecks (ipTarget addr) [.ipAddr ipv6Range] [] == [isMatch, isMatch, isMatch] &&
+  ncChecks (ipTarget addr) [] [.ipAddr ipv6Range] == [!isMatch, !isMatch, !isMatch])
+-- A 2:1 length ratio alone is insufficient: only IPv4 and IPv6 lengths are legal.
+#guard ([(⟨#[]⟩, ⟨#[]⟩), (⟨#[0, 0]⟩, ⟨#[0]⟩),
+    (⟨Array.replicate 34 0⟩, ⟨Array.replicate 17 0⟩)] : List (ByteArray × ByteArray)).all
+    (fun (range, addr) =>
+  ncChecks (ipTarget addr) [.ipAddr range] [] == [false, false, false] &&
+  ncChecks (ipTarget addr) [] [.ipAddr range] == [true, true, true])
+-- Malformed range sizes and cross-family pairs do not match either constraint path.
+#guard ([(⟨Array.replicate 7 0⟩, ⟨Array.replicate 4 0⟩),
+    (⟨Array.replicate 31 0⟩, ⟨Array.replicate 16 0⟩),
+    (ipv4Range, ⟨Array.replicate 16 0⟩), (ipv6Range, ⟨Array.replicate 4 0⟩)] :
+    List (ByteArray × ByteArray)).all (fun (range, addr) =>
+  ncChecks (ipTarget addr) [.ipAddr range] [] == [false, false, false] &&
+  ncChecks (ipTarget addr) [] [.ipAddr range] == [true, true, true])
 
 -- SAN suppresses OpenSSL CN fallback only when it contains a DNS name.
 #guard opensslCheckHostname { leaf with extSubjectAltName := none } "WWW.EXAMPLE.TEST" &&
