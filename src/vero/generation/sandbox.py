@@ -205,7 +205,9 @@ def _copy_benchmark(src: Path, dst: Path) -> None:
             # Direct `lean -o` builds can leave compiled reference bodies next
             # to the sources, outside .lake. Never ship those to an agent or
             # reuse them while grading a freshly rendered answer.
-            if n.endswith((".olean", ".olean.private", ".olean.server", ".ilean", ".ir")):
+            if n.endswith(
+                (".olean", ".olean.private", ".olean.server", ".ilean", ".ir")
+            ):
                 out.append(n)
                 continue
             if n in {
