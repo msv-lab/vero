@@ -141,6 +141,148 @@ abbrev FirefoxValidChainSig :=
 end Verdict
 
 -- !benchmark @start global_aux
+namespace Verdict.Policy.Firefox.Reference
+
+def validPki (cert : AbstractCertificate) : Bool :=
+  match cert.subjectKey with
+  | .rsa bits => bits ≥ 2048
+  | .dsa _ _ _ => false
+  | .other => true
+
+def validName (name : String) : Bool :=
+  if name.any (· == '*') then
+    name.length > 2 && name.startsWith "*." && !name.endsWith "." &&
+      (String.ofList (name.toList.drop 2)).any (· == '.')
+  else
+    !name.isEmpty && !name.startsWith "." && !name.endsWith "."
+
+def strongSignature (alg : String) : Bool :=
+  ["1.2.840.10045.4.3.2", "1.2.840.10045.4.3.3", "1.2.840.10045.4.3.4",
+   "1.2.840.113549.1.1.11", "1.2.840.113549.1.1.12", "1.2.840.113549.1.1.13"].contains alg
+
+def handledExtensions (cert : AbstractCertificate) : Bool :=
+  match cert.allExts with
+  | none => true
+  | some exts => exts.all fun ext =>
+    ext.critical != some true ||
+      ["2.5.29.9", "2.5.29.14", "2.5.29.15", "2.5.29.16", "2.5.29.17",
+       "2.5.29.18", "2.5.29.19", "2.5.29.30", "2.5.29.31", "2.5.29.32",
+       "2.5.29.33", "2.5.29.36", "2.5.29.35", "2.5.29.37",
+       "1.3.6.1.5.5.7.1.1"].contains ext.oid
+
+def subjectKeyIdNoncritical (cert : AbstractCertificate) : Bool :=
+  match cert.extSubjectKeyId with
+  | none => true
+  | some skid => skid.critical != some true
+
+def extendedKeyUsage (cert : AbstractCertificate) : Bool :=
+  match cert.extExtendedKeyUsage with
+  | none => true
+  | some eku =>
+    eku.usages.contains .serverAuth &&
+      ((match cert.extBasicConstraints with
+        | some bc => bc.isCA
+        | none => false) || !eku.usages.contains .ocspSigning)
+
+def hostnameMatches (cert : AbstractCertificate) (domain : String) : Bool :=
+  match cert.extSubjectAltName with
+  | some san =>
+    (san.names.all fun name => match name with
+      | .dnsName dns => validName dns
+      | _ => true) &&
+    san.names.any fun name => match name with
+      | .dnsName dns => matchName (Verdict.Policy.Reference.lowerString dns)
+          (Verdict.Policy.Reference.lowerString domain)
+      | _ => false
+  | none => cert.subject.rdns.any fun rdn => rdn.any fun attr =>
+      attr.oid == "2.5.4.3" && validName attr.value &&
+        matchName attr.value (Verdict.Policy.Reference.lowerString domain)
+
+def internationalValid (env : FirefoxPolicyEnv)
+    (cert leaf : AbstractCertificate) : Bool :=
+  match leaf.extSubjectAltName with
+  | none => true
+  | some san => san.names.all fun name => match name with
+    | .dnsName dns =>
+      (!env.tubitakFingerprints.contains cert.fingerprint ||
+        env.tubitakDomains.any (fun pattern => matchName pattern dns)) &&
+      (!env.anssiFingerprints.contains cert.fingerprint ||
+        env.anssiDomains.any (fun pattern => matchName pattern dns))
+    | _ => true
+
+def nonLeaf (env : FirefoxPolicyEnv) (task : PolicyTask)
+    (cert leaf : AbstractCertificate) (depth : Nat) : Bool :=
+  internationalValid env cert leaf && validPki cert && depth ≤ 6 &&
+  (match cert.extBasicConstraints with
+    | none => false
+    | some bc => bc.isCA && (match bc.pathLen with
+      | none => true
+      | some limit => limit ≥ 0 && (depth : Int) ≤ limit)) &&
+  cert.sigAlgInner.bytes == cert.sigAlgOuter.bytes &&
+  cert.notBefore ≤ task.now && task.now ≤ cert.notAfter &&
+  checkKeyUsageIntermediate cert &&
+  (match cert.extAuthorityKeyId with
+    | none => true
+    | some aki => aki.critical != some true) &&
+  !cert.subject.rdns.isEmpty && checkDuplicateExtensions cert &&
+  handledExtensions cert && subjectKeyIdNoncritical cert
+
+def validDnsConstraints (constraints : NameConstraints) : Bool :=
+  (constraints.permitted ++ constraints.excluded).all fun name => match name with
+    | .dnsName dns => !dns.isEmpty && !dns.endsWith "." && !dns.any (· == '*')
+    | _ => true
+
+def directoryConstraints (constraints : NameConstraints) (name : DistinguishedName) : Bool :=
+  (!(constraints.permitted.any fun entry => match entry with
+      | .directoryName _ => true
+      | _ => false) ||
+    constraints.permitted.any (fun entry => match entry with
+      | .directoryName permitted => Verdict.Policy.Reference.isSubtreeOf permitted name false
+      | _ => false)) &&
+  constraints.excluded.all fun entry => match entry with
+    | .directoryName excluded => !Verdict.Policy.Reference.isSubtreeOf excluded name false
+    | _ => true
+
+def dnsConstraints (constraints : NameConstraints) (name : String) : Bool :=
+  (!(constraints.permitted.any fun entry => match entry with
+      | .dnsName _ => true
+      | _ => false) ||
+    constraints.permitted.any (fun entry => match entry with
+      | .dnsName permitted => permitName permitted name
+      | _ => false)) &&
+  constraints.excluded.all fun entry => match entry with
+    | .dnsName excluded => !permitName excluded name
+    | _ => true
+
+def ipConstraints (constraints : NameConstraints) (addr : ByteArray) : Bool :=
+  (!(constraints.permitted.any fun entry => match entry with
+      | .ipAddr _ => true
+      | _ => false) ||
+    constraints.permitted.any (fun entry => match entry with
+      | .ipAddr permitted => Verdict.Policy.Reference.ipAddrInRange permitted addr
+      | _ => false)) &&
+  constraints.excluded.all fun entry => match entry with
+    | .ipAddr excluded => !Verdict.Policy.Reference.ipAddrInRange excluded addr
+    | _ => true
+
+def nameConstraints (parent target : AbstractCertificate) (isLeaf : Bool) : Bool :=
+  match parent.extNameConstraints with
+  | none => true
+  | some constraints =>
+    validDnsConstraints constraints &&
+    (!constraints.permitted.isEmpty || !constraints.excluded.isEmpty) &&
+    (match target.extSubjectAltName with
+      | some san => san.names.all fun name => match name with
+        | .dnsName dns => dnsConstraints constraints dns
+        | .directoryName dn => directoryConstraints constraints dn
+        | .ipAddr addr => ipConstraints constraints addr
+        | .otherName => false
+        | .unsupported => true
+      | none => !isLeaf || target.subject.rdns.all (fun rdn => rdn.all fun attr =>
+          attr.oid != "2.5.4.3" || dnsConstraints constraints attr.value)) &&
+    directoryConstraints constraints target.subject
+
+end Verdict.Policy.Firefox.Reference
 -- !benchmark @end global_aux
 
 /-! ## § 4  Firefox Per-Certificate Verification (LLM Implements) -/
@@ -150,7 +292,24 @@ end Verdict
 
 def Verdict.firefoxCertVerifiedLeaf : Verdict.FirefoxCertVerifiedLeafSig :=
 -- !benchmark @start code def=firefoxCertVerifiedLeaf
-  sorry
+  fun env task cert ev =>
+    Verdict.Policy.Firefox.Reference.validPki cert &&
+    (match task.hostname with
+      | none => true
+      | some domain => Verdict.Policy.Firefox.Reference.hostnameMatches cert domain) &&
+    (match cert.extBasicConstraints with
+      | none => true
+      | some bc => !bc.isCA) &&
+    (!ev || (cert.notBefore ≤ cert.notAfter && cert.notAfter - cert.notBefore < 71712000)) &&
+    !env.crl.contains cert.fingerprint &&
+    cert.sigAlgInner.bytes == cert.sigAlgOuter.bytes &&
+    cert.notBefore ≤ task.now && task.now ≤ cert.notAfter &&
+    Verdict.Policy.Firefox.Reference.strongSignature cert.sigAlgInner.id &&
+    Verdict.Policy.Firefox.checkKeyUsageLeaf cert &&
+    Verdict.Policy.Firefox.Reference.extendedKeyUsage cert &&
+    Verdict.Policy.checkDuplicateExtensions cert &&
+    Verdict.Policy.Firefox.Reference.handledExtensions cert &&
+    Verdict.Policy.Firefox.Reference.subjectKeyIdNoncritical cert
 -- !benchmark @end code def=firefoxCertVerifiedLeaf
 
 -- !benchmark @start code_aux def=firefoxCertVerifiedIntermediate
@@ -158,7 +317,11 @@ def Verdict.firefoxCertVerifiedLeaf : Verdict.FirefoxCertVerifiedLeafSig :=
 
 def Verdict.firefoxCertVerifiedIntermediate : Verdict.FirefoxCertVerifiedIntermediateSig :=
 -- !benchmark @start code def=firefoxCertVerifiedIntermediate
-  sorry
+  fun env task cert leaf depth =>
+    Verdict.Policy.Firefox.Reference.nonLeaf env task cert leaf depth &&
+    !env.crl.contains cert.fingerprint &&
+    Verdict.Policy.Firefox.Reference.strongSignature cert.sigAlgInner.id &&
+    Verdict.Policy.Firefox.Reference.extendedKeyUsage cert
 -- !benchmark @end code def=firefoxCertVerifiedIntermediate
 
 -- !benchmark @start code_aux def=firefoxCertVerifiedRoot
@@ -166,7 +329,11 @@ def Verdict.firefoxCertVerifiedIntermediate : Verdict.FirefoxCertVerifiedInterme
 
 def Verdict.firefoxCertVerifiedRoot : Verdict.FirefoxCertVerifiedRootSig :=
 -- !benchmark @start code def=firefoxCertVerifiedRoot
-  sorry
+  fun env task cert interm leaf depth =>
+    Verdict.Policy.Firefox.Reference.nonLeaf env task cert leaf depth &&
+    !(env.symantecRoots.contains cert.fingerprint &&
+      !env.symantecExceptions.contains interm.fingerprint && cert.notBefore < 1464739200) &&
+    Verdict.Policy.Firefox.Reference.internationalValid env cert leaf
 -- !benchmark @end code def=firefoxCertVerifiedRoot
 
 -- !benchmark @start code_aux def=firefoxCheckAllNameConstraints
@@ -174,7 +341,10 @@ def Verdict.firefoxCertVerifiedRoot : Verdict.FirefoxCertVerifiedRootSig :=
 
 def Verdict.firefoxCheckAllNameConstraints : Verdict.FirefoxCheckAllNameConstraintsSig :=
 -- !benchmark @start code def=firefoxCheckAllNameConstraints
-  sorry
+  fun chain =>
+    !chain.isEmpty && (chain.zipIdx).all fun (parent, i) =>
+      ((chain.take i).zipIdx).all fun (target, j) =>
+        Verdict.Policy.Firefox.Reference.nameConstraints parent target (j == 0)
 -- !benchmark @end code def=firefoxCheckAllNameConstraints
 
 /-! ## § 5  Firefox Policy Composition (LLM Implements) -/
@@ -184,7 +354,9 @@ def Verdict.firefoxCheckAllNameConstraints : Verdict.FirefoxCheckAllNameConstrai
 
 def Verdict.firefoxLikelyIssued : Verdict.FirefoxLikelyIssuedSig :=
 -- !benchmark @start code def=firefoxLikelyIssued
-  sorry
+  fun issuer subject =>
+    Verdict.Policy.sameDN issuer.subject subject.issuer false &&
+    Verdict.Policy.checkAuthKeyId issuer subject
 -- !benchmark @end code def=firefoxLikelyIssued
 
 -- !benchmark @start code_aux def=firefoxValidChain
@@ -192,5 +364,13 @@ def Verdict.firefoxLikelyIssued : Verdict.FirefoxLikelyIssuedSig :=
 
 def Verdict.firefoxValidChain : Verdict.FirefoxValidChainSig :=
 -- !benchmark @start code def=firefoxValidChain
-  sorry
+  fun env chain task =>
+    chain.length ≥ 2 &&
+    Verdict.firefoxCertVerifiedLeaf env task (chain.getD 0 default) false &&
+    ((List.range (chain.length - 2)).all fun depth =>
+      Verdict.firefoxCertVerifiedIntermediate env task (chain.getD (depth + 1) default)
+        (chain.getD 0 default) depth) &&
+    Verdict.firefoxCertVerifiedRoot env task (chain.getD (chain.length - 1) default)
+      (chain.getD (chain.length - 2) default) (chain.getD 0 default) (chain.length - 2) &&
+    Verdict.firefoxCheckAllNameConstraints chain
 -- !benchmark @end code def=firefoxValidChain
