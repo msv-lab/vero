@@ -1,0 +1,618 @@
+[
+  {
+    "declaration": "DedekindCertificates.spec_Rle_equiv",
+    "dependencies": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  {
+    "declaration": "DedekindCertificates.spec_Rnot_lt_le",
+    "dependencies": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  {
+    "declaration": "DedekindCertificates.spec_Req_equiv",
+    "dependencies": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  {
+    "declaration": "DedekindCertificates.spec_lower_below_upper",
+    "dependencies": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  {
+    "declaration": "DedekindCertificates.spec_lower_le",
+    "dependencies": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  {
+    "declaration": "DedekindCertificates.spec_upper_le",
+    "dependencies": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  {
+    "declaration": "DedekindCertificates.spec_R_lt_Q_iff",
+    "dependencies": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  {
+    "declaration": "DedekindCertificates.spec_R_is_Q_iff",
+    "dependencies": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  {
+    "declaration": "DedekindCertificates.spec_Rlt_irrefl",
+    "dependencies": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  {
+    "declaration": "DedekindCertificates.spec_Rlt_trans",
+    "dependencies": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  {
+    "declaration": "DedekindCertificates.spec_Rlt_asymm",
+    "dependencies": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  {
+    "declaration": "DedekindCertificates.spec_Rlt_linear",
+    "dependencies": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  {
+    "declaration": "DedekindCertificates.spec_Rneq_symm",
+    "dependencies": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  {
+    "declaration": "DedekindCertificates.spec_Rneq_irrefl",
+    "dependencies": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  {
+    "declaration": "DedekindCertificates.spec_Rnew_contrans",
+    "dependencies": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  {
+    "declaration": "DedekindCertificates.spec_Rle_refl",
+    "dependencies": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  {
+    "declaration": "DedekindCertificates.spec_Rle_trans",
+    "dependencies": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  {
+    "declaration": "DedekindCertificates.spec_Rle_antisym",
+    "dependencies": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  {
+    "declaration": "DedekindCertificates.spec_Rlt_le_weak",
+    "dependencies": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  {
+    "declaration": "DedekindCertificates.spec_Order_Rnot_lt_le",
+    "dependencies": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  {
+    "declaration": "DedekindCertificates.spec_R0_lt_1",
+    "dependencies": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  {
+    "declaration": "DedekindCertificates.spec_Rmin_spec",
+    "dependencies": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  {
+    "declaration": "DedekindCertificates.spec_Rmin_lower_l",
+    "dependencies": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  {
+    "declaration": "DedekindCertificates.spec_Rmin_lower_r",
+    "dependencies": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  {
+    "declaration": "DedekindCertificates.spec_Rmin_idempotent",
+    "dependencies": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  {
+    "declaration": "DedekindCertificates.spec_Rmin_comm",
+    "dependencies": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  {
+    "declaration": "DedekindCertificates.spec_Rmin_assoc",
+    "dependencies": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  {
+    "declaration": "DedekindCertificates.spec_Rmax_spec",
+    "dependencies": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  {
+    "declaration": "DedekindCertificates.spec_Rmax_upper_l",
+    "dependencies": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  {
+    "declaration": "DedekindCertificates.spec_Rmax_upper_r",
+    "dependencies": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  {
+    "declaration": "DedekindCertificates.spec_Rmax_idempotent",
+    "dependencies": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  {
+    "declaration": "DedekindCertificates.spec_Rmax_comm",
+    "dependencies": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  {
+    "declaration": "DedekindCertificates.spec_Rmax_assoc",
+    "dependencies": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  {
+    "declaration": "DedekindCertificates.spec_lt_from_le_nonzero",
+    "dependencies": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  {
+    "declaration": "DedekindCertificates.spec_pow_Q1_Qle",
+    "dependencies": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  {
+    "declaration": "DedekindCertificates.spec_pow_Q1_incr",
+    "dependencies": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  {
+    "declaration": "DedekindCertificates.spec_middle_between",
+    "dependencies": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  {
+    "declaration": "DedekindCertificates.spec_archimedean",
+    "dependencies": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  {
+    "declaration": "DedekindCertificates.spec_DecOrderImpliesLPO",
+    "dependencies": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  {
+    "declaration": "DedekindCertificates.spec_RCut_eq_refl",
+    "dependencies": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  {
+    "declaration": "DedekindCertificates.spec_RCut_eq_sym",
+    "dependencies": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  {
+    "declaration": "DedekindCertificates.spec_RCut_eq_trans",
+    "dependencies": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  {
+    "declaration": "DedekindCertificates.spec_mult_lower_open",
+    "dependencies": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  {
+    "declaration": "DedekindCertificates.spec_mult_upper_open",
+    "dependencies": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  {
+    "declaration": "DedekindCertificates.spec_DReal_locate_mult",
+    "dependencies": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  {
+    "declaration": "DedekindCertificates.spec_Rmult_comm",
+    "dependencies": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  {
+    "declaration": "DedekindCertificates.spec_Ropp_inv_permute",
+    "dependencies": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  {
+    "declaration": "DedekindCertificates.spec_CauchyQ_lower_open",
+    "dependencies": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  {
+    "declaration": "DedekindCertificates.spec_CauchyQ_upper_open",
+    "dependencies": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  {
+    "declaration": "DedekindCertificates.spec_CauchyQ_located",
+    "dependencies": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  {
+    "declaration": "DedekindCertificates.spec_Un_cv_cauchy",
+    "dependencies": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  {
+    "declaration": "DedekindCertificates.spec_Ropp_involutive",
+    "dependencies": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  {
+    "declaration": "DedekindCertificates.spec_Rplus_comm",
+    "dependencies": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  {
+    "declaration": "DedekindCertificates.spec_Rplus_0_l",
+    "dependencies": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  {
+    "declaration": "DedekindCertificates.spec_Rplus_lt_compat_r",
+    "dependencies": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  {
+    "declaration": "DedekindCertificates.spec_Rplus_lt_compat_l",
+    "dependencies": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  {
+    "declaration": "DedekindCertificates.spec_Rplus_le_compat_l",
+    "dependencies": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  {
+    "declaration": "DedekindCertificates.spec_Rplus_le_compat_r",
+    "dependencies": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  {
+    "declaration": "DedekindCertificates.spec_Order_Rplus_le_compat_l",
+    "dependencies": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  {
+    "declaration": "DedekindCertificates.spec_Order_Rplus_le_compat_r",
+    "dependencies": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  {
+    "declaration": "DedekindCertificates.spec_Rplus_lt_reg_l",
+    "dependencies": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  {
+    "declaration": "DedekindCertificates.spec_Rplus_lt_reg_r",
+    "dependencies": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  {
+    "declaration": "DedekindCertificates.spec_R_of_Q_plus",
+    "dependencies": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  {
+    "declaration": "DedekindCertificates.spec_Rplus_0_r",
+    "dependencies": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  {
+    "declaration": "DedekindCertificates.spec_Rplus_assoc",
+    "dependencies": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  {
+    "declaration": "DedekindCertificates.spec_Rplus_opp_r",
+    "dependencies": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  {
+    "declaration": "DedekindCertificates.spec_Rplus_opp_l",
+    "dependencies": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  {
+    "declaration": "DedekindCertificates.spec_Ropp_plus_distr",
+    "dependencies": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  {
+    "declaration": "DedekindCertificates.spec_Rplus_positive",
+    "dependencies": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  {
+    "declaration": "DedekindCertificates.spec_Ropp_min",
+    "dependencies": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  {
+    "declaration": "DedekindCertificates.spec_Ropp_max",
+    "dependencies": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  {
+    "declaration": "DedekindCertificates.spec_dedekind_complete",
+    "dependencies": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  {
+    "declaration": "DedekindCertificates.spec_Cauchy_series_maj",
+    "dependencies": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  {
+    "declaration": "DedekindCertificates.spec_Rmin_plus_distr_r",
+    "dependencies": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  {
+    "declaration": "DedekindCertificates.spec_Rmin_plus_distr_l",
+    "dependencies": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  {
+    "declaration": "DedekindCertificates.spec_Rmax_plus_distr_r",
+    "dependencies": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  {
+    "declaration": "DedekindCertificates.spec_Rmax_plus_distr_l",
+    "dependencies": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  }
+]

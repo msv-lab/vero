@@ -1,0 +1,107 @@
+[
+  {
+    "historical_spec": "pre_2026_11_03_spec_chrome_sig_alg_consistency",
+    "declaration": "VerdictCertificates.Standard.Historical.chrome_sig_alg_consistency_refuted",
+    "certificate_file": "certificates/verdict/Standard.lean",
+    "status": "historical_refutation",
+    "scored": false
+  },
+  {
+    "historical_spec": "pre_2026_11_03_spec_firefox_sig_alg_consistency",
+    "declaration": "VerdictCertificates.Standard.Historical.firefox_sig_alg_consistency_refuted",
+    "certificate_file": "certificates/verdict/Standard.lean",
+    "status": "historical_refutation",
+    "scored": false
+  },
+  {
+    "historical_spec": "pre_2026_11_03_spec_openssl_sig_alg_consistency",
+    "declaration": "VerdictCertificates.Standard.Historical.openssl_sig_alg_consistency_refuted",
+    "certificate_file": "certificates/verdict/Standard.lean",
+    "status": "historical_refutation",
+    "scored": false
+  },
+  {
+    "historical_spec": "pre_2026_11_03_spec_chrome_strong_signature",
+    "declaration": "VerdictCertificates.Standard.Historical.chrome_strong_signature_refuted",
+    "certificate_file": "certificates/verdict/Standard.lean",
+    "status": "historical_refutation",
+    "scored": false
+  },
+  {
+    "historical_spec": "pre_2026_11_03_spec_firefox_strong_signature",
+    "declaration": "VerdictCertificates.Standard.Historical.firefox_strong_signature_refuted",
+    "certificate_file": "certificates/verdict/Standard.lean",
+    "status": "historical_refutation",
+    "scored": false
+  },
+  {
+    "historical_spec": "pre_2026_11_03_spec_chrome_authority_key_id_valid",
+    "declaration": "VerdictCertificates.Standard.Historical.chrome_authority_key_id_valid_refuted",
+    "certificate_file": "certificates/verdict/Standard.lean",
+    "status": "historical_refutation",
+    "scored": false
+  },
+  {
+    "historical_spec": "pre_2026_11_03_spec_firefox_authority_key_id_valid",
+    "declaration": "VerdictCertificates.Standard.Historical.firefox_authority_key_id_valid_refuted",
+    "certificate_file": "certificates/verdict/Standard.lean",
+    "status": "historical_refutation",
+    "scored": false
+  },
+  {
+    "historical_spec": "pre_2026_11_03_spec_openssl_authority_key_id_valid",
+    "declaration": "VerdictCertificates.Standard.Historical.openssl_authority_key_id_valid_refuted",
+    "certificate_file": "certificates/verdict/Standard.lean",
+    "status": "historical_refutation",
+    "scored": false
+  },
+  {
+    "historical_spec": "pre_2026_11_03_spec_chrome_key_usage_leaf",
+    "declaration": "VerdictCertificates.Standard.Historical.chrome_key_usage_leaf_refuted",
+    "certificate_file": "certificates/verdict/Standard.lean",
+    "status": "historical_refutation",
+    "scored": false
+  },
+  {
+    "historical_spec": "pre_2026_11_03_spec_chrome_extended_key_usage_leaf",
+    "declaration": "VerdictCertificates.Standard.Historical.chrome_extended_key_usage_leaf_refuted",
+    "certificate_file": "certificates/verdict/Standard.lean",
+    "status": "historical_refutation",
+    "scored": false
+  },
+  {
+    "historical_spec": "pre_2026_11_03_spec_chrome_not_revoked",
+    "declaration": "VerdictCertificates.Standard.Historical.chrome_not_revoked_refuted",
+    "certificate_file": "certificates/verdict/Standard.lean",
+    "status": "historical_refutation",
+    "scored": false
+  },
+  {
+    "historical_spec": "pre_2026_11_03_spec_firefox_subject_alt_name_present",
+    "declaration": "VerdictCertificates.Standard.Historical.firefox_subject_alt_name_present_refuted",
+    "certificate_file": "certificates/verdict/Standard.lean",
+    "status": "historical_refutation",
+    "scored": false
+  },
+  {
+    "historical_spec": "pre_2026_11_03_spec_openssl_subject_alt_name_present",
+    "declaration": "VerdictCertificates.Standard.Historical.openssl_subject_alt_name_present_refuted",
+    "certificate_file": "certificates/verdict/Standard.lean",
+    "status": "historical_refutation",
+    "scored": false
+  },
+  {
+    "historical_spec": "pre_2026_11_03_spec_firefox_valid_version",
+    "declaration": "VerdictCertificates.Standard.Historical.firefox_valid_version_refuted",
+    "certificate_file": "certificates/verdict/Standard.lean",
+    "status": "historical_refutation",
+    "scored": false
+  },
+  {
+    "historical_spec": "pre_2026_11_03_spec_openssl_valid_version",
+    "declaration": "VerdictCertificates.Standard.Historical.openssl_valid_version_refuted",
+    "certificate_file": "certificates/verdict/Standard.lean",
+    "status": "historical_refutation",
+    "scored": false
+  }
+]

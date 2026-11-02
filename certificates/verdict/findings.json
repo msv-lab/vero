@@ -1,0 +1,664 @@
+{
+  "upstream": {
+    "repository": "https://github.com/secure-foundations/verdict",
+    "commit": "9bc18bc5a287c1608dcb74a6eee7b9ca94a62b67",
+    "source_files": [
+      {
+        "local_file": "temp/verdict-source/standard.rs",
+        "upstream_file": "verdict/src/policy/standard.rs",
+        "sha256": "6ab0677796eb82bece064d34b747e9743808e6becba30da422f11bae257a609b"
+      },
+      {
+        "local_file": "temp/verdict-source/common.rs",
+        "upstream_file": "verdict/src/policy/common.rs",
+        "sha256": "72c5d6bb7894f17801f9cc45d719902aaee81c3073589d21a775b63c9ae9f4ee"
+      },
+      {
+        "local_file": "temp/verdict-source/chrome.rs",
+        "upstream_file": "verdict/src/policy/chrome.rs",
+        "sha256": "a49c85fbb150cb37418b40f36519ee58d8df034c84842f841df1442c17fe9669"
+      },
+      {
+        "local_file": "temp/verdict-source/firefox.rs",
+        "upstream_file": "verdict/src/policy/firefox.rs",
+        "sha256": "a9544a4f545f37a388325282f4cbcec3b0297e414784eb8b1b8d7046e111fea8"
+      },
+      {
+        "local_file": "temp/verdict-source/openssl.rs",
+        "upstream_file": "verdict/src/policy/openssl.rs",
+        "sha256": "c28195649eaddf48dd14ba4d7e6567eb1f02889825ab9deb0d27be1f6c7d2f45"
+      },
+      {
+        "local_file": "temp/verdict-source/convert.rs",
+        "upstream_file": "verdict/src/convert.rs",
+        "sha256": "b2b9cac94b6de4da8c603e0ac2aa65bac29a4476b6e5f8b476bdc7e75670c344"
+      },
+      {
+        "local_file": "temp/verdict-source/validator.rs",
+        "upstream_file": "verdict/src/validator.rs",
+        "sha256": "1fca4d8bf9fa8c86b0eed8e3c88fbd32d35e2b3fbacac4af3693a237bbaec738"
+      },
+      {
+        "local_file": "temp/verdict-source/tbs_cert.rs",
+        "upstream_file": "verdict-parser/src/x509/tbs_cert.rs",
+        "sha256": "6de0e8e0b8254ade7f920522abfde9549d44f56cf3f28b7e91d6ddf5eb32bcda"
+      }
+    ]
+  },
+  "scope": "Targeted comparison of the exact branches exercised by the 15 PolicyStandard counterexamples; not a whole-project translation-equivalence audit.",
+  "result": {
+    "groups": 8,
+    "targeted_translation_bugs_found": 0,
+    "semantic_decisions_required": false,
+    "spec_api_impl_modified_by_this_audit": false,
+    "historical_refuted_specs": 15,
+    "current_refuted_specs": 0,
+    "current_proven_specs": 44,
+    "approved_amendments_applied": true
+  },
+  "witness_defaults": {
+    "task": {
+      "hostname": null,
+      "purpose": "serverAuth",
+      "now": 1
+    },
+    "env": "all environment lists empty unless an override is stated",
+    "leaf": {
+      "fingerprint": "leaf",
+      "version": 2,
+      "serial": "",
+      "notBefore": 0,
+      "notAfter": 2,
+      "subject": "CN=a",
+      "issuer": "CN=issuer",
+      "subjectKey": "other",
+      "sigAlgInner": {
+        "id": "1.2.840.113549.1.1.11",
+        "bytes": ""
+      },
+      "sigAlgOuter": {
+        "id": "different",
+        "bytes": ""
+      },
+      "extAuthorityKeyId": {
+        "critical": null,
+        "keyId": "wrong",
+        "issuer": null,
+        "serial": null
+      },
+      "all_other_optional_fields": null
+    },
+    "root_overrides": {
+      "fingerprint": "root",
+      "extBasicConstraints": {
+        "critical": true,
+        "isCA": true,
+        "pathLen": null
+      },
+      "extKeyUsage": {
+        "keyCertSign": true,
+        "all_other_bits": false,
+        "critical": null
+      },
+      "extSubjectKeyId": {
+        "critical": null,
+        "keyId": "root-key"
+      }
+    }
+  },
+  "witness_variants": {
+    "signature_mismatch": "Original leaf/root above; all three policies accept. Used only for the 5 id-vs-bytes/outer-vs-inner counterexamples.",
+    "coherent_ids": "Set both outer algorithm records equal to their inner records; additionally set root.subject=leaf.issuer, so adjacent DN matches while AKI remains mismatched.",
+    "ca_leaf": "coherent_ids plus leaf.BasicConstraints={critical:true,isCA:true,pathLen:none} and leaf.KeyUsage={keyCertSign:true,all_other_bits:false,critical:none}.",
+    "any_eku": "coherent_ids plus leaf.EKU={critical:none,usages:[any]}.",
+    "revoked_root": "coherent_ids plus Chrome env.crl=[root].",
+    "cn_fallback": "coherent_ids plus task.hostname=some a; leaf SAN remains absent.",
+    "version_3": "coherent_ids plus leaf.version=3 and leaf.allExts=some []."
+  },
+  "proof_file": "certificates/verdict/Standard.lean",
+  "proof_file_sha256": "3aa95c90fd3b6ff84955434720dd96d245e233f13e9e97c4b025ba2b0677646c",
+  "proof_validation": "Final marker-cleaned source at benchmark commit 36dd3a950b6e0c087ada92f80e2f2c60c044b94e: lake build exit 0; Standard.lean compile exit 0; 44 exact current-spec annotations exit 0; all 59 current/historical axiom closures use only propext/Classical.choice/Quot.sound; 8 concrete policy acceptance/rejection/issuance-stage cases pass. Declaration-level results and both LF/current raw-local source hashes are in standard-validation.json.",
+  "groups": [
+    {
+      "id": "signature_id_vs_bytes",
+      "specs": [
+        {
+          "spec": "spec_chrome_sig_alg_consistency",
+          "declaration": "VerdictCertificates.Standard.Historical.chrome_sig_alg_consistency_refuted",
+          "witness": "signature_mismatch",
+          "violating_index": 0,
+          "current_declaration": "VerdictCertificates.Standard.chrome_sig_alg_consistency",
+          "current_status": "proven"
+        },
+        {
+          "spec": "spec_firefox_sig_alg_consistency",
+          "declaration": "VerdictCertificates.Standard.Historical.firefox_sig_alg_consistency_refuted",
+          "witness": "signature_mismatch",
+          "violating_index": 0,
+          "current_declaration": "VerdictCertificates.Standard.firefox_sig_alg_consistency",
+          "current_status": "proven"
+        },
+        {
+          "spec": "spec_openssl_sig_alg_consistency",
+          "declaration": "VerdictCertificates.Standard.Historical.openssl_sig_alg_consistency_refuted",
+          "witness": "signature_mismatch",
+          "violating_index": 0,
+          "current_declaration": "VerdictCertificates.Standard.openssl_sig_alg_consistency",
+          "current_status": "proven"
+        }
+      ],
+      "classification": "curation_spec_differs_from_upstream_trait_and_abstract_representation_has_no_coherence_invariant",
+      "translation_bug_found": false,
+      "counterexample": "inner.id=RSA-SHA256 OID, outer.id=different, inner.bytes=outer.bytes=\"\"; all three raw policy validators accept [leaf,root], but OID equality is false.",
+      "upstream_behavior": "The upstream trait OuterInnerSigMatch promises byte equality, and all three implementations compare AlgorithmIdentifier bytes. SignatureAlgorithm independently stores id and bytes; conversion derives both from the same ASN.1 value, but raw policy inputs have no such invariant.",
+      "evidence": [
+        {
+          "file": "verdict/src/policy/standard.rs",
+          "lines": [
+            21,
+            30
+          ],
+          "url": "https://github.com/secure-foundations/verdict/blob/9bc18bc5a287c1608dcb74a6eee7b9ca94a62b67/verdict/src/policy/standard.rs#L21-L30"
+        },
+        {
+          "file": "verdict/src/policy/common.rs",
+          "lines": [
+            138,
+            141
+          ],
+          "url": "https://github.com/secure-foundations/verdict/blob/9bc18bc5a287c1608dcb74a6eee7b9ca94a62b67/verdict/src/policy/common.rs#L138-L141"
+        },
+        {
+          "file": "verdict/src/policy/chrome.rs",
+          "lines": [
+            322,
+            329
+          ],
+          "url": "https://github.com/secure-foundations/verdict/blob/9bc18bc5a287c1608dcb74a6eee7b9ca94a62b67/verdict/src/policy/chrome.rs#L322-L329"
+        },
+        {
+          "file": "verdict/src/policy/chrome.rs",
+          "lines": [
+            362,
+            368
+          ],
+          "url": "https://github.com/secure-foundations/verdict/blob/9bc18bc5a287c1608dcb74a6eee7b9ca94a62b67/verdict/src/policy/chrome.rs#L362-L368"
+        },
+        {
+          "file": "verdict/src/policy/firefox.rs",
+          "lines": [
+            367,
+            379
+          ],
+          "url": "https://github.com/secure-foundations/verdict/blob/9bc18bc5a287c1608dcb74a6eee7b9ca94a62b67/verdict/src/policy/firefox.rs#L367-L379"
+        },
+        {
+          "file": "verdict/src/policy/firefox.rs",
+          "lines": [
+            574,
+            601
+          ],
+          "url": "https://github.com/secure-foundations/verdict/blob/9bc18bc5a287c1608dcb74a6eee7b9ca94a62b67/verdict/src/policy/firefox.rs#L574-L601"
+        },
+        {
+          "file": "verdict/src/policy/openssl.rs",
+          "lines": [
+            440,
+            443
+          ],
+          "url": "https://github.com/secure-foundations/verdict/blob/9bc18bc5a287c1608dcb74a6eee7b9ca94a62b67/verdict/src/policy/openssl.rs#L440-L443"
+        },
+        {
+          "file": "verdict/src/convert.rs",
+          "lines": [
+            48,
+            80
+          ],
+          "url": "https://github.com/secure-foundations/verdict/blob/9bc18bc5a287c1608dcb74a6eee7b9ca94a62b67/verdict/src/convert.rs#L48-L80"
+        }
+      ],
+      "minimal_recommendation": "User decision: change SigAlgConsistency conclusion from sigAlgOuter.id=sigAlgInner.id to sigAlgOuter.bytes=sigAlgInner.bytes, matching the actual upstream trait. If OID equality must be retained, specify and establish a noncircular parsed-certificate coherence precondition; do not silently add OID checks to the translated policy.",
+      "decision_required": false,
+      "counterexample_status": "historical_pre_amendment_only; not a refutation of the current scored specification"
+    },
+    {
+      "id": "strong_signature_checked_on_inner",
+      "specs": [
+        {
+          "spec": "spec_chrome_strong_signature",
+          "declaration": "VerdictCertificates.Standard.Historical.chrome_strong_signature_refuted",
+          "witness": "signature_mismatch",
+          "violating_index": 0,
+          "current_declaration": "VerdictCertificates.Standard.chrome_strong_signature",
+          "current_status": "proven"
+        },
+        {
+          "spec": "spec_firefox_strong_signature",
+          "declaration": "VerdictCertificates.Standard.Historical.firefox_strong_signature_refuted",
+          "witness": "signature_mismatch",
+          "violating_index": 0,
+          "current_declaration": "VerdictCertificates.Standard.firefox_strong_signature",
+          "current_status": "proven"
+        }
+      ],
+      "classification": "conformance_spec_observes_outer_field_but_source_checks_inner",
+      "translation_bug_found": false,
+      "counterexample": "The accepted signature_mismatch leaf has strong inner.id and outer.id=\"different\"; strongSignature outer.id=false.",
+      "upstream_behavior": "Chrome and Firefox explicitly apply strong_signature to sig_alg_inner.id; equal raw bytes do not imply equal independent id fields in this abstract model.",
+      "evidence": [
+        {
+          "file": "verdict/src/policy/chrome.rs",
+          "lines": [
+            329,
+            354
+          ],
+          "url": "https://github.com/secure-foundations/verdict/blob/9bc18bc5a287c1608dcb74a6eee7b9ca94a62b67/verdict/src/policy/chrome.rs#L329-L354"
+        },
+        {
+          "file": "verdict/src/policy/chrome.rs",
+          "lines": [
+            500,
+            517
+          ],
+          "url": "https://github.com/secure-foundations/verdict/blob/9bc18bc5a287c1608dcb74a6eee7b9ca94a62b67/verdict/src/policy/chrome.rs#L500-L517"
+        },
+        {
+          "file": "verdict/src/policy/firefox.rs",
+          "lines": [
+            566,
+            570
+          ],
+          "url": "https://github.com/secure-foundations/verdict/blob/9bc18bc5a287c1608dcb74a6eee7b9ca94a62b67/verdict/src/policy/firefox.rs#L566-L570"
+        },
+        {
+          "file": "verdict/src/policy/firefox.rs",
+          "lines": [
+            597,
+            603
+          ],
+          "url": "https://github.com/secure-foundations/verdict/blob/9bc18bc5a287c1608dcb74a6eee7b9ca94a62b67/verdict/src/policy/firefox.rs#L597-L603"
+        }
+      ],
+      "minimal_recommendation": "User decision: change StrongSignature to inspect sigAlgInner.id. Keeping outer.id requires the same parsed-certificate coherence invariant as the signature consistency group.",
+      "decision_required": false,
+      "counterexample_status": "historical_pre_amendment_only; not a refutation of the current scored specification"
+    },
+    {
+      "id": "aki_belongs_to_link_filter_not_raw_valid_chain",
+      "specs": [
+        {
+          "spec": "spec_chrome_authority_key_id_valid",
+          "declaration": "VerdictCertificates.Standard.Historical.chrome_authority_key_id_valid_refuted",
+          "witness": "coherent_ids",
+          "violating_index": 0,
+          "current_declaration": "VerdictCertificates.Standard.chrome_authority_key_id_valid",
+          "current_status": "proven"
+        },
+        {
+          "spec": "spec_firefox_authority_key_id_valid",
+          "declaration": "VerdictCertificates.Standard.Historical.firefox_authority_key_id_valid_refuted",
+          "witness": "coherent_ids",
+          "violating_index": 0,
+          "current_declaration": "VerdictCertificates.Standard.firefox_authority_key_id_valid",
+          "current_status": "proven"
+        },
+        {
+          "spec": "spec_openssl_authority_key_id_valid",
+          "declaration": "VerdictCertificates.Standard.Historical.openssl_authority_key_id_valid_refuted",
+          "witness": "coherent_ids",
+          "violating_index": 0,
+          "current_declaration": "VerdictCertificates.Standard.openssl_authority_key_id_valid",
+          "current_status": "proven"
+        }
+      ],
+      "classification": "missing_path_issuance_precondition_for_firefox_openssl_and_explicitly_unsupported_check_for_chrome",
+      "translation_bug_found": false,
+      "counterexample": "Accepted coherent-ID chain [leaf,root] has matching adjacent issuer/subject DN, leaf.AKI.keyId=\"wrong\", root.SKI.keyId=\"root-key\"; checkAuthKeyId root leaf=false.",
+      "upstream_behavior": "Each valid_chain documents that adjacent certificates are already issued. Firefox/OpenSSL likely_issued performs AKI comparison, and the upstream Query.issued/path construction applies that filter before valid_chain. Chrome likely_issued deliberately comments out AKI comparison, so even that precondition cannot imply Chrome AKI matching.",
+      "evidence": [
+        {
+          "file": "verdict/src/policy/chrome.rs",
+          "lines": [
+            580,
+            599
+          ],
+          "url": "https://github.com/secure-foundations/verdict/blob/9bc18bc5a287c1608dcb74a6eee7b9ca94a62b67/verdict/src/policy/chrome.rs#L580-L599"
+        },
+        {
+          "file": "verdict/src/policy/firefox.rs",
+          "lines": [
+            623,
+            642
+          ],
+          "url": "https://github.com/secure-foundations/verdict/blob/9bc18bc5a287c1608dcb74a6eee7b9ca94a62b67/verdict/src/policy/firefox.rs#L623-L642"
+        },
+        {
+          "file": "verdict/src/policy/openssl.rs",
+          "lines": [
+            527,
+            544
+          ],
+          "url": "https://github.com/secure-foundations/verdict/blob/9bc18bc5a287c1608dcb74a6eee7b9ca94a62b67/verdict/src/policy/openssl.rs#L527-L544"
+        },
+        {
+          "file": "verdict/src/validator.rs",
+          "lines": [
+            102,
+            134
+          ],
+          "url": "https://github.com/secure-foundations/verdict/blob/9bc18bc5a287c1608dcb74a6eee7b9ca94a62b67/verdict/src/validator.rs#L102-L134"
+        },
+        {
+          "file": "verdict/src/policy/common.rs",
+          "lines": [
+            219,
+            239
+          ],
+          "url": "https://github.com/secure-foundations/verdict/blob/9bc18bc5a287c1608dcb74a6eee7b9ca94a62b67/verdict/src/policy/common.rs#L219-L239"
+        }
+      ],
+      "minimal_recommendation": {
+        "firefox_openssl": "User decision: add the noncircular precondition that each adjacent pair satisfies impl.verdict.<policy>LikelyIssued (or move the obligation to the full validated-path predicate); this recovers the source layering without changing validChain behavior.",
+        "chrome": "User decision: the source deliberately allows AKI mismatch. Retaining an unconditional AKI guarantee requires an intentional new runtime check, not a translation repair. There is no honest source-equivalent unconditional AKI conformance theorem; do not weaken it to a tautological AKI premise."
+      },
+      "decision_required": false,
+      "counterexample_status": "historical_pre_amendment_only; not a refutation of the current scored specification"
+    },
+    {
+      "id": "chrome_leaf_may_be_ca",
+      "specs": [
+        {
+          "spec": "spec_chrome_key_usage_leaf",
+          "declaration": "VerdictCertificates.Standard.Historical.chrome_key_usage_leaf_refuted",
+          "witness": "ca_leaf",
+          "violating_index": 0,
+          "current_declaration": "VerdictCertificates.Standard.chrome_key_usage_leaf",
+          "current_status": "proven"
+        }
+      ],
+      "classification": "generic_leaf_usage_obligation_excludes_source_ca_leaf_branch",
+      "translation_bug_found": false,
+      "counterexample": "coherent leaf additionally has BasicConstraints.isCA=true and KeyUsage.keyCertSign=true; digitalSignature/keyEncipherment/keyAgreement are all false. Chrome accepts it.",
+      "upstream_behavior": "Chrome key_usage_valid branches on isCA even for the leaf: CA certificates require keyCertSign; only non-CA certificates require one of the three TLS usage bits. cert_verified_leaf does not forbid CA=true.",
+      "evidence": [
+        {
+          "file": "verdict/src/policy/chrome.rs",
+          "lines": [
+            223,
+            235
+          ],
+          "url": "https://github.com/secure-foundations/verdict/blob/9bc18bc5a287c1608dcb74a6eee7b9ca94a62b67/verdict/src/policy/chrome.rs#L223-L235"
+        },
+        {
+          "file": "verdict/src/policy/chrome.rs",
+          "lines": [
+            322,
+            359
+          ],
+          "url": "https://github.com/secure-foundations/verdict/blob/9bc18bc5a287c1608dcb74a6eee7b9ca94a62b67/verdict/src/policy/chrome.rs#L322-L359"
+        }
+      ],
+      "minimal_recommendation": "User decision: specialize the Chrome leaf spec to require keyCertSign for a CA leaf and the existing three-bit disjunction otherwise; alternatively add a non-CA-leaf premise. Rejecting CA leaves in the implementation changes the upstream policy.",
+      "decision_required": false,
+      "counterexample_status": "historical_pre_amendment_only; not a refutation of the current scored specification"
+    },
+    {
+      "id": "chrome_eku_allows_any",
+      "specs": [
+        {
+          "spec": "spec_chrome_extended_key_usage_leaf",
+          "declaration": "VerdictCertificates.Standard.Historical.chrome_extended_key_usage_leaf_refuted",
+          "witness": "any_eku",
+          "violating_index": 0,
+          "current_declaration": "VerdictCertificates.Standard.chrome_extended_key_usage_leaf",
+          "current_status": "proven"
+        }
+      ],
+      "classification": "chrome_specific_eku_disjunction_lost_in_generic_spec",
+      "translation_bug_found": false,
+      "counterexample": "coherent leaf EKU={critical:none,usages:[any]}, so Chrome accepts but usages.any(serverAuth)=false.",
+      "upstream_behavior": "Chrome extended_key_usage_valid explicitly accepts either ServerAuth or Any, or an absent EKU.",
+      "evidence": [
+        {
+          "file": "verdict/src/policy/chrome.rs",
+          "lines": [
+            237,
+            247
+          ],
+          "url": "https://github.com/secure-foundations/verdict/blob/9bc18bc5a287c1608dcb74a6eee7b9ca94a62b67/verdict/src/policy/chrome.rs#L237-L247"
+        },
+        {
+          "file": "verdict/src/policy/chrome.rs",
+          "lines": [
+            351,
+            354
+          ],
+          "url": "https://github.com/secure-foundations/verdict/blob/9bc18bc5a287c1608dcb74a6eee7b9ca94a62b67/verdict/src/policy/chrome.rs#L351-L354"
+        }
+      ],
+      "minimal_recommendation": "User decision: the Chrome-specific EKU obligation should allow serverAuth OR any. Requiring serverAuth exclusively would intentionally strengthen the source runtime policy.",
+      "decision_required": false,
+      "counterexample_status": "historical_pre_amendment_only; not a refutation of the current scored specification"
+    },
+    {
+      "id": "chrome_crl_excludes_root",
+      "specs": [
+        {
+          "spec": "spec_chrome_not_revoked",
+          "declaration": "VerdictCertificates.Standard.Historical.chrome_not_revoked_refuted",
+          "witness": "revoked_root",
+          "violating_index": 1,
+          "current_declaration": "VerdictCertificates.Standard.chrome_not_revoked",
+          "current_status": "proven"
+        }
+      ],
+      "classification": "root_scope_mismatch",
+      "translation_bug_found": false,
+      "counterexample": "coherent chain [leaf,root], env.crl=[\"root\"], leaf fingerprint=\"leaf\", root fingerprint=\"root\". Accepted; notInCrl env root=false.",
+      "upstream_behavior": "CRL checking occurs in cert_verified_leaf and cert_verified_intermediate. The root routine explicitly says many root checks are omitted and contains no not_in_crl call.",
+      "evidence": [
+        {
+          "file": "verdict/src/policy/chrome.rs",
+          "lines": [
+            351,
+            354
+          ],
+          "url": "https://github.com/secure-foundations/verdict/blob/9bc18bc5a287c1608dcb74a6eee7b9ca94a62b67/verdict/src/policy/chrome.rs#L351-L354"
+        },
+        {
+          "file": "verdict/src/policy/chrome.rs",
+          "lines": [
+            500,
+            517
+          ],
+          "url": "https://github.com/secure-foundations/verdict/blob/9bc18bc5a287c1608dcb74a6eee7b9ca94a62b67/verdict/src/policy/chrome.rs#L500-L517"
+        },
+        {
+          "file": "verdict/src/policy/chrome.rs",
+          "lines": [
+            548,
+            569
+          ],
+          "url": "https://github.com/secure-foundations/verdict/blob/9bc18bc5a287c1608dcb74a6eee7b9ca94a62b67/verdict/src/policy/chrome.rs#L548-L569"
+        }
+      ],
+      "minimal_recommendation": "User decision: restrict this Chrome obligation to i+1<chain.length, analogous to the already approved Chrome time-validity root exclusion. Adding root CRL checks changes source behavior.",
+      "decision_required": false,
+      "counterexample_status": "historical_pre_amendment_only; not a refutation of the current scored specification"
+    },
+    {
+      "id": "hostname_allows_cn_fallback",
+      "specs": [
+        {
+          "spec": "spec_firefox_subject_alt_name_present",
+          "declaration": "VerdictCertificates.Standard.Historical.firefox_subject_alt_name_present_refuted",
+          "witness": "cn_fallback",
+          "violating_index": 0,
+          "current_declaration": "VerdictCertificates.Standard.firefox_subject_alt_name_present",
+          "current_status": "proven"
+        },
+        {
+          "spec": "spec_openssl_subject_alt_name_present",
+          "declaration": "VerdictCertificates.Standard.Historical.openssl_subject_alt_name_present_refuted",
+          "witness": "cn_fallback",
+          "violating_index": 0,
+          "current_declaration": "VerdictCertificates.Standard.openssl_subject_alt_name_present",
+          "current_status": "proven"
+        }
+      ],
+      "classification": "san_only_requirement_conflicts_with_explicit_legacy_cn_fallback",
+      "translation_bug_found": false,
+      "counterexample": "coherent leaf subject has CN=\"a\", SAN=none, task.hostname=some \"a\". Both raw policies accept by CN matching; leaf SAN.isSome=false.",
+      "upstream_behavior": "Firefox explicitly matches CN when SAN is absent. OpenSSL permits CN when SAN has no DNS name (including absent SAN).",
+      "evidence": [
+        {
+          "file": "verdict/src/policy/firefox.rs",
+          "lines": [
+            574,
+            585
+          ],
+          "url": "https://github.com/secure-foundations/verdict/blob/9bc18bc5a287c1608dcb74a6eee7b9ca94a62b67/verdict/src/policy/firefox.rs#L574-L585"
+        },
+        {
+          "file": "verdict/src/policy/openssl.rs",
+          "lines": [
+            476,
+            508
+          ],
+          "url": "https://github.com/secure-foundations/verdict/blob/9bc18bc5a287c1608dcb74a6eee7b9ca94a62b67/verdict/src/policy/openssl.rs#L476-L508"
+        }
+      ],
+      "minimal_recommendation": "User decision: replace SAN-must-exist with the policy-specific hostname-match consequence, or state SAN present OR the documented matching-CN fallback. Keeping SAN mandatory requires intentionally disabling upstream CN fallback in the implementation.",
+      "decision_required": false,
+      "counterexample_status": "historical_pre_amendment_only; not a refutation of the current scored specification"
+    },
+    {
+      "id": "version_constraint_not_enforced_by_source",
+      "specs": [
+        {
+          "spec": "spec_firefox_valid_version",
+          "declaration": "VerdictCertificates.Standard.Historical.firefox_valid_version_refuted",
+          "witness": "version_3",
+          "violating_index": 0,
+          "current_declaration": "VerdictCertificates.Standard.firefox_valid_version",
+          "current_status": "proven"
+        },
+        {
+          "spec": "spec_openssl_valid_version",
+          "declaration": "VerdictCertificates.Standard.Historical.openssl_valid_version_refuted",
+          "witness": "version_3",
+          "violating_index": 0,
+          "current_declaration": "VerdictCertificates.Standard.openssl_valid_version",
+          "current_status": "proven"
+        }
+      ],
+      "classification": "normative_version_requirement_stronger_than_source_policy_not_a_translation_difference",
+      "translation_bug_found": false,
+      "counterexample": "coherent leaf changed to raw version=3 and allExts=some []; both policies accept although the frozen extension-version conclusion requires raw version=2. Raw value 2 denotes X.509 v3; value 3 is a different/future value.",
+      "upstream_behavior": "Firefox leaf/non-leaf checks impose no version condition. OpenSSL check_auth_subject_key_id uses version>=2, not version=2; only version<2 forces extensions absent. The upstream TBSCertificate grammar parses a general Integer with default 0, and conversion casts that field to u32 without a 0..2 test in the shown conversion.",
+      "evidence": [
+        {
+          "file": "verdict/src/policy/firefox.rs",
+          "lines": [
+            367,
+            402
+          ],
+          "url": "https://github.com/secure-foundations/verdict/blob/9bc18bc5a287c1608dcb74a6eee7b9ca94a62b67/verdict/src/policy/firefox.rs#L367-L402"
+        },
+        {
+          "file": "verdict/src/policy/firefox.rs",
+          "lines": [
+            574,
+            612
+          ],
+          "url": "https://github.com/secure-foundations/verdict/blob/9bc18bc5a287c1608dcb74a6eee7b9ca94a62b67/verdict/src/policy/firefox.rs#L574-L612"
+        },
+        {
+          "file": "verdict/src/policy/openssl.rs",
+          "lines": [
+            202,
+            223
+          ],
+          "url": "https://github.com/secure-foundations/verdict/blob/9bc18bc5a287c1608dcb74a6eee7b9ca94a62b67/verdict/src/policy/openssl.rs#L202-L223"
+        },
+        {
+          "file": "verdict/src/policy/openssl.rs",
+          "lines": [
+            413,
+            462
+          ],
+          "url": "https://github.com/secure-foundations/verdict/blob/9bc18bc5a287c1608dcb74a6eee7b9ca94a62b67/verdict/src/policy/openssl.rs#L413-L462"
+        },
+        {
+          "file": "verdict-parser/src/x509/tbs_cert.rs",
+          "lines": [
+            7,
+            22
+          ],
+          "url": "https://github.com/secure-foundations/verdict/blob/9bc18bc5a287c1608dcb74a6eee7b9ca94a62b67/verdict-parser/src/x509/tbs_cert.rs#L7-L22"
+        },
+        {
+          "file": "verdict/src/convert.rs",
+          "lines": [
+            48,
+            80
+          ],
+          "url": "https://github.com/secure-foundations/verdict/blob/9bc18bc5a287c1608dcb74a6eee7b9ca94a62b67/verdict/src/convert.rs#L48-L80"
+        }
+      ],
+      "minimal_recommendation": {
+        "openssl_source_faithful_option": "User decision: if this is a source-policy conformance benchmark, use version>=2 for certificates with extensions; that is the actual implication checked by OpenSSL here.",
+        "firefox_or_normative_rfc_option": "The frozen version=2 requirement is a meaningful RFC-style requirement, but Firefox source offers no such implication (even an arbitrary-version input is unchecked). If that requirement is intended, retain the spec and explicitly authorize a runtime allExts.isSome→version=2 guard in Firefox leaf/non-leaf and OpenSSL common verification. This is an intentional upstream-policy correction, not an automatic translation fix. Do not replace Firefox obligation by True or a circular premise."
+      },
+      "decision_required": false,
+      "counterexample_status": "historical_pre_amendment_only; not a refutation of the current scored specification"
+    }
+  ],
+  "limits": [
+    "These are kernel proofs about raw AbstractCertificate policy inputs, not evidence that malformed DER or a fabricated cryptographic signature passes a real browser.",
+    "The id/bytes counterexamples specifically exploit a missing representation coherence invariant; source conversion deriving both fields from ASN.1 is recorded separately.",
+    "Upstream behavior is established by fixed-source predicate comparison, not by executing the upstream Rust application.",
+    "The user subsequently approved the three scoped changes recorded in spec-amendments.json. These source diagnoses and counterexamples concern the old predicates/policies; they must not be counted as current refutations."
+  ],
+  "canonical_head": "36dd3a950b6e0c087ada92f80e2f2c60c044b94e",
+  "canonical_policy_files": [
+    {
+      "file": "benchmarks/verdict/Verdict/Impl/PolicyStandard.lean",
+      "lf_sha256": "c556a233c2b0d6663a5d5aa03238eb278466310c39d1aeb976f2b21450b1d69d",
+      "raw_local_sha256": "efc6a4b4db0985f3c5ba2665b7242e6d92b8131fc3980596ec0e0623859aea17"
+    },
+    {
+      "file": "benchmarks/verdict/Verdict/Spec/PolicyStandard.lean",
+      "lf_sha256": "1acafb70dfe9645abc68f69ec2a2de71fc80a211e53de52ee033b7a36d1b4e78",
+      "raw_local_sha256": "9e08f9bb452126caa9442a9a46397d7cd3493355b70fb2f7a2cb5c51c4ae65a5"
+    },
+    {
+      "file": "benchmarks/verdict/Verdict/Impl/PolicyCommon.lean",
+      "lf_sha256": "be33c9f4ec689d88c28c4b01c0fdd3c2afb6dcee4b04d56a74d3baa7500e6e33",
+      "raw_local_sha256": "be33c9f4ec689d88c28c4b01c0fdd3c2afb6dcee4b04d56a74d3baa7500e6e33"
+    },
+    {
+      "file": "benchmarks/verdict/Verdict/Impl/PolicyChrome.lean",
+      "lf_sha256": "0e6ab64536e1fcc0cda25aa72d5c4d2221daad991dd24b324f66f22aff3ac4da",
+      "raw_local_sha256": "981bef8b0e9bf71fca6a4f7ed5d619f898df559d01a8c171c1fd32a89663ff35"
+    },
+    {
+      "file": "benchmarks/verdict/Verdict/Impl/PolicyFirefox.lean",
+      "lf_sha256": "1ad6b3a662f9f4a49378ce576d77012c373e3dcc9a912baaa9bfe8505aabc94f",
+      "raw_local_sha256": "9a64bb471004f3a1351858f9c1557ab354ed97321aa70b54166df5a5b48ff7b6"
+    },
+    {
+      "file": "benchmarks/verdict/Verdict/Impl/PolicyOpenSSL.lean",
+      "lf_sha256": "5e23528917ec6c063685dddf9705591b1eda4321b92afbd1daf709926d17c177",
+      "raw_local_sha256": "573abd5d9c372c9e1bf98900d7ac8cedf7a61f37bd644db1622447918fab282c"
+    }
+  ],
+  "resolution_date": "2026-11-03",
+  "current_map": "certificates/verdict/standard-map.json",
+  "historical_map": "certificates/verdict/standard-history-map.json",
+  "amendment_record": "certificates/verdict/spec-amendments.json",
+  "validation_record": "certificates/verdict/standard-validation.json",
+  "proof_file_lf_sha256": "a2950ceeb48c49a99c6402a1b49baff2932eeb4130762aabff5111afa270c0b8",
+  "current_hash_convention": "SHA256 of exact file bytes after CRLF -> LF; BOM, if present, is retained. This matches the certification checker.",
+  "proof_file_sha256_mode": "Raw local file bytes (Windows evidence); proof_file_lf_sha256 is the portable checker identity."
+}

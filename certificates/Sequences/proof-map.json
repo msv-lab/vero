@@ -1,0 +1,23 @@
+{
+  "spec_Seq_First___ensures_spec": "SequencesCertificates.spec_Seq_First___ensures_spec",
+  "spec_Seq_LemmaLast": "SequencesCertificates.spec_Seq_LemmaLast",
+  "spec_Seq_Last___ensures_spec": "SequencesCertificates.spec_Seq_Last___ensures_spec",
+  "spec_Seq_LemmaAppendLast": "SequencesCertificates.spec_Seq_LemmaAppendLast",
+  "spec_Seq_LemmaConcatIsAssociative": "SequencesCertificates.spec_Seq_LemmaConcatIsAssociative",
+  "spec_Seq_LemmaNoDuplicatesInConcat": "SequencesCertificates.spec_Seq_LemmaNoDuplicatesInConcat",
+  "spec_Seq_Flatten___ensures_spec": "SequencesCertificates.spec_Seq_Flatten___ensures_spec",
+  "spec_Seq_FlattenReverse___ensures_spec": "SequencesCertificates.spec_Seq_FlattenReverse___ensures_spec",
+  "spec_Seq_LemmaFlattenConcat": "SequencesCertificates.spec_Seq_LemmaFlattenConcat",
+  "spec_Seq_LemmaFlattenReverseConcat": "SequencesCertificates.spec_Seq_LemmaFlattenReverseConcat",
+  "spec_Seq_LemmaFlattenAndFlattenReverseAreEquivalent": "SequencesCertificates.spec_Seq_LemmaFlattenAndFlattenReverseAreEquivalent",
+  "spec_Seq_FlatMap___ensures_spec": "SequencesCertificates.spec_Seq_FlatMap___ensures_spec",
+  "spec_Seq_LemmaMapDistributesOverConcat": "SequencesCertificates.spec_Seq_LemmaMapDistributesOverConcat",
+  "spec_Seq_Filter___ensures_spec": "SequencesCertificates.spec_Seq_Filter___ensures_spec",
+  "spec_Seq_LemmaFilterDistributesOverConcat": "SequencesCertificates.spec_Seq_LemmaFilterDistributesOverConcat",
+  "spec_Seq_FoldLeft___ensures_spec": "SequencesCertificates.spec_Seq_FoldLeft___ensures_spec",
+  "spec_Seq_LemmaFoldLeftDistributesOverConcat": "SequencesCertificates.spec_Seq_LemmaFoldLeftDistributesOverConcat",
+  "spec_Seq_FoldRight___ensures_spec": "SequencesCertificates.spec_Seq_FoldRight___ensures_spec",
+  "spec_Seq_LemmaFoldRightDistributesOverConcat": "SequencesCertificates.spec_Seq_LemmaFoldRightDistributesOverConcat",
+  "spec_LittleEndianNat_LemmaToNatLeftEqToNatRight": "SequencesCertificates.spec_LittleEndianNat_LemmaToNatLeftEqToNatRight",
+  "spec_LittleEndianNat_LemmaSeqAppendZero": "SequencesCertificates.spec_LittleEndianNat_LemmaSeqAppendZero"
+}

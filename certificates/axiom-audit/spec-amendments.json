@@ -1,0 +1,19 @@
+[
+  {
+    "benchmark": "huffman",
+    "source": "benchmarks/Huffman/Huffman/Impl/Cover.lean",
+    "old_sha256": "69c48235f30b77b097b5b4aa22a53ea7eb1c03dd51da0a7b2f99c0b3c9871e2b",
+    "new_sha256": "270a07035fe327da00587214cad05bd649de92269a7631f5ea89b9670540640e",
+    "upstream": {
+      "repository": "https://github.com/rocq-community/huffman.git",
+      "commit": "cc7d4cc41ef623f85b417e723cd8e4c2e5be1f6a",
+      "path": "theories/Cover.v",
+      "lines": [
+        37,
+        42
+      ]
+    },
+    "amendment": "Restore arbitrary-tree singleton frontier and permutation-based merge constructors. No function API or cover type change.",
+    "old_contradiction": "Old leaf-only cover could not cover a singleton internal node; old BuildFunSig asserted such a cover."
+  }
+]

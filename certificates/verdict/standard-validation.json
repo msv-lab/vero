@@ -1,0 +1,730 @@
+{
+  "compiler": "leanprover/lean4:v4.29.1",
+  "canonical_base": "36dd3a9 benchmark source commit, stacked on PR8 74fca26 through 7d39fc2",
+  "standard_lean_compile_exit_code": 0,
+  "exact_current_spec_examples": 44,
+  "exact_current_spec_examples_exit_code": 0,
+  "declarations_axiom_audited": 59,
+  "allowed_axioms": [
+    "Classical.choice",
+    "Quot.sound",
+    "propext"
+  ],
+  "current_proven": 44,
+  "current_refuted": 0,
+  "historical_refutations": 15,
+  "historical_scored": false,
+  "source_sha256": {
+    "certificates/verdict/Standard.lean": "a2950ceeb48c49a99c6402a1b49baff2932eeb4130762aabff5111afa270c0b8",
+    "benchmarks/verdict/Verdict/Impl/PolicyStandard.lean": "c556a233c2b0d6663a5d5aa03238eb278466310c39d1aeb976f2b21450b1d69d",
+    "benchmarks/verdict/Verdict/Spec/PolicyStandard.lean": "1acafb70dfe9645abc68f69ec2a2de71fc80a211e53de52ee033b7a36d1b4e78",
+    "benchmarks/verdict/Verdict/Impl/PolicyCommon.lean": "be33c9f4ec689d88c28c4b01c0fdd3c2afb6dcee4b04d56a74d3baa7500e6e33",
+    "benchmarks/verdict/Verdict/Impl/PolicyChrome.lean": "0e6ab64536e1fcc0cda25aa72d5c4d2221daad991dd24b324f66f22aff3ac4da",
+    "benchmarks/verdict/Verdict/Impl/PolicyFirefox.lean": "1ad6b3a662f9f4a49378ce576d77012c373e3dcc9a912baaa9bfe8505aabc94f",
+    "benchmarks/verdict/Verdict/Impl/PolicyOpenSSL.lean": "5e23528917ec6c063685dddf9705591b1eda4321b92afbd1daf709926d17c177"
+  },
+  "audit_input_sha256": "69719cb9cab3477d26e0165fb7c44b5f8a8cd2685ca02bfbcce4034847a2b4ac",
+  "audit_transcript_sha256": "82bf94ef290cc2b352dfaf3a205890ba4995316617436193e614518299b106d2",
+  "current": [
+    {
+      "spec": "spec_chrome_chain_min_length",
+      "declaration": "VerdictCertificates.Standard.chrome_chain_min_length",
+      "certificate_file": "certificates/verdict/Standard.lean",
+      "status": "proven",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "spec": "spec_firefox_chain_min_length",
+      "declaration": "VerdictCertificates.Standard.firefox_chain_min_length",
+      "certificate_file": "certificates/verdict/Standard.lean",
+      "status": "proven",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "spec": "spec_openssl_chain_min_length",
+      "declaration": "VerdictCertificates.Standard.openssl_chain_min_length",
+      "certificate_file": "certificates/verdict/Standard.lean",
+      "status": "proven",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "spec": "spec_chrome_name_constraints_respected",
+      "declaration": "VerdictCertificates.Standard.chrome_name_constraints_respected",
+      "certificate_file": "certificates/verdict/Standard.lean",
+      "status": "proven",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "spec": "spec_firefox_name_constraints_respected",
+      "declaration": "VerdictCertificates.Standard.firefox_name_constraints_respected",
+      "certificate_file": "certificates/verdict/Standard.lean",
+      "status": "proven",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "spec": "spec_openssl_name_constraints_respected",
+      "declaration": "VerdictCertificates.Standard.openssl_name_constraints_respected",
+      "certificate_file": "certificates/verdict/Standard.lean",
+      "status": "proven",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "spec": "spec_openssl_hostname_match",
+      "declaration": "VerdictCertificates.Standard.openssl_hostname_match",
+      "certificate_file": "certificates/verdict/Standard.lean",
+      "status": "proven",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "spec": "spec_chrome_unique_extensions",
+      "declaration": "VerdictCertificates.Standard.chrome_unique_extensions",
+      "certificate_file": "certificates/verdict/Standard.lean",
+      "status": "proven",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "spec": "spec_chrome_valid_pki",
+      "declaration": "VerdictCertificates.Standard.chrome_valid_pki",
+      "certificate_file": "certificates/verdict/Standard.lean",
+      "status": "proven",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "spec": "spec_chrome_valid_version",
+      "declaration": "VerdictCertificates.Standard.chrome_valid_version",
+      "certificate_file": "certificates/verdict/Standard.lean",
+      "status": "proven",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "spec": "spec_firefox_unique_extensions",
+      "declaration": "VerdictCertificates.Standard.firefox_unique_extensions",
+      "certificate_file": "certificates/verdict/Standard.lean",
+      "status": "proven",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "spec": "spec_firefox_time_validity",
+      "declaration": "VerdictCertificates.Standard.firefox_time_validity",
+      "certificate_file": "certificates/verdict/Standard.lean",
+      "status": "proven",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "spec": "spec_openssl_unique_extensions",
+      "declaration": "VerdictCertificates.Standard.openssl_unique_extensions",
+      "certificate_file": "certificates/verdict/Standard.lean",
+      "status": "proven",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "spec": "spec_openssl_valid_pki",
+      "declaration": "VerdictCertificates.Standard.openssl_valid_pki",
+      "certificate_file": "certificates/verdict/Standard.lean",
+      "status": "proven",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "spec": "spec_openssl_time_validity",
+      "declaration": "VerdictCertificates.Standard.openssl_time_validity",
+      "certificate_file": "certificates/verdict/Standard.lean",
+      "status": "proven",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "spec": "spec_chrome_time_validity",
+      "declaration": "VerdictCertificates.Standard.chrome_time_validity",
+      "certificate_file": "certificates/verdict/Standard.lean",
+      "status": "proven",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "spec": "spec_chrome_basic_constraints_ca",
+      "declaration": "VerdictCertificates.Standard.chrome_basic_constraints_ca",
+      "certificate_file": "certificates/verdict/Standard.lean",
+      "status": "proven",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "spec": "spec_firefox_basic_constraints_ca",
+      "declaration": "VerdictCertificates.Standard.firefox_basic_constraints_ca",
+      "certificate_file": "certificates/verdict/Standard.lean",
+      "status": "proven",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "spec": "spec_chrome_key_usage_ca",
+      "declaration": "VerdictCertificates.Standard.chrome_key_usage_ca",
+      "certificate_file": "certificates/verdict/Standard.lean",
+      "status": "proven",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "spec": "spec_firefox_key_usage_ca",
+      "declaration": "VerdictCertificates.Standard.firefox_key_usage_ca",
+      "certificate_file": "certificates/verdict/Standard.lean",
+      "status": "proven",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "spec": "spec_firefox_key_usage_leaf",
+      "declaration": "VerdictCertificates.Standard.firefox_key_usage_leaf",
+      "certificate_file": "certificates/verdict/Standard.lean",
+      "status": "proven",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "spec": "spec_firefox_extended_key_usage_leaf",
+      "declaration": "VerdictCertificates.Standard.firefox_extended_key_usage_leaf",
+      "certificate_file": "certificates/verdict/Standard.lean",
+      "status": "proven",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "spec": "spec_chrome_path_length_enforced",
+      "declaration": "VerdictCertificates.Standard.chrome_path_length_enforced",
+      "certificate_file": "certificates/verdict/Standard.lean",
+      "status": "proven",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "spec": "spec_firefox_path_length_enforced",
+      "declaration": "VerdictCertificates.Standard.firefox_path_length_enforced",
+      "certificate_file": "certificates/verdict/Standard.lean",
+      "status": "proven",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "spec": "spec_openssl_path_length_enforced",
+      "declaration": "VerdictCertificates.Standard.openssl_path_length_enforced",
+      "certificate_file": "certificates/verdict/Standard.lean",
+      "status": "proven",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "spec": "spec_openssl_basic_constraints_ca",
+      "declaration": "VerdictCertificates.Standard.openssl_basic_constraints_ca",
+      "certificate_file": "certificates/verdict/Standard.lean",
+      "status": "proven",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "spec": "spec_openssl_key_usage_ca",
+      "declaration": "VerdictCertificates.Standard.openssl_key_usage_ca",
+      "certificate_file": "certificates/verdict/Standard.lean",
+      "status": "proven",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "spec": "spec_openssl_key_usage_leaf",
+      "declaration": "VerdictCertificates.Standard.openssl_key_usage_leaf",
+      "certificate_file": "certificates/verdict/Standard.lean",
+      "status": "proven",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "spec": "spec_chrome_subject_alt_name_present",
+      "declaration": "VerdictCertificates.Standard.chrome_subject_alt_name_present",
+      "certificate_file": "certificates/verdict/Standard.lean",
+      "status": "proven",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "spec": "spec_chrome_sig_alg_consistency",
+      "declaration": "VerdictCertificates.Standard.chrome_sig_alg_consistency",
+      "certificate_file": "certificates/verdict/Standard.lean",
+      "status": "proven",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "spec": "spec_firefox_sig_alg_consistency",
+      "declaration": "VerdictCertificates.Standard.firefox_sig_alg_consistency",
+      "certificate_file": "certificates/verdict/Standard.lean",
+      "status": "proven",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "spec": "spec_openssl_sig_alg_consistency",
+      "declaration": "VerdictCertificates.Standard.openssl_sig_alg_consistency",
+      "certificate_file": "certificates/verdict/Standard.lean",
+      "status": "proven",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "spec": "spec_chrome_strong_signature",
+      "declaration": "VerdictCertificates.Standard.chrome_strong_signature",
+      "certificate_file": "certificates/verdict/Standard.lean",
+      "status": "proven",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "spec": "spec_firefox_strong_signature",
+      "declaration": "VerdictCertificates.Standard.firefox_strong_signature",
+      "certificate_file": "certificates/verdict/Standard.lean",
+      "status": "proven",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "spec": "spec_chrome_key_usage_leaf",
+      "declaration": "VerdictCertificates.Standard.chrome_key_usage_leaf",
+      "certificate_file": "certificates/verdict/Standard.lean",
+      "status": "proven",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "spec": "spec_chrome_extended_key_usage_leaf",
+      "declaration": "VerdictCertificates.Standard.chrome_extended_key_usage_leaf",
+      "certificate_file": "certificates/verdict/Standard.lean",
+      "status": "proven",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "spec": "spec_chrome_not_revoked",
+      "declaration": "VerdictCertificates.Standard.chrome_not_revoked",
+      "certificate_file": "certificates/verdict/Standard.lean",
+      "status": "proven",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "spec": "spec_chrome_authority_key_id_valid",
+      "declaration": "VerdictCertificates.Standard.chrome_authority_key_id_valid",
+      "certificate_file": "certificates/verdict/Standard.lean",
+      "status": "proven",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "spec": "spec_firefox_authority_key_id_valid",
+      "declaration": "VerdictCertificates.Standard.firefox_authority_key_id_valid",
+      "certificate_file": "certificates/verdict/Standard.lean",
+      "status": "proven",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "spec": "spec_openssl_authority_key_id_valid",
+      "declaration": "VerdictCertificates.Standard.openssl_authority_key_id_valid",
+      "certificate_file": "certificates/verdict/Standard.lean",
+      "status": "proven",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "spec": "spec_firefox_subject_alt_name_present",
+      "declaration": "VerdictCertificates.Standard.firefox_subject_alt_name_present",
+      "certificate_file": "certificates/verdict/Standard.lean",
+      "status": "proven",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "spec": "spec_openssl_subject_alt_name_present",
+      "declaration": "VerdictCertificates.Standard.openssl_subject_alt_name_present",
+      "certificate_file": "certificates/verdict/Standard.lean",
+      "status": "proven",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "spec": "spec_firefox_valid_version",
+      "declaration": "VerdictCertificates.Standard.firefox_valid_version",
+      "certificate_file": "certificates/verdict/Standard.lean",
+      "status": "proven",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "spec": "spec_openssl_valid_version",
+      "declaration": "VerdictCertificates.Standard.openssl_valid_version",
+      "certificate_file": "certificates/verdict/Standard.lean",
+      "status": "proven",
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    }
+  ],
+  "historical": [
+    {
+      "historical_spec": "pre_2026_11_03_spec_chrome_sig_alg_consistency",
+      "declaration": "VerdictCertificates.Standard.Historical.chrome_sig_alg_consistency_refuted",
+      "certificate_file": "certificates/verdict/Standard.lean",
+      "status": "historical_refutation",
+      "scored": false,
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "historical_spec": "pre_2026_11_03_spec_firefox_sig_alg_consistency",
+      "declaration": "VerdictCertificates.Standard.Historical.firefox_sig_alg_consistency_refuted",
+      "certificate_file": "certificates/verdict/Standard.lean",
+      "status": "historical_refutation",
+      "scored": false,
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "historical_spec": "pre_2026_11_03_spec_openssl_sig_alg_consistency",
+      "declaration": "VerdictCertificates.Standard.Historical.openssl_sig_alg_consistency_refuted",
+      "certificate_file": "certificates/verdict/Standard.lean",
+      "status": "historical_refutation",
+      "scored": false,
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "historical_spec": "pre_2026_11_03_spec_chrome_strong_signature",
+      "declaration": "VerdictCertificates.Standard.Historical.chrome_strong_signature_refuted",
+      "certificate_file": "certificates/verdict/Standard.lean",
+      "status": "historical_refutation",
+      "scored": false,
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "historical_spec": "pre_2026_11_03_spec_firefox_strong_signature",
+      "declaration": "VerdictCertificates.Standard.Historical.firefox_strong_signature_refuted",
+      "certificate_file": "certificates/verdict/Standard.lean",
+      "status": "historical_refutation",
+      "scored": false,
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "historical_spec": "pre_2026_11_03_spec_chrome_authority_key_id_valid",
+      "declaration": "VerdictCertificates.Standard.Historical.chrome_authority_key_id_valid_refuted",
+      "certificate_file": "certificates/verdict/Standard.lean",
+      "status": "historical_refutation",
+      "scored": false,
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "historical_spec": "pre_2026_11_03_spec_firefox_authority_key_id_valid",
+      "declaration": "VerdictCertificates.Standard.Historical.firefox_authority_key_id_valid_refuted",
+      "certificate_file": "certificates/verdict/Standard.lean",
+      "status": "historical_refutation",
+      "scored": false,
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "historical_spec": "pre_2026_11_03_spec_openssl_authority_key_id_valid",
+      "declaration": "VerdictCertificates.Standard.Historical.openssl_authority_key_id_valid_refuted",
+      "certificate_file": "certificates/verdict/Standard.lean",
+      "status": "historical_refutation",
+      "scored": false,
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "historical_spec": "pre_2026_11_03_spec_chrome_key_usage_leaf",
+      "declaration": "VerdictCertificates.Standard.Historical.chrome_key_usage_leaf_refuted",
+      "certificate_file": "certificates/verdict/Standard.lean",
+      "status": "historical_refutation",
+      "scored": false,
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "historical_spec": "pre_2026_11_03_spec_chrome_extended_key_usage_leaf",
+      "declaration": "VerdictCertificates.Standard.Historical.chrome_extended_key_usage_leaf_refuted",
+      "certificate_file": "certificates/verdict/Standard.lean",
+      "status": "historical_refutation",
+      "scored": false,
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "historical_spec": "pre_2026_11_03_spec_chrome_not_revoked",
+      "declaration": "VerdictCertificates.Standard.Historical.chrome_not_revoked_refuted",
+      "certificate_file": "certificates/verdict/Standard.lean",
+      "status": "historical_refutation",
+      "scored": false,
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "historical_spec": "pre_2026_11_03_spec_firefox_subject_alt_name_present",
+      "declaration": "VerdictCertificates.Standard.Historical.firefox_subject_alt_name_present_refuted",
+      "certificate_file": "certificates/verdict/Standard.lean",
+      "status": "historical_refutation",
+      "scored": false,
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "historical_spec": "pre_2026_11_03_spec_openssl_subject_alt_name_present",
+      "declaration": "VerdictCertificates.Standard.Historical.openssl_subject_alt_name_present_refuted",
+      "certificate_file": "certificates/verdict/Standard.lean",
+      "status": "historical_refutation",
+      "scored": false,
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "historical_spec": "pre_2026_11_03_spec_firefox_valid_version",
+      "declaration": "VerdictCertificates.Standard.Historical.firefox_valid_version_refuted",
+      "certificate_file": "certificates/verdict/Standard.lean",
+      "status": "historical_refutation",
+      "scored": false,
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    },
+    {
+      "historical_spec": "pre_2026_11_03_spec_openssl_valid_version",
+      "declaration": "VerdictCertificates.Standard.Historical.openssl_valid_version_refuted",
+      "certificate_file": "certificates/verdict/Standard.lean",
+      "status": "historical_refutation",
+      "scored": false,
+      "axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    }
+  ],
+  "canonical_benchmark_commit": "36dd3a950b6e0c087ada92f80e2f2c60c044b94e",
+  "source_sha256_raw_local": {
+    "certificates/verdict/Standard.lean": "3aa95c90fd3b6ff84955434720dd96d245e233f13e9e97c4b025ba2b0677646c",
+    "benchmarks/verdict/Verdict/Impl/PolicyStandard.lean": "efc6a4b4db0985f3c5ba2665b7242e6d92b8131fc3980596ec0e0623859aea17",
+    "benchmarks/verdict/Verdict/Spec/PolicyStandard.lean": "9e08f9bb452126caa9442a9a46397d7cd3493355b70fb2f7a2cb5c51c4ae65a5",
+    "benchmarks/verdict/Verdict/Impl/PolicyCommon.lean": "be33c9f4ec689d88c28c4b01c0fdd3c2afb6dcee4b04d56a74d3baa7500e6e33",
+    "benchmarks/verdict/Verdict/Impl/PolicyChrome.lean": "981bef8b0e9bf71fca6a4f7ed5d619f898df559d01a8c171c1fd32a89663ff35",
+    "benchmarks/verdict/Verdict/Impl/PolicyFirefox.lean": "9a64bb471004f3a1351858f9c1557ab354ed97321aa70b54166df5a5b48ff7b6",
+    "benchmarks/verdict/Verdict/Impl/PolicyOpenSSL.lean": "573abd5d9c372c9e1bf98900d7ac8cedf7a61f37bd644db1622447918fab282c"
+  },
+  "source_sha256_mode": "SHA256 of exact file bytes after CRLF -> LF; BOM, if present, is retained. This matches the certification checker.",
+  "source_sha256_raw_local_mode": "SHA256 of original local file bytes; Windows-local diagnostic evidence, not portable LF checker identities.",
+  "final_lake_build_exit_code": 0,
+  "audit_artifact_hash_mode": "raw local file bytes",
+  "runtime_behavior_examples": 8,
+  "runtime_behavior_examples_exit_code": 0,
+  "runtime_behavior_cases": [
+    "Chrome accepts matching AKI chain",
+    "Firefox accepts matching AKI chain",
+    "OpenSSL accepts matching AKI chain",
+    "Chrome rejects AKI-mismatch chain",
+    "Firefox rejects raw version 3 with extensions",
+    "OpenSSL rejects raw version 3 with extensions",
+    "Firefox likelyIssued stage is satisfiable",
+    "OpenSSL likelyIssued stage is satisfiable"
+  ],
+  "runtime_behavior_input_sha256": "7f49d176437d37c31b1783cb4ead7dc5d6dbbe86dec03b37faa758a5fd23196f",
+  "runtime_behavior_transcript_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "post_semantic_marker_cleanup": {
+    "file": "benchmarks/verdict/Verdict/Impl/PolicyChrome.lean",
+    "intermediate_after_raw_sha256": "991a6f8744d7e95d69a07dc5bee11dae3726b123d4c35ed403c1b12d8e9f5a87",
+    "final_after_raw_sha256": "981bef8b0e9bf71fca6a4f7ed5d619f898df559d01a8c171c1fd32a89663ff35",
+    "change": "Removed the duplicate empty code_aux marker pair only; main project was rebuilt and all 44 exact goals / 59 axiom closures rechecked after this cleanup."
+  }
+}

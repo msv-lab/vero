@@ -1,0 +1,140 @@
+{
+  "upstream": "flocq/flocq@7aab8f55bceec0cfafc3b3bc0e77e0dbb5a70c5f",
+  "source_lines": [
+    "src/IEEE754/Binary.v:161-190",
+    "src/IEEE754/Bits.v:129-157,494-496,559-563",
+    "src/IEEE754/BinarySingleNaN.v:58-63",
+    "src/IEEE754/PrimFloat.v:24-53",
+    "Coq V8.20.0 theories/Floats/SpecFloat.v:34-60"
+  ],
+  "authorization": "User approved restoring full source constructor validity and bounded raw-bit range, and preserving the original PrimFloat single-NaN domain. Native Float theorems remain unresolved without adding axioms or changing APIs. Sign encoding has a separate approval recorded below.",
+  "changes": [
+    "BinaryFloat.Valid restores positive payload/mantissa, precision, exponent bounds and canonical mantissa; validBinary is concrete decide, not an axiom",
+    "Bits inverse specifications restore source format assumptions, value validity, and 0<=n<2^(mw+ew+1)",
+    "PrimFloat reverse specification restores valid canonical single-NaN input domain; conversion NaNs are canonicalized",
+    "b2Prim minimum-exponent normal/subnormal distinction additionally checks m<2^52"
+  ],
+  "files": [
+    {
+      "file": "benchmarks/Flocq/Flocq/IEEE754/Impl/BinaryDefs.lean",
+      "old_sha256": "1ce9fe0de7c611534fe9ba80d80a856eb7a48ceea7e67599fd5c9efba29f675a",
+      "new_sha256": "3d3607c0f98e50f8c44bd8c42520db49f9dc198d64550eccea6107d677632a65"
+    },
+    {
+      "file": "benchmarks/Flocq/Flocq/IEEE754/Impl/Bits.lean",
+      "old_sha256": "36e36d63191d4110d95ace3171db79b0d17ae3524efbe23377729147468581b4",
+      "new_sha256": "6d882adbcf0e2fe9a0b3889ca432c0dc833ca007b487c73375d97d3e0c213a01"
+    },
+    {
+      "file": "benchmarks/Flocq/Flocq/IEEE754/Impl/PrimFloat.lean",
+      "old_sha256": "f78b53916f46e6050649b78a8a3c15cc96cbdeb0be1ede391f224087e9b41302",
+      "new_sha256": "617095393e1dcdfb406f109604875d4e7fa6c05133b9b93f81c77d5f0fb24772"
+    },
+    {
+      "file": "benchmarks/Flocq/Flocq/IEEE754/Spec/Bits.lean",
+      "old_sha256": "e50ff152738e7fedd6cf82cf309bb867d2ebf04d91a0cff61f4624e8f7f5bfa3",
+      "new_sha256": "4481f39916dcae3556ff612180947de0e2d3f8e3927bf78079e1ec799aac30c1"
+    },
+    {
+      "file": "benchmarks/Flocq/Flocq/IEEE754/Spec/PrimFloat.lean",
+      "old_sha256": "6cd9dc4362c6217ad26f8ce9cccdd35eac64a2b1a413a23b84f7242c49c7c6b0",
+      "new_sha256": "e235150c5fb63d4c1b9ef93633a3fdc3f5b5560efff50c5594c592a4884d2103"
+    }
+  ],
+  "separate_approvals": [
+    {
+      "authorization": "User separately approved restoring the original positive highest sign bit and exponent masking, including the frozen splitBits_fields formula.",
+      "source_lines": [
+        "src/IEEE754/Bits.v:37-38,77-80"
+      ],
+      "changes": [
+        "joinBits and bitsOfBinaryFloat encode sign as +2^(mw+ew)",
+        "splitBits extracts sign by 2^mw*2^ew<=n and exponent as (n/2^mw)%2^ew; splitBits_fields matches this source formula"
+      ],
+      "files": [
+        {
+          "file": "benchmarks/Flocq/Flocq/IEEE754/Impl/Bits.lean",
+          "old_sha256": "6eaa1aaa5da973608912e26827099a86c2e516e5578d558bb8b98364c29441db",
+          "new_sha256": "6d882adbcf0e2fe9a0b3889ca432c0dc833ca007b487c73375d97d3e0c213a01"
+        },
+        {
+          "file": "benchmarks/Flocq/Flocq/IEEE754/Spec/Bits.lean",
+          "old_sha256": "3ec827a1e8181169c357ddacb1c47f0090fa9b8b0d9a8587e8cdd92eb0c4c45a",
+          "new_sha256": "4481f39916dcae3556ff612180947de0e2d3f8e3927bf78079e1ec799aac30c1"
+        }
+      ]
+    }
+  ],
+  "source_files": [
+    {
+      "file": "src/IEEE754/Binary.v",
+      "url": "https://gitlab.inria.fr/flocq/flocq/-/raw/7aab8f55bceec0cfafc3b3bc0e77e0dbb5a70c5f/src/IEEE754/Binary.v",
+      "sha256": "6e34147057b610b7347b4f5862aefdad926661854a4b4bb03420806c32598eba"
+    },
+    {
+      "file": "src/IEEE754/BinarySingleNaN.v",
+      "url": "https://gitlab.inria.fr/flocq/flocq/-/raw/7aab8f55bceec0cfafc3b3bc0e77e0dbb5a70c5f/src/IEEE754/BinarySingleNaN.v",
+      "sha256": "f65143523dea504b1a9124664b2564752fbdd185768b3bfdf86650e501cbfc05"
+    },
+    {
+      "file": "src/IEEE754/Bits.v",
+      "url": "https://gitlab.inria.fr/flocq/flocq/-/raw/7aab8f55bceec0cfafc3b3bc0e77e0dbb5a70c5f/src/IEEE754/Bits.v",
+      "sha256": "f79177786d8a9fb5a0d49cdb64752d280e596fd09d53665d8abe577b6d23f603"
+    },
+    {
+      "file": "src/IEEE754/PrimFloat.v",
+      "url": "https://gitlab.inria.fr/flocq/flocq/-/raw/7aab8f55bceec0cfafc3b3bc0e77e0dbb5a70c5f/src/IEEE754/PrimFloat.v",
+      "sha256": "e2252060d3e5cb0150aece75b3a84375c7218a0a358fe494651f6d8c5d663f5f"
+    },
+    {
+      "file": "theories/Floats/SpecFloat.v",
+      "url": "https://raw.githubusercontent.com/coq/coq/V8.20.0/theories/Floats/SpecFloat.v",
+      "sha256": "f4e8e88661288e4c9a43a23b7fe1db46c7c316289e1b15e47fae79648208dbb4",
+      "role": "supporting definition of SpecFloat.bounded imported by the pinned Flocq source"
+    }
+  ],
+  "implementation_repairs": [
+    {
+      "authorization": "Clear source-algorithm translation bugs were authorized for direct repair; zdiv2 repair separately confirmed by root.",
+      "file": "benchmarks/Flocq/Flocq/Calc/Impl/Sqrt.lean",
+      "old_sha256": "cea2b29d83f5079674c303098fe429ba05039eb64fac631042cf9d8d69707d3e",
+      "new_sha256": "1672a9651762f4a837e562e2e5e719ece79f12618ec1efb3f6e2be47fc7e5640",
+      "changes": [
+        "zdiv2 n = n/2: Lean integer division already has the source floor semantics",
+        "Original Newton fuel loop is unchanged; transparent induction lemmas establish its equality to decreasing Newton iteration and both square-root bounds"
+      ]
+    }
+  ],
+  "axiom_replacements": [
+    {
+      "authorization": "Root authorized integrating four independently proved same-name same-type mathematical helpers; no specification/API/algorithm change.",
+      "file": "benchmarks/Flocq/Flocq/Core/Impl/GenericFmt.lean",
+      "old_sha256": "08ff905b84089bd80d20ae4e9b1dd3bad54f18f256639fd062b62ad876170fef",
+      "new_sha256": "e0c10af54d6d7d2cc997649eae37b157c05009b5407acdf3530968229c0d127a",
+      "declarations": [
+        "ZfloorValidRnd",
+        "ZceilValidRnd",
+        "canonicalGenericFormat",
+        "cexpOpp"
+      ],
+      "kernel_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ]
+    }
+  ],
+  "trust_metadata_refresh": {
+    "file": "benchmarks/Flocq/manifest.json",
+    "old_sha256": "1a5241e39028bea49eacbf34306a67e888d1fcc99d114c23c29859a79748e7aa",
+    "new_sha256": "acc50b6b5a97c6f3d8ee8af3ed4f41ef61182c09ac07ed0d3d5ba63e2d47dc82",
+    "removed_nonaxioms": [
+      "ZfloorValidRnd",
+      "ZceilValidRnd",
+      "canonicalGenericFormat",
+      "cexpOpp",
+      "validBinary"
+    ],
+    "remaining_formal_axioms": 15
+  }
+}

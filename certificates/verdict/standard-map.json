@@ -1,0 +1,266 @@
+[
+  {
+    "spec": "spec_chrome_chain_min_length",
+    "declaration": "VerdictCertificates.Standard.chrome_chain_min_length",
+    "certificate_file": "certificates/verdict/Standard.lean",
+    "status": "proven"
+  },
+  {
+    "spec": "spec_firefox_chain_min_length",
+    "declaration": "VerdictCertificates.Standard.firefox_chain_min_length",
+    "certificate_file": "certificates/verdict/Standard.lean",
+    "status": "proven"
+  },
+  {
+    "spec": "spec_openssl_chain_min_length",
+    "declaration": "VerdictCertificates.Standard.openssl_chain_min_length",
+    "certificate_file": "certificates/verdict/Standard.lean",
+    "status": "proven"
+  },
+  {
+    "spec": "spec_chrome_name_constraints_respected",
+    "declaration": "VerdictCertificates.Standard.chrome_name_constraints_respected",
+    "certificate_file": "certificates/verdict/Standard.lean",
+    "status": "proven"
+  },
+  {
+    "spec": "spec_firefox_name_constraints_respected",
+    "declaration": "VerdictCertificates.Standard.firefox_name_constraints_respected",
+    "certificate_file": "certificates/verdict/Standard.lean",
+    "status": "proven"
+  },
+  {
+    "spec": "spec_openssl_name_constraints_respected",
+    "declaration": "VerdictCertificates.Standard.openssl_name_constraints_respected",
+    "certificate_file": "certificates/verdict/Standard.lean",
+    "status": "proven"
+  },
+  {
+    "spec": "spec_openssl_hostname_match",
+    "declaration": "VerdictCertificates.Standard.openssl_hostname_match",
+    "certificate_file": "certificates/verdict/Standard.lean",
+    "status": "proven"
+  },
+  {
+    "spec": "spec_chrome_unique_extensions",
+    "declaration": "VerdictCertificates.Standard.chrome_unique_extensions",
+    "certificate_file": "certificates/verdict/Standard.lean",
+    "status": "proven"
+  },
+  {
+    "spec": "spec_chrome_valid_pki",
+    "declaration": "VerdictCertificates.Standard.chrome_valid_pki",
+    "certificate_file": "certificates/verdict/Standard.lean",
+    "status": "proven"
+  },
+  {
+    "spec": "spec_chrome_valid_version",
+    "declaration": "VerdictCertificates.Standard.chrome_valid_version",
+    "certificate_file": "certificates/verdict/Standard.lean",
+    "status": "proven"
+  },
+  {
+    "spec": "spec_firefox_unique_extensions",
+    "declaration": "VerdictCertificates.Standard.firefox_unique_extensions",
+    "certificate_file": "certificates/verdict/Standard.lean",
+    "status": "proven"
+  },
+  {
+    "spec": "spec_firefox_time_validity",
+    "declaration": "VerdictCertificates.Standard.firefox_time_validity",
+    "certificate_file": "certificates/verdict/Standard.lean",
+    "status": "proven"
+  },
+  {
+    "spec": "spec_openssl_unique_extensions",
+    "declaration": "VerdictCertificates.Standard.openssl_unique_extensions",
+    "certificate_file": "certificates/verdict/Standard.lean",
+    "status": "proven"
+  },
+  {
+    "spec": "spec_openssl_valid_pki",
+    "declaration": "VerdictCertificates.Standard.openssl_valid_pki",
+    "certificate_file": "certificates/verdict/Standard.lean",
+    "status": "proven"
+  },
+  {
+    "spec": "spec_openssl_time_validity",
+    "declaration": "VerdictCertificates.Standard.openssl_time_validity",
+    "certificate_file": "certificates/verdict/Standard.lean",
+    "status": "proven"
+  },
+  {
+    "spec": "spec_chrome_time_validity",
+    "declaration": "VerdictCertificates.Standard.chrome_time_validity",
+    "certificate_file": "certificates/verdict/Standard.lean",
+    "status": "proven"
+  },
+  {
+    "spec": "spec_chrome_basic_constraints_ca",
+    "declaration": "VerdictCertificates.Standard.chrome_basic_constraints_ca",
+    "certificate_file": "certificates/verdict/Standard.lean",
+    "status": "proven"
+  },
+  {
+    "spec": "spec_firefox_basic_constraints_ca",
+    "declaration": "VerdictCertificates.Standard.firefox_basic_constraints_ca",
+    "certificate_file": "certificates/verdict/Standard.lean",
+    "status": "proven"
+  },
+  {
+    "spec": "spec_chrome_key_usage_ca",
+    "declaration": "VerdictCertificates.Standard.chrome_key_usage_ca",
+    "certificate_file": "certificates/verdict/Standard.lean",
+    "status": "proven"
+  },
+  {
+    "spec": "spec_firefox_key_usage_ca",
+    "declaration": "VerdictCertificates.Standard.firefox_key_usage_ca",
+    "certificate_file": "certificates/verdict/Standard.lean",
+    "status": "proven"
+  },
+  {
+    "spec": "spec_firefox_key_usage_leaf",
+    "declaration": "VerdictCertificates.Standard.firefox_key_usage_leaf",
+    "certificate_file": "certificates/verdict/Standard.lean",
+    "status": "proven"
+  },
+  {
+    "spec": "spec_firefox_extended_key_usage_leaf",
+    "declaration": "VerdictCertificates.Standard.firefox_extended_key_usage_leaf",
+    "certificate_file": "certificates/verdict/Standard.lean",
+    "status": "proven"
+  },
+  {
+    "spec": "spec_chrome_path_length_enforced",
+    "declaration": "VerdictCertificates.Standard.chrome_path_length_enforced",
+    "certificate_file": "certificates/verdict/Standard.lean",
+    "status": "proven"
+  },
+  {
+    "spec": "spec_firefox_path_length_enforced",
+    "declaration": "VerdictCertificates.Standard.firefox_path_length_enforced",
+    "certificate_file": "certificates/verdict/Standard.lean",
+    "status": "proven"
+  },
+  {
+    "spec": "spec_openssl_path_length_enforced",
+    "declaration": "VerdictCertificates.Standard.openssl_path_length_enforced",
+    "certificate_file": "certificates/verdict/Standard.lean",
+    "status": "proven"
+  },
+  {
+    "spec": "spec_openssl_basic_constraints_ca",
+    "declaration": "VerdictCertificates.Standard.openssl_basic_constraints_ca",
+    "certificate_file": "certificates/verdict/Standard.lean",
+    "status": "proven"
+  },
+  {
+    "spec": "spec_openssl_key_usage_ca",
+    "declaration": "VerdictCertificates.Standard.openssl_key_usage_ca",
+    "certificate_file": "certificates/verdict/Standard.lean",
+    "status": "proven"
+  },
+  {
+    "spec": "spec_openssl_key_usage_leaf",
+    "declaration": "VerdictCertificates.Standard.openssl_key_usage_leaf",
+    "certificate_file": "certificates/verdict/Standard.lean",
+    "status": "proven"
+  },
+  {
+    "spec": "spec_chrome_subject_alt_name_present",
+    "declaration": "VerdictCertificates.Standard.chrome_subject_alt_name_present",
+    "certificate_file": "certificates/verdict/Standard.lean",
+    "status": "proven"
+  },
+  {
+    "spec": "spec_chrome_sig_alg_consistency",
+    "declaration": "VerdictCertificates.Standard.chrome_sig_alg_consistency",
+    "certificate_file": "certificates/verdict/Standard.lean",
+    "status": "proven"
+  },
+  {
+    "spec": "spec_firefox_sig_alg_consistency",
+    "declaration": "VerdictCertificates.Standard.firefox_sig_alg_consistency",
+    "certificate_file": "certificates/verdict/Standard.lean",
+    "status": "proven"
+  },
+  {
+    "spec": "spec_openssl_sig_alg_consistency",
+    "declaration": "VerdictCertificates.Standard.openssl_sig_alg_consistency",
+    "certificate_file": "certificates/verdict/Standard.lean",
+    "status": "proven"
+  },
+  {
+    "spec": "spec_chrome_strong_signature",
+    "declaration": "VerdictCertificates.Standard.chrome_strong_signature",
+    "certificate_file": "certificates/verdict/Standard.lean",
+    "status": "proven"
+  },
+  {
+    "spec": "spec_firefox_strong_signature",
+    "declaration": "VerdictCertificates.Standard.firefox_strong_signature",
+    "certificate_file": "certificates/verdict/Standard.lean",
+    "status": "proven"
+  },
+  {
+    "spec": "spec_chrome_key_usage_leaf",
+    "declaration": "VerdictCertificates.Standard.chrome_key_usage_leaf",
+    "certificate_file": "certificates/verdict/Standard.lean",
+    "status": "proven"
+  },
+  {
+    "spec": "spec_chrome_extended_key_usage_leaf",
+    "declaration": "VerdictCertificates.Standard.chrome_extended_key_usage_leaf",
+    "certificate_file": "certificates/verdict/Standard.lean",
+    "status": "proven"
+  },
+  {
+    "spec": "spec_chrome_not_revoked",
+    "declaration": "VerdictCertificates.Standard.chrome_not_revoked",
+    "certificate_file": "certificates/verdict/Standard.lean",
+    "status": "proven"
+  },
+  {
+    "spec": "spec_chrome_authority_key_id_valid",
+    "declaration": "VerdictCertificates.Standard.chrome_authority_key_id_valid",
+    "certificate_file": "certificates/verdict/Standard.lean",
+    "status": "proven"
+  },
+  {
+    "spec": "spec_firefox_authority_key_id_valid",
+    "declaration": "VerdictCertificates.Standard.firefox_authority_key_id_valid",
+    "certificate_file": "certificates/verdict/Standard.lean",
+    "status": "proven"
+  },
+  {
+    "spec": "spec_openssl_authority_key_id_valid",
+    "declaration": "VerdictCertificates.Standard.openssl_authority_key_id_valid",
+    "certificate_file": "certificates/verdict/Standard.lean",
+    "status": "proven"
+  },
+  {
+    "spec": "spec_firefox_subject_alt_name_present",
+    "declaration": "VerdictCertificates.Standard.firefox_subject_alt_name_present",
+    "certificate_file": "certificates/verdict/Standard.lean",
+    "status": "proven"
+  },
+  {
+    "spec": "spec_openssl_subject_alt_name_present",
+    "declaration": "VerdictCertificates.Standard.openssl_subject_alt_name_present",
+    "certificate_file": "certificates/verdict/Standard.lean",
+    "status": "proven"
+  },
+  {
+    "spec": "spec_firefox_valid_version",
+    "declaration": "VerdictCertificates.Standard.firefox_valid_version",
+    "certificate_file": "certificates/verdict/Standard.lean",
+    "status": "proven"
+  },
+  {
+    "spec": "spec_openssl_valid_version",
+    "declaration": "VerdictCertificates.Standard.openssl_valid_version",
+    "certificate_file": "certificates/verdict/Standard.lean",
+    "status": "proven"
+  }
+]

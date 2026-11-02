@@ -1,0 +1,1006 @@
+[
+  {
+    "task": "DedekindReals",
+    "package": "DedekindReals",
+    "module": "Cut",
+    "spec": "spec_Rle_equiv",
+    "status": "proved",
+    "certificate_file": "certificates/DedekindReals/Proofs.lean",
+    "declaration": "DedekindCertificates.spec_Rle_equiv",
+    "dependencies": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  {
+    "task": "DedekindReals",
+    "package": "DedekindReals",
+    "module": "Cut",
+    "spec": "spec_Rnot_lt_le",
+    "status": "proved",
+    "certificate_file": "certificates/DedekindReals/Proofs.lean",
+    "declaration": "DedekindCertificates.spec_Rnot_lt_le",
+    "dependencies": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  {
+    "task": "DedekindReals",
+    "package": "DedekindReals",
+    "module": "Cut",
+    "spec": "spec_Req_equiv",
+    "status": "proved",
+    "certificate_file": "certificates/DedekindReals/Proofs.lean",
+    "declaration": "DedekindCertificates.spec_Req_equiv",
+    "dependencies": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  {
+    "task": "DedekindReals",
+    "package": "DedekindReals",
+    "module": "Cut",
+    "spec": "spec_R_lt_Q_iff",
+    "status": "proved",
+    "certificate_file": "certificates/DedekindReals/Proofs.lean",
+    "declaration": "DedekindCertificates.spec_R_lt_Q_iff",
+    "dependencies": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  {
+    "task": "DedekindReals",
+    "package": "DedekindReals",
+    "module": "Cut",
+    "spec": "spec_R_is_Q_iff",
+    "status": "proved",
+    "certificate_file": "certificates/DedekindReals/Proofs.lean",
+    "declaration": "DedekindCertificates.spec_R_is_Q_iff",
+    "dependencies": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  {
+    "task": "DedekindReals",
+    "package": "DedekindReals",
+    "module": "Additive",
+    "spec": "spec_Rplus_assoc",
+    "status": "proved",
+    "certificate_file": "certificates/DedekindReals/Proofs.lean",
+    "declaration": "DedekindCertificates.spec_Rplus_assoc",
+    "dependencies": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  {
+    "task": "DedekindReals",
+    "package": "DedekindReals",
+    "module": "Additive",
+    "spec": "spec_Rplus_comm",
+    "status": "proved",
+    "certificate_file": "certificates/DedekindReals/Proofs.lean",
+    "declaration": "DedekindCertificates.spec_Rplus_comm",
+    "dependencies": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  {
+    "task": "DedekindReals",
+    "package": "DedekindReals",
+    "module": "Additive",
+    "spec": "spec_Rplus_0_l",
+    "status": "proved",
+    "certificate_file": "certificates/DedekindReals/Proofs.lean",
+    "declaration": "DedekindCertificates.spec_Rplus_0_l",
+    "dependencies": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  {
+    "task": "DedekindReals",
+    "package": "DedekindReals",
+    "module": "Additive",
+    "spec": "spec_Rplus_0_r",
+    "status": "proved",
+    "certificate_file": "certificates/DedekindReals/Proofs.lean",
+    "declaration": "DedekindCertificates.spec_Rplus_0_r",
+    "dependencies": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  {
+    "task": "DedekindReals",
+    "package": "DedekindReals",
+    "module": "Additive",
+    "spec": "spec_Ropp_involutive",
+    "status": "proved",
+    "certificate_file": "certificates/DedekindReals/Proofs.lean",
+    "declaration": "DedekindCertificates.spec_Ropp_involutive",
+    "dependencies": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  {
+    "task": "DedekindReals",
+    "package": "DedekindReals",
+    "module": "Additive",
+    "spec": "spec_Rplus_opp_r",
+    "status": "proved",
+    "certificate_file": "certificates/DedekindReals/Proofs.lean",
+    "declaration": "DedekindCertificates.spec_Rplus_opp_r",
+    "dependencies": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  {
+    "task": "DedekindReals",
+    "package": "DedekindReals",
+    "module": "Additive",
+    "spec": "spec_Rplus_opp_l",
+    "status": "proved",
+    "certificate_file": "certificates/DedekindReals/Proofs.lean",
+    "declaration": "DedekindCertificates.spec_Rplus_opp_l",
+    "dependencies": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  {
+    "task": "DedekindReals",
+    "package": "DedekindReals",
+    "module": "Additive",
+    "spec": "spec_Ropp_plus_distr",
+    "status": "proved",
+    "certificate_file": "certificates/DedekindReals/Proofs.lean",
+    "declaration": "DedekindCertificates.spec_Ropp_plus_distr",
+    "dependencies": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  {
+    "task": "DedekindReals",
+    "package": "DedekindReals",
+    "module": "Additive",
+    "spec": "spec_Rplus_lt_reg_l",
+    "status": "proved",
+    "certificate_file": "certificates/DedekindReals/Proofs.lean",
+    "declaration": "DedekindCertificates.spec_Rplus_lt_reg_l",
+    "dependencies": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  {
+    "task": "DedekindReals",
+    "package": "DedekindReals",
+    "module": "Additive",
+    "spec": "spec_Rplus_lt_reg_r",
+    "status": "proved",
+    "certificate_file": "certificates/DedekindReals/Proofs.lean",
+    "declaration": "DedekindCertificates.spec_Rplus_lt_reg_r",
+    "dependencies": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  {
+    "task": "DedekindReals",
+    "package": "DedekindReals",
+    "module": "Additive",
+    "spec": "spec_Rplus_le_compat_l",
+    "status": "proved",
+    "certificate_file": "certificates/DedekindReals/Proofs.lean",
+    "declaration": "DedekindCertificates.spec_Rplus_le_compat_l",
+    "dependencies": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  {
+    "task": "DedekindReals",
+    "package": "DedekindReals",
+    "module": "Additive",
+    "spec": "spec_Rplus_le_compat_r",
+    "status": "proved",
+    "certificate_file": "certificates/DedekindReals/Proofs.lean",
+    "declaration": "DedekindCertificates.spec_Rplus_le_compat_r",
+    "dependencies": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  {
+    "task": "DedekindReals",
+    "package": "DedekindReals",
+    "module": "Additive",
+    "spec": "spec_R_of_Q_plus",
+    "status": "proved",
+    "certificate_file": "certificates/DedekindReals/Proofs.lean",
+    "declaration": "DedekindCertificates.spec_R_of_Q_plus",
+    "dependencies": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  {
+    "task": "DedekindReals",
+    "package": "DedekindReals",
+    "module": "Completeness",
+    "spec": "spec_dedekind_complete",
+    "status": "proved",
+    "certificate_file": "certificates/DedekindReals/Proofs.lean",
+    "declaration": "DedekindCertificates.spec_dedekind_complete",
+    "dependencies": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  {
+    "task": "DedekindReals",
+    "package": "DedekindReals",
+    "module": "DecOrder",
+    "spec": "spec_DecOrderImpliesLPO",
+    "status": "proved",
+    "certificate_file": "certificates/DedekindReals/Proofs.lean",
+    "declaration": "DedekindCertificates.spec_DecOrderImpliesLPO",
+    "dependencies": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  {
+    "task": "DedekindReals",
+    "package": "DedekindReals",
+    "module": "Multiplication",
+    "spec": "spec_Rmult_comm",
+    "status": "proved",
+    "certificate_file": "certificates/DedekindReals/Proofs.lean",
+    "declaration": "DedekindCertificates.spec_Rmult_comm",
+    "dependencies": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  {
+    "task": "DedekindReals",
+    "package": "DedekindReals",
+    "module": "Multiplication",
+    "spec": "spec_Rmult_1_l",
+    "status": "unresolved",
+    "reason": "Substantive mathematical proof remains open; no refutation established."
+  },
+  {
+    "task": "DedekindReals",
+    "package": "DedekindReals",
+    "module": "Multiplication",
+    "spec": "spec_Rmult_1_r",
+    "status": "unresolved",
+    "reason": "Substantive mathematical proof remains open; no refutation established."
+  },
+  {
+    "task": "DedekindReals",
+    "package": "DedekindReals",
+    "module": "Multiplication",
+    "spec": "spec_Ropp_mult_distr_l",
+    "status": "unresolved",
+    "reason": "Substantive mathematical proof remains open; no refutation established."
+  },
+  {
+    "task": "DedekindReals",
+    "package": "DedekindReals",
+    "module": "Multiplication",
+    "spec": "spec_Ropp_mult_distr_r",
+    "status": "unresolved",
+    "reason": "Substantive mathematical proof remains open; no refutation established."
+  },
+  {
+    "task": "DedekindReals",
+    "package": "DedekindReals",
+    "module": "Multiplication",
+    "spec": "spec_Rmult_plus_distr_r_le",
+    "status": "unresolved",
+    "reason": "Substantive mathematical proof remains open; no refutation established."
+  },
+  {
+    "task": "DedekindReals",
+    "package": "DedekindReals",
+    "module": "Multiplication",
+    "spec": "spec_Rmult_plus_distr_r",
+    "status": "unresolved",
+    "reason": "Substantive mathematical proof remains open; no refutation established."
+  },
+  {
+    "task": "DedekindReals",
+    "package": "DedekindReals",
+    "module": "Multiplication",
+    "spec": "spec_Rmult_plus_distr_l",
+    "status": "unresolved",
+    "reason": "Substantive mathematical proof remains open; no refutation established."
+  },
+  {
+    "task": "DedekindReals",
+    "package": "DedekindReals",
+    "module": "Multiplication",
+    "spec": "spec_mult_lower_pos",
+    "status": "unresolved",
+    "reason": "Substantive mathematical proof remains open; no refutation established."
+  },
+  {
+    "task": "DedekindReals",
+    "package": "DedekindReals",
+    "module": "Multiplication",
+    "spec": "spec_Rmult_lt_0_compat",
+    "status": "unresolved",
+    "reason": "Substantive mathematical proof remains open; no refutation established."
+  },
+  {
+    "task": "DedekindReals",
+    "package": "DedekindReals",
+    "module": "Multiplication",
+    "spec": "spec_Rmult_assoc_pos",
+    "status": "unresolved",
+    "reason": "Substantive mathematical proof remains open; no refutation established."
+  },
+  {
+    "task": "DedekindReals",
+    "package": "DedekindReals",
+    "module": "Multiplication",
+    "spec": "spec_Rmult_assoc",
+    "status": "unresolved",
+    "reason": "Substantive mathematical proof remains open; no refutation established."
+  },
+  {
+    "task": "DedekindReals",
+    "package": "DedekindReals",
+    "module": "Multiplication",
+    "spec": "spec_Rinv_0_lt_compat",
+    "status": "unresolved",
+    "reason": "Substantive mathematical proof remains open; no refutation established."
+  },
+  {
+    "task": "DedekindReals",
+    "package": "DedekindReals",
+    "module": "Multiplication",
+    "spec": "spec_Ropp_inv_permute",
+    "status": "proved",
+    "certificate_file": "certificates/DedekindReals/Proofs.lean",
+    "declaration": "DedekindCertificates.spec_Ropp_inv_permute",
+    "dependencies": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  {
+    "task": "DedekindReals",
+    "package": "DedekindReals",
+    "module": "Multiplication",
+    "spec": "spec_Rinv_l_pos",
+    "status": "unresolved",
+    "reason": "Substantive mathematical proof remains open; no refutation established."
+  },
+  {
+    "task": "DedekindReals",
+    "package": "DedekindReals",
+    "module": "Multiplication",
+    "spec": "spec_Rinv_l_neg",
+    "status": "unresolved",
+    "reason": "Substantive mathematical proof remains open; no refutation established."
+  },
+  {
+    "task": "DedekindReals",
+    "package": "DedekindReals",
+    "module": "Multiplication",
+    "spec": "spec_Rinv_l",
+    "status": "unresolved",
+    "reason": "Substantive mathematical proof remains open; no refutation established."
+  },
+  {
+    "task": "DedekindReals",
+    "package": "DedekindReals",
+    "module": "Multiplication",
+    "spec": "spec_Rinv_r",
+    "status": "unresolved",
+    "reason": "Substantive mathematical proof remains open; no refutation established."
+  },
+  {
+    "task": "DedekindReals",
+    "package": "DedekindReals",
+    "module": "MinMax",
+    "spec": "spec_Rmin_spec",
+    "status": "proved",
+    "certificate_file": "certificates/DedekindReals/Proofs.lean",
+    "declaration": "DedekindCertificates.spec_Rmin_spec",
+    "dependencies": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  {
+    "task": "DedekindReals",
+    "package": "DedekindReals",
+    "module": "MinMax",
+    "spec": "spec_Rmin_lower_l",
+    "status": "proved",
+    "certificate_file": "certificates/DedekindReals/Proofs.lean",
+    "declaration": "DedekindCertificates.spec_Rmin_lower_l",
+    "dependencies": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  {
+    "task": "DedekindReals",
+    "package": "DedekindReals",
+    "module": "MinMax",
+    "spec": "spec_Rmin_lower_r",
+    "status": "proved",
+    "certificate_file": "certificates/DedekindReals/Proofs.lean",
+    "declaration": "DedekindCertificates.spec_Rmin_lower_r",
+    "dependencies": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  {
+    "task": "DedekindReals",
+    "package": "DedekindReals",
+    "module": "MinMax",
+    "spec": "spec_Rmin_idempotent",
+    "status": "proved",
+    "certificate_file": "certificates/DedekindReals/Proofs.lean",
+    "declaration": "DedekindCertificates.spec_Rmin_idempotent",
+    "dependencies": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  {
+    "task": "DedekindReals",
+    "package": "DedekindReals",
+    "module": "MinMax",
+    "spec": "spec_Rmin_comm",
+    "status": "proved",
+    "certificate_file": "certificates/DedekindReals/Proofs.lean",
+    "declaration": "DedekindCertificates.spec_Rmin_comm",
+    "dependencies": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  {
+    "task": "DedekindReals",
+    "package": "DedekindReals",
+    "module": "MinMax",
+    "spec": "spec_Rmin_assoc",
+    "status": "proved",
+    "certificate_file": "certificates/DedekindReals/Proofs.lean",
+    "declaration": "DedekindCertificates.spec_Rmin_assoc",
+    "dependencies": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  {
+    "task": "DedekindReals",
+    "package": "DedekindReals",
+    "module": "MinMax",
+    "spec": "spec_Rmax_spec",
+    "status": "proved",
+    "certificate_file": "certificates/DedekindReals/Proofs.lean",
+    "declaration": "DedekindCertificates.spec_Rmax_spec",
+    "dependencies": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  {
+    "task": "DedekindReals",
+    "package": "DedekindReals",
+    "module": "MinMax",
+    "spec": "spec_Rmax_upper_l",
+    "status": "proved",
+    "certificate_file": "certificates/DedekindReals/Proofs.lean",
+    "declaration": "DedekindCertificates.spec_Rmax_upper_l",
+    "dependencies": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  {
+    "task": "DedekindReals",
+    "package": "DedekindReals",
+    "module": "MinMax",
+    "spec": "spec_Rmax_upper_r",
+    "status": "proved",
+    "certificate_file": "certificates/DedekindReals/Proofs.lean",
+    "declaration": "DedekindCertificates.spec_Rmax_upper_r",
+    "dependencies": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  {
+    "task": "DedekindReals",
+    "package": "DedekindReals",
+    "module": "MinMax",
+    "spec": "spec_Rmax_idempotent",
+    "status": "proved",
+    "certificate_file": "certificates/DedekindReals/Proofs.lean",
+    "declaration": "DedekindCertificates.spec_Rmax_idempotent",
+    "dependencies": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  {
+    "task": "DedekindReals",
+    "package": "DedekindReals",
+    "module": "MinMax",
+    "spec": "spec_Rmax_comm",
+    "status": "proved",
+    "certificate_file": "certificates/DedekindReals/Proofs.lean",
+    "declaration": "DedekindCertificates.spec_Rmax_comm",
+    "dependencies": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  {
+    "task": "DedekindReals",
+    "package": "DedekindReals",
+    "module": "MinMax",
+    "spec": "spec_Rmax_assoc",
+    "status": "proved",
+    "certificate_file": "certificates/DedekindReals/Proofs.lean",
+    "declaration": "DedekindCertificates.spec_Rmax_assoc",
+    "dependencies": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  {
+    "task": "DedekindReals",
+    "package": "DedekindReals",
+    "module": "MinMax",
+    "spec": "spec_Rmin_plus_distr_r",
+    "status": "proved",
+    "certificate_file": "certificates/DedekindReals/Proofs.lean",
+    "declaration": "DedekindCertificates.spec_Rmin_plus_distr_r",
+    "dependencies": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  {
+    "task": "DedekindReals",
+    "package": "DedekindReals",
+    "module": "MinMax",
+    "spec": "spec_Rmin_plus_distr_l",
+    "status": "proved",
+    "certificate_file": "certificates/DedekindReals/Proofs.lean",
+    "declaration": "DedekindCertificates.spec_Rmin_plus_distr_l",
+    "dependencies": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  {
+    "task": "DedekindReals",
+    "package": "DedekindReals",
+    "module": "MinMax",
+    "spec": "spec_Rmax_plus_distr_r",
+    "status": "proved",
+    "certificate_file": "certificates/DedekindReals/Proofs.lean",
+    "declaration": "DedekindCertificates.spec_Rmax_plus_distr_r",
+    "dependencies": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  {
+    "task": "DedekindReals",
+    "package": "DedekindReals",
+    "module": "MinMax",
+    "spec": "spec_Rmax_plus_distr_l",
+    "status": "proved",
+    "certificate_file": "certificates/DedekindReals/Proofs.lean",
+    "declaration": "DedekindCertificates.spec_Rmax_plus_distr_l",
+    "dependencies": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  {
+    "task": "DedekindReals",
+    "package": "DedekindReals",
+    "module": "MinMax",
+    "spec": "spec_Rmin_mult_distr_r",
+    "status": "unresolved",
+    "reason": "Substantive mathematical proof remains open; no refutation established."
+  },
+  {
+    "task": "DedekindReals",
+    "package": "DedekindReals",
+    "module": "MinMax",
+    "spec": "spec_Rmin_mult_distr_l",
+    "status": "unresolved",
+    "reason": "Substantive mathematical proof remains open; no refutation established."
+  },
+  {
+    "task": "DedekindReals",
+    "package": "DedekindReals",
+    "module": "MinMax",
+    "spec": "spec_Rmax_mult_distr_r",
+    "status": "unresolved",
+    "reason": "Substantive mathematical proof remains open; no refutation established."
+  },
+  {
+    "task": "DedekindReals",
+    "package": "DedekindReals",
+    "module": "MinMax",
+    "spec": "spec_Rmax_mult_distr_l",
+    "status": "unresolved",
+    "reason": "Substantive mathematical proof remains open; no refutation established."
+  },
+  {
+    "task": "DedekindReals",
+    "package": "DedekindReals",
+    "module": "MinMax",
+    "spec": "spec_Ropp_min",
+    "status": "proved",
+    "certificate_file": "certificates/DedekindReals/Proofs.lean",
+    "declaration": "DedekindCertificates.spec_Ropp_min",
+    "dependencies": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  {
+    "task": "DedekindReals",
+    "package": "DedekindReals",
+    "module": "MinMax",
+    "spec": "spec_Ropp_max",
+    "status": "proved",
+    "certificate_file": "certificates/DedekindReals/Proofs.lean",
+    "declaration": "DedekindCertificates.spec_Ropp_max",
+    "dependencies": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  {
+    "task": "DedekindReals",
+    "package": "DedekindReals",
+    "module": "Order",
+    "spec": "spec_Rlt_irrefl",
+    "status": "proved",
+    "certificate_file": "certificates/DedekindReals/Proofs.lean",
+    "declaration": "DedekindCertificates.spec_Rlt_irrefl",
+    "dependencies": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  {
+    "task": "DedekindReals",
+    "package": "DedekindReals",
+    "module": "Order",
+    "spec": "spec_Rlt_trans",
+    "status": "proved",
+    "certificate_file": "certificates/DedekindReals/Proofs.lean",
+    "declaration": "DedekindCertificates.spec_Rlt_trans",
+    "dependencies": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  {
+    "task": "DedekindReals",
+    "package": "DedekindReals",
+    "module": "Order",
+    "spec": "spec_Rlt_asymm",
+    "status": "proved",
+    "certificate_file": "certificates/DedekindReals/Proofs.lean",
+    "declaration": "DedekindCertificates.spec_Rlt_asymm",
+    "dependencies": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  {
+    "task": "DedekindReals",
+    "package": "DedekindReals",
+    "module": "Order",
+    "spec": "spec_Rlt_linear",
+    "status": "proved",
+    "certificate_file": "certificates/DedekindReals/Proofs.lean",
+    "declaration": "DedekindCertificates.spec_Rlt_linear",
+    "dependencies": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  {
+    "task": "DedekindReals",
+    "package": "DedekindReals",
+    "module": "Order",
+    "spec": "spec_Rneq_symm",
+    "status": "proved",
+    "certificate_file": "certificates/DedekindReals/Proofs.lean",
+    "declaration": "DedekindCertificates.spec_Rneq_symm",
+    "dependencies": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  {
+    "task": "DedekindReals",
+    "package": "DedekindReals",
+    "module": "Order",
+    "spec": "spec_Rneq_irrefl",
+    "status": "proved",
+    "certificate_file": "certificates/DedekindReals/Proofs.lean",
+    "declaration": "DedekindCertificates.spec_Rneq_irrefl",
+    "dependencies": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  {
+    "task": "DedekindReals",
+    "package": "DedekindReals",
+    "module": "Order",
+    "spec": "spec_Rnew_contrans",
+    "status": "proved",
+    "certificate_file": "certificates/DedekindReals/Proofs.lean",
+    "declaration": "DedekindCertificates.spec_Rnew_contrans",
+    "dependencies": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  {
+    "task": "DedekindReals",
+    "package": "DedekindReals",
+    "module": "Order",
+    "spec": "spec_Rle_refl",
+    "status": "proved",
+    "certificate_file": "certificates/DedekindReals/Proofs.lean",
+    "declaration": "DedekindCertificates.spec_Rle_refl",
+    "dependencies": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  {
+    "task": "DedekindReals",
+    "package": "DedekindReals",
+    "module": "Order",
+    "spec": "spec_Rle_trans",
+    "status": "proved",
+    "certificate_file": "certificates/DedekindReals/Proofs.lean",
+    "declaration": "DedekindCertificates.spec_Rle_trans",
+    "dependencies": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  {
+    "task": "DedekindReals",
+    "package": "DedekindReals",
+    "module": "Order",
+    "spec": "spec_Rle_antisym",
+    "status": "proved",
+    "certificate_file": "certificates/DedekindReals/Proofs.lean",
+    "declaration": "DedekindCertificates.spec_Rle_antisym",
+    "dependencies": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  {
+    "task": "DedekindReals",
+    "package": "DedekindReals",
+    "module": "Order",
+    "spec": "spec_Rlt_le_weak",
+    "status": "proved",
+    "certificate_file": "certificates/DedekindReals/Proofs.lean",
+    "declaration": "DedekindCertificates.spec_Rlt_le_weak",
+    "dependencies": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  {
+    "task": "DedekindReals",
+    "package": "DedekindReals",
+    "module": "Order",
+    "spec": "spec_Order_Rnot_lt_le",
+    "status": "proved",
+    "certificate_file": "certificates/DedekindReals/Proofs.lean",
+    "declaration": "DedekindCertificates.spec_Order_Rnot_lt_le",
+    "dependencies": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  {
+    "task": "DedekindReals",
+    "package": "DedekindReals",
+    "module": "Order",
+    "spec": "spec_R0_lt_1",
+    "status": "proved",
+    "certificate_file": "certificates/DedekindReals/Proofs.lean",
+    "declaration": "DedekindCertificates.spec_R0_lt_1",
+    "dependencies": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  {
+    "task": "DedekindReals",
+    "package": "DedekindReals",
+    "module": "Order",
+    "spec": "spec_Rplus_lt_compat_r",
+    "status": "proved",
+    "certificate_file": "certificates/DedekindReals/Proofs.lean",
+    "declaration": "DedekindCertificates.spec_Rplus_lt_compat_r",
+    "dependencies": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  {
+    "task": "DedekindReals",
+    "package": "DedekindReals",
+    "module": "Order",
+    "spec": "spec_Rplus_lt_compat_l",
+    "status": "proved",
+    "certificate_file": "certificates/DedekindReals/Proofs.lean",
+    "declaration": "DedekindCertificates.spec_Rplus_lt_compat_l",
+    "dependencies": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  {
+    "task": "DedekindReals",
+    "package": "DedekindReals",
+    "module": "Order",
+    "spec": "spec_Order_Rplus_le_compat_r",
+    "status": "proved",
+    "certificate_file": "certificates/DedekindReals/Proofs.lean",
+    "declaration": "DedekindCertificates.spec_Order_Rplus_le_compat_r",
+    "dependencies": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  {
+    "task": "DedekindReals",
+    "package": "DedekindReals",
+    "module": "Order",
+    "spec": "spec_Order_Rplus_le_compat_l",
+    "status": "proved",
+    "certificate_file": "certificates/DedekindReals/Proofs.lean",
+    "declaration": "DedekindCertificates.spec_Order_Rplus_le_compat_l",
+    "dependencies": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  {
+    "task": "DedekindReals",
+    "package": "DedekindReals",
+    "module": "Order",
+    "spec": "spec_Rplus_positive",
+    "status": "proved",
+    "certificate_file": "certificates/DedekindReals/Proofs.lean",
+    "declaration": "DedekindCertificates.spec_Rplus_positive",
+    "dependencies": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  {
+    "task": "DedekindReals",
+    "package": "DedekindReals",
+    "module": "Order",
+    "spec": "spec_Rmult_le_compat_r",
+    "status": "unresolved",
+    "reason": "Substantive mathematical proof remains open; no refutation established."
+  },
+  {
+    "task": "DedekindReals",
+    "package": "DedekindReals",
+    "module": "Order",
+    "spec": "spec_Rmult_le_compat_l",
+    "status": "unresolved",
+    "reason": "Substantive mathematical proof remains open; no refutation established."
+  },
+  {
+    "task": "DedekindReals",
+    "package": "DedekindReals",
+    "module": "Order",
+    "spec": "spec_Rmult_lt_compat_r",
+    "status": "unresolved",
+    "reason": "Substantive mathematical proof remains open; no refutation established."
+  },
+  {
+    "task": "DedekindReals",
+    "package": "DedekindReals",
+    "module": "Order",
+    "spec": "spec_Rmult_lt_compat_l",
+    "status": "unresolved",
+    "reason": "Substantive mathematical proof remains open; no refutation established."
+  }
+]

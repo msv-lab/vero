@@ -1,0 +1,17 @@
+import VerifiedIronkv.Spec.CmessageV
+import VerifiedIronkv.Spec.DelegationMapV
+import VerifiedIronkv.Spec.HostImplV
+import VerifiedIronkv.Spec.IoT
+import VerifiedIronkv.Spec.KeysT
+import VerifiedIronkv.Spec.NetShtV
+import VerifiedIronkv.Spec.SeqIsUniqueV
+import VerifiedIronkv.Spec.SingleDeliveryModelV
+import VerifiedIronkv.Spec.SingleDeliveryStateV
+set_option maxHeartbeats 1000
+set_option maxRecDepth 512
+theorem structural_spec_valid_physical_address_matches_length_bound : spec_valid_physical_address_matches_length_bound canonical := by
+  unfold spec_valid_physical_address_matches_length_bound
+  intros
+  rfl
+
+#print axioms structural_spec_valid_physical_address_matches_length_bound

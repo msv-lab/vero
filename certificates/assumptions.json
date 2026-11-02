@@ -1,0 +1,2313 @@
+{
+  "schema_version": 1,
+  "scope": {
+    "benchmarks": 43,
+    "apis": 743,
+    "specifications": 2705
+  },
+  "snapshot": {
+    "head": "4d1ab7916cf501213f93d98f887ba3ef4ec07e08",
+    "working_tree": "frozen_committed_benchmark_sources",
+    "hash_encoding": "Current manifest, source, and referenced evidence hashes are SHA256 of UTF-8 bytes after CRLF-to-LF replacement, matching certification.check.frozen_sources; all other bytes are preserved. formal_source_snapshot hashes UTF-8 sorted compact JSON [{source,sha256}] with LF-normalized per-file hashes and lexicographic repository-relative POSIX source paths.",
+    "inventory_method": "Comment/string-masked local source declarations; local imports from manifest root/harness/test/bundle/Impl/Spec entrypoints. External Lean/mathlib axioms are outside this source inventory.",
+    "final_leanchecker_status": "All 43 tasks were checked by the source-bound checker recorded in certificates/catalog.json: 771 proven, 0 refuted, 1934 unresolved; complete=false. Its runtime audit confirms the 30 remaining formal axiom blockers listed here. This does not establish consistency or correctness of the remaining abstract interfaces.",
+    "final_catalog_lf_sha256": "5cd2ecfae6af835913af1978beae2fd79b79f07256938d13334f3a32dbdbaebb",
+    "evidence_state": "The snapshot commit anchors benchmark sources; certificate and checker evidence is identified separately by its recorded file hashes and validation results.",
+    "hash_reference": "src/vero/certification/check.py:frozen_sources"
+  },
+  "standard_lean_axioms": [
+    "Classical.choice",
+    "propext",
+    "Quot.sound"
+  ],
+  "policy": {
+    "manifest_trusted_axioms": "metadata_only; neither a proof nor a consistency claim",
+    "nonstandard_unreviewed_axiom": "present in source; no independent standard proof or consistency claim",
+    "opaque_abstract_interface": "bodyless external type/function; absence of semantic laws does not validate parser, crypto, IO, or operational behavior",
+    "abstract_interface_axiom": "still an actual kernel axiom even when it only supplies an external object/function",
+    "standard_derived_theorem_or_definition": "specialist candidate Lean compilation reports only listed standard axioms; final leanchecker status is separate",
+    "nonformal_declaration": "present on disk but outside formal local import closure; never silently counted as a formal assumption",
+    "historical_false": "applies only to recorded old source/assumption; conditional refutations are not current False or correctness certificates",
+    "historical_hashes": "historical_source_sha256 and hashes embedded inside referenced specialist/amendment evidence retain their original raw-byte encoding; they are not silently converted or claimed as portable LF hashes.",
+    "semantic_audit": "Pinned-source type/premise review and concrete boundary tests are separate from full source-model faithfulness, whole-environment consistency, general algorithm correctness, and final leanchecker acceptance."
+  },
+  "benchmarks": [
+    {
+      "benchmark": "arithmetic-v2",
+      "directory": "benchmarks/Arithmetic",
+      "manifest_sha256": "fbf7b24720ff8706c8e8f57b4edf4c0deffc848e484692d6021b89ea1f1d5e51",
+      "apis": 54,
+      "specifications": 191,
+      "trusted_axioms": [],
+      "formal_source_snapshot": {
+        "files": 30,
+        "sha256": "87f91cbec321e75b8c2d78cfa8312789b2efc83ef3e9b2d1a7ebe85efcacb7d8"
+      },
+      "declarations": [],
+      "audit_status": "current_source_inventory_only_no_consistency_or_final_checker_claim"
+    },
+    {
+      "benchmark": "base58",
+      "directory": "benchmarks/base58",
+      "manifest_sha256": "f4a6eec54d9c6f486bd4ede8ae1aedc5400e078066bd3483caac669cb5dbaa3d",
+      "apis": 4,
+      "specifications": 53,
+      "trusted_axioms": [],
+      "formal_source_snapshot": {
+        "files": 6,
+        "sha256": "090d1bacd72add2bfe4306a96e11073409ae5c933e6c79a556bda2b5e6065e10"
+      },
+      "declarations": [],
+      "audit_status": "current_source_inventory_only_no_consistency_or_final_checker_claim"
+    },
+    {
+      "benchmark": "cachetools",
+      "directory": "benchmarks/cachetools",
+      "manifest_sha256": "4cc87c6423fe8ed8a2b8b35a7e2eb5eac665cf0fbd58953930632f8862bf472a",
+      "apis": 5,
+      "specifications": 74,
+      "trusted_axioms": [],
+      "formal_source_snapshot": {
+        "files": 6,
+        "sha256": "3cef01e6dc52c4cda9fc730b089df67dd333e421deb1ab0ef6acf487468122a5"
+      },
+      "declarations": [],
+      "audit_status": "current_source_inventory_only_no_consistency_or_final_checker_claim"
+    },
+    {
+      "benchmark": "croniter",
+      "directory": "benchmarks/croniter",
+      "manifest_sha256": "8ef503ed7cdf0d76ee6216b7de38a55d8caf2d91159eed915676f8c5bbf7818f",
+      "apis": 3,
+      "specifications": 55,
+      "trusted_axioms": [],
+      "formal_source_snapshot": {
+        "files": 6,
+        "sha256": "dc091936755f165527503ce43d0dfe0a162d14d88d1d00cef0f37e3f113c35d4"
+      },
+      "declarations": [],
+      "audit_status": "current_source_inventory_only_no_consistency_or_final_checker_claim"
+    },
+    {
+      "benchmark": "dedekind-reals",
+      "directory": "benchmarks/DedekindReals",
+      "manifest_sha256": "a579c1aad8973a4a1f8469cff0ec442549178dd2be2e2f2a30f183096ecf9ba6",
+      "apis": 17,
+      "specifications": 82,
+      "trusted_axioms": [],
+      "formal_source_snapshot": {
+        "files": 24,
+        "sha256": "0d0937936a7931c90ff094ad306e584f8dcb2f6dbcef6296b0ea51809cd509e2"
+      },
+      "declarations": [],
+      "audit_status": "current_source_inventory_only_no_consistency_or_final_checker_claim",
+      "replaced_declarations": [
+        {
+          "name": "DedekindReals.Rplus_lower_bound",
+          "kind": "theorem",
+          "line": 100,
+          "source": "benchmarks/DedekindReals/DedekindReals/Impl/Additive.lean",
+          "in_formal_import_closure": true,
+          "classification": "standard_derived_theorem",
+          "kernel_axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ],
+          "candidate_evidence": "dedekind_replacements"
+        },
+        {
+          "name": "DedekindReals.Rplus_upper_bound",
+          "kind": "theorem",
+          "line": 107,
+          "source": "benchmarks/DedekindReals/DedekindReals/Impl/Additive.lean",
+          "in_formal_import_closure": true,
+          "classification": "standard_derived_theorem",
+          "kernel_axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ],
+          "candidate_evidence": "dedekind_replacements"
+        },
+        {
+          "name": "DedekindReals.Rplus_lower_open",
+          "kind": "theorem",
+          "line": 114,
+          "source": "benchmarks/DedekindReals/DedekindReals/Impl/Additive.lean",
+          "in_formal_import_closure": true,
+          "classification": "standard_derived_theorem",
+          "kernel_axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ],
+          "candidate_evidence": "dedekind_replacements"
+        },
+        {
+          "name": "DedekindReals.Rplus_upper_open",
+          "kind": "theorem",
+          "line": 122,
+          "source": "benchmarks/DedekindReals/DedekindReals/Impl/Additive.lean",
+          "in_formal_import_closure": true,
+          "classification": "standard_derived_theorem",
+          "kernel_axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ],
+          "candidate_evidence": "dedekind_replacements"
+        },
+        {
+          "name": "DedekindReals.Rplus_disjoint",
+          "kind": "theorem",
+          "line": 130,
+          "source": "benchmarks/DedekindReals/DedekindReals/Impl/Additive.lean",
+          "in_formal_import_closure": true,
+          "classification": "standard_derived_theorem",
+          "kernel_axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ],
+          "candidate_evidence": "dedekind_replacements"
+        },
+        {
+          "name": "DedekindReals.Rplus_located",
+          "kind": "theorem",
+          "line": 140,
+          "source": "benchmarks/DedekindReals/DedekindReals/Impl/Additive.lean",
+          "in_formal_import_closure": true,
+          "classification": "standard_derived_theorem",
+          "kernel_axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ],
+          "candidate_evidence": "dedekind_replacements"
+        },
+        {
+          "name": "DedekindReals.Rmult_lower_bound",
+          "kind": "theorem",
+          "line": 296,
+          "source": "benchmarks/DedekindReals/DedekindReals/Impl/Multiplication.lean",
+          "in_formal_import_closure": true,
+          "classification": "standard_derived_theorem",
+          "kernel_axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ],
+          "candidate_evidence": "dedekind_replacements"
+        },
+        {
+          "name": "DedekindReals.Rmult_upper_bound",
+          "kind": "theorem",
+          "line": 305,
+          "source": "benchmarks/DedekindReals/DedekindReals/Impl/Multiplication.lean",
+          "in_formal_import_closure": true,
+          "classification": "standard_derived_theorem",
+          "kernel_axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ],
+          "candidate_evidence": "dedekind_replacements"
+        },
+        {
+          "name": "DedekindReals.Rmult_lower_open",
+          "kind": "theorem",
+          "line": 314,
+          "source": "benchmarks/DedekindReals/DedekindReals/Impl/Multiplication.lean",
+          "in_formal_import_closure": true,
+          "classification": "standard_derived_theorem",
+          "kernel_axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ],
+          "candidate_evidence": "dedekind_replacements"
+        },
+        {
+          "name": "DedekindReals.Rmult_upper_open",
+          "kind": "theorem",
+          "line": 321,
+          "source": "benchmarks/DedekindReals/DedekindReals/Impl/Multiplication.lean",
+          "in_formal_import_closure": true,
+          "classification": "standard_derived_theorem",
+          "kernel_axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ],
+          "candidate_evidence": "dedekind_replacements"
+        },
+        {
+          "name": "DedekindReals.Rmult_disjoint",
+          "kind": "theorem",
+          "line": 328,
+          "source": "benchmarks/DedekindReals/DedekindReals/Impl/Multiplication.lean",
+          "in_formal_import_closure": true,
+          "classification": "standard_derived_theorem",
+          "kernel_axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ],
+          "candidate_evidence": "dedekind_replacements"
+        },
+        {
+          "name": "DedekindReals.Rmult_located",
+          "kind": "theorem",
+          "line": 348,
+          "source": "benchmarks/DedekindReals/DedekindReals/Impl/Multiplication.lean",
+          "in_formal_import_closure": true,
+          "classification": "standard_derived_theorem",
+          "kernel_axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ],
+          "candidate_evidence": "dedekind_replacements"
+        },
+        {
+          "name": "DedekindReals.Rinv_lower_proper",
+          "kind": "theorem",
+          "line": 457,
+          "source": "benchmarks/DedekindReals/DedekindReals/Impl/Multiplication.lean",
+          "in_formal_import_closure": true,
+          "classification": "standard_derived_theorem",
+          "kernel_axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ],
+          "candidate_evidence": "dedekind_replacements"
+        },
+        {
+          "name": "DedekindReals.Rinv_upper_proper",
+          "kind": "theorem",
+          "line": 462,
+          "source": "benchmarks/DedekindReals/DedekindReals/Impl/Multiplication.lean",
+          "in_formal_import_closure": true,
+          "classification": "standard_derived_theorem",
+          "kernel_axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ],
+          "candidate_evidence": "dedekind_replacements"
+        },
+        {
+          "name": "DedekindReals.Rinv_lower_bound",
+          "kind": "theorem",
+          "line": 467,
+          "source": "benchmarks/DedekindReals/DedekindReals/Impl/Multiplication.lean",
+          "in_formal_import_closure": true,
+          "classification": "standard_derived_theorem",
+          "kernel_axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ],
+          "candidate_evidence": "dedekind_replacements"
+        },
+        {
+          "name": "DedekindReals.Rinv_upper_bound",
+          "kind": "theorem",
+          "line": 479,
+          "source": "benchmarks/DedekindReals/DedekindReals/Impl/Multiplication.lean",
+          "in_formal_import_closure": true,
+          "classification": "standard_derived_theorem",
+          "kernel_axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ],
+          "candidate_evidence": "dedekind_replacements"
+        },
+        {
+          "name": "DedekindReals.Rinv_lower_lower",
+          "kind": "theorem",
+          "line": 491,
+          "source": "benchmarks/DedekindReals/DedekindReals/Impl/Multiplication.lean",
+          "in_formal_import_closure": true,
+          "classification": "standard_derived_theorem",
+          "kernel_axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ],
+          "candidate_evidence": "dedekind_replacements"
+        },
+        {
+          "name": "DedekindReals.Rinv_lower_open",
+          "kind": "theorem",
+          "line": 499,
+          "source": "benchmarks/DedekindReals/DedekindReals/Impl/Multiplication.lean",
+          "in_formal_import_closure": true,
+          "classification": "standard_derived_theorem",
+          "kernel_axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ],
+          "candidate_evidence": "dedekind_replacements"
+        },
+        {
+          "name": "DedekindReals.Rinv_upper_upper",
+          "kind": "theorem",
+          "line": 515,
+          "source": "benchmarks/DedekindReals/DedekindReals/Impl/Multiplication.lean",
+          "in_formal_import_closure": true,
+          "classification": "standard_derived_theorem",
+          "kernel_axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ],
+          "candidate_evidence": "dedekind_replacements"
+        },
+        {
+          "name": "DedekindReals.Rinv_upper_open",
+          "kind": "theorem",
+          "line": 523,
+          "source": "benchmarks/DedekindReals/DedekindReals/Impl/Multiplication.lean",
+          "in_formal_import_closure": true,
+          "classification": "standard_derived_theorem",
+          "kernel_axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ],
+          "candidate_evidence": "dedekind_replacements"
+        },
+        {
+          "name": "DedekindReals.Rinv_disjoint",
+          "kind": "theorem",
+          "line": 539,
+          "source": "benchmarks/DedekindReals/DedekindReals/Impl/Multiplication.lean",
+          "in_formal_import_closure": true,
+          "classification": "standard_derived_theorem",
+          "kernel_axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ],
+          "candidate_evidence": "dedekind_replacements"
+        },
+        {
+          "name": "DedekindReals.Rinv_located",
+          "kind": "theorem",
+          "line": 558,
+          "source": "benchmarks/DedekindReals/DedekindReals/Impl/Multiplication.lean",
+          "in_formal_import_closure": true,
+          "classification": "standard_derived_theorem",
+          "kernel_axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ],
+          "candidate_evidence": "dedekind_replacements"
+        }
+      ],
+      "source_sha256": {
+        "benchmarks/DedekindReals/DedekindReals/Impl/Additive.lean": "3f46a15aef5ec3a64b9eb2fbb6dab9d57e66feab4b62f603e0d205ff6a7134b2",
+        "benchmarks/DedekindReals/DedekindReals/Impl/Multiplication.lean": "ee69f6efc66aa2280aee39d5fce1fa6852609bd172fb319369a72be9bb41d680"
+      },
+      "declaration_check_source": "certificates/axiom-audit/DedekindRealsDeclarations.lean"
+    },
+    {
+      "benchmark": "deposit_sc",
+      "directory": "benchmarks/deposit_sc",
+      "manifest_sha256": "069599437d7ccf8362c92ad3e3f72196060f68bc0345dd63f56df0e371a8a4e1",
+      "apis": 22,
+      "specifications": 79,
+      "trusted_axioms": [],
+      "formal_source_snapshot": {
+        "files": 12,
+        "sha256": "48eb0e113b7b325d128dd290c04d73a0a81beddfe28b227bfdabef37eafd66dc"
+      },
+      "declarations": [],
+      "audit_status": "current_source_inventory_only_no_consistency_or_final_checker_claim"
+    },
+    {
+      "benchmark": "difflib",
+      "directory": "benchmarks/difflib",
+      "manifest_sha256": "2209cafc02c5d1b2fd34927e28e81b5231b20dcc11d7b5635ecaed76293add23",
+      "apis": 3,
+      "specifications": 49,
+      "trusted_axioms": [],
+      "formal_source_snapshot": {
+        "files": 6,
+        "sha256": "a6b126fcba1a50b7a710933761a14174297853b76e69781f29e1c5dd4ba30951"
+      },
+      "declarations": [],
+      "audit_status": "current_source_inventory_only_no_consistency_or_final_checker_claim"
+    },
+    {
+      "benchmark": "dijkstar",
+      "directory": "benchmarks/dijkstar",
+      "manifest_sha256": "1aec5b4dfa8e7ad1a05d3c6531c988f9967815ccdf214b807aeda87ce98158c8",
+      "apis": 3,
+      "specifications": 43,
+      "trusted_axioms": [],
+      "formal_source_snapshot": {
+        "files": 6,
+        "sha256": "92d6bdaf5b5ca7405b20cad19e7b49fbe94bff523bf9175ca6e369d9f25814e0"
+      },
+      "declarations": [],
+      "audit_status": "current_source_inventory_only_no_consistency_or_final_checker_claim"
+    },
+    {
+      "benchmark": "ecdsa",
+      "directory": "benchmarks/ecdsa",
+      "manifest_sha256": "8d5a3fe22cf43bec37f720d59e4f0fcf319145b717ba5a2e1a1fe8cde2bd72e3",
+      "apis": 9,
+      "specifications": 48,
+      "trusted_axioms": [],
+      "formal_source_snapshot": {
+        "files": 8,
+        "sha256": "0b30b348193fe3ba09ef71b4ce1ca1f3c7486256f7dde404c141a603920a4f55"
+      },
+      "declarations": [],
+      "audit_status": "current_source_inventory_only_no_consistency_or_final_checker_claim"
+    },
+    {
+      "benchmark": "flocq",
+      "directory": "benchmarks/Flocq",
+      "manifest_sha256": "efcdaf134b82edda82a81f5a1c0f79cfdebd073d350aee1c938363863a1d12a2",
+      "apis": 73,
+      "specifications": 203,
+      "trusted_axioms": [
+        "ZnearestValidRnd",
+        "mantissaUPSmallPos",
+        "mantissaSmallPos",
+        "expSmallRound0Pos",
+        "magDN",
+        "roundUPSmallPos",
+        "magUniquePos",
+        "binaryFloatOfBitsAux",
+        "binaryFloatOfBitsAuxCorrect",
+        "bplus",
+        "bminus",
+        "bmult",
+        "bdiv",
+        "bsqrt",
+        "bfma"
+      ],
+      "formal_source_snapshot": {
+        "files": 53,
+        "sha256": "389b93a21186066b9c9713c05f6b118c77d80921303f8b90d791a52ee5f34638"
+      },
+      "declarations": [
+        {
+          "name": "ZnearestValidRnd",
+          "kind": "axiom",
+          "line": 124,
+          "source": "benchmarks/Flocq/Flocq/Core/Impl/GenericFmt.lean",
+          "in_formal_import_closure": true,
+          "classification": "nonstandard_unreviewed_axiom",
+          "manifest_trusted_exact": true,
+          "manifest_trusted_suffix": true,
+          "boundary": "unproved_semantic_or_mathematical_law_or_proof_bearing_construction",
+          "upstream_ref": "Core/Generic_fmt.v:1645-1653,1695-1761",
+          "semantic_status": "unresolved_source_signature_matches",
+          "semantic_note": "Arbitrary tie choice is allowed in source; retained ValidRnd laws match. Not independently reproved."
+        },
+        {
+          "name": "mantissaUPSmallPos",
+          "kind": "axiom",
+          "line": 149,
+          "source": "benchmarks/Flocq/Flocq/Core/Impl/GenericFmt.lean",
+          "in_formal_import_closure": true,
+          "classification": "nonstandard_unreviewed_axiom",
+          "manifest_trusted_exact": true,
+          "manifest_trusted_suffix": true,
+          "boundary": "unproved_semantic_or_mathematical_law_or_proof_bearing_construction",
+          "upstream_ref": "Core/Generic_fmt.v:449-458",
+          "semantic_status": "unresolved_source_signature_matches",
+          "semantic_note": "Power bracket and exponent inequality retained; source does not require ValidExp here. Not independently reproved."
+        },
+        {
+          "name": "mantissaSmallPos",
+          "kind": "axiom",
+          "line": 154,
+          "source": "benchmarks/Flocq/Flocq/Core/Impl/GenericFmt.lean",
+          "in_formal_import_closure": true,
+          "classification": "nonstandard_unreviewed_axiom",
+          "manifest_trusted_exact": true,
+          "manifest_trusted_suffix": true,
+          "boundary": "unproved_semantic_or_mathematical_law_or_proof_bearing_construction",
+          "upstream_ref": "Core/Generic_fmt.v:353-370",
+          "semantic_status": "unresolved_source_signature_matches",
+          "semantic_note": "Power bracket and exponent inequality retained; Radix supplies val>=2. Not independently reproved."
+        },
+        {
+          "name": "expSmallRound0Pos",
+          "kind": "axiom",
+          "line": 196,
+          "source": "benchmarks/Flocq/Flocq/Core/Impl/GenericFmt.lean",
+          "in_formal_import_closure": true,
+          "classification": "nonstandard_unreviewed_axiom",
+          "manifest_trusted_exact": true,
+          "manifest_trusted_suffix": true,
+          "boundary": "unproved_semantic_or_mathematical_law_or_proof_bearing_construction",
+          "upstream_ref": "Core/Generic_fmt.v:38-46,570-575,772-783",
+          "semantic_status": "unresolved_source_signature_matches",
+          "semantic_note": "ValidExp and ValidRnd retained; equivalence of logarithmic magnitude to source magnitude remains unproved."
+        },
+        {
+          "name": "magDN",
+          "kind": "axiom",
+          "line": 202,
+          "source": "benchmarks/Flocq/Flocq/Core/Impl/GenericFmt.lean",
+          "in_formal_import_closure": true,
+          "classification": "nonstandard_unreviewed_axiom",
+          "manifest_trusted_exact": true,
+          "manifest_trusted_suffix": true,
+          "boundary": "unproved_semantic_or_mathematical_law_or_proof_bearing_construction",
+          "upstream_ref": "Core/Generic_fmt.v:1455-1470; Monotone_exp starts 1544",
+          "semantic_status": "unresolved_source_signature_matches",
+          "semantic_note": "ValidExp and positive downward result retained; no source MonotoneExp premise is needed. Not independently reproved."
+        },
+        {
+          "name": "roundUPSmallPos",
+          "kind": "axiom",
+          "line": 207,
+          "source": "benchmarks/Flocq/Flocq/Core/Impl/GenericFmt.lean",
+          "in_formal_import_closure": true,
+          "classification": "nonstandard_unreviewed_axiom",
+          "manifest_trusted_exact": true,
+          "manifest_trusted_suffix": true,
+          "boundary": "unproved_semantic_or_mathematical_law_or_proof_bearing_construction",
+          "upstream_ref": "Core/Generic_fmt.v:1339-1348",
+          "semantic_status": "unresolved_source_signature_matches",
+          "semantic_note": "ValidExp, power bracket and exponent inequality retained. Not independently reproved."
+        },
+        {
+          "name": "magUniquePos",
+          "kind": "axiom",
+          "line": 151,
+          "source": "benchmarks/Flocq/Flocq/Core/Impl/Raux.lean",
+          "in_formal_import_closure": true,
+          "classification": "nonstandard_unreviewed_axiom",
+          "manifest_trusted_exact": true,
+          "manifest_trusted_suffix": true,
+          "boundary": "unproved_semantic_or_mathematical_law_or_proof_bearing_construction",
+          "upstream_ref": "Core/Raux.v:1698-1709",
+          "semantic_status": "unresolved_source_signature_matches",
+          "semantic_note": "Power bracket implies positivity; logarithmic/source magnitude bridge remains unproved."
+        },
+        {
+          "name": "binaryFloatOfBitsAux",
+          "kind": "axiom",
+          "line": 80,
+          "source": "benchmarks/Flocq/Flocq/IEEE754/Impl/Bits.lean",
+          "in_formal_import_closure": true,
+          "classification": "nonstandard_unreviewed_axiom",
+          "manifest_trusted_exact": true,
+          "manifest_trusted_suffix": true,
+          "boundary": "abstract_external_interface",
+          "upstream_ref": "IEEE754/Bits.v:129-157,348-366",
+          "semantic_status": "algorithm_placeholder_no_ieee_semantics",
+          "semantic_note": "Unconstrained decoder function, not the source executable decoder."
+        },
+        {
+          "name": "binaryFloatOfBitsAuxCorrect",
+          "kind": "axiom",
+          "line": 83,
+          "source": "benchmarks/Flocq/Flocq/IEEE754/Impl/Bits.lean",
+          "in_formal_import_closure": true,
+          "classification": "nonstandard_unreviewed_axiom",
+          "manifest_trusted_exact": true,
+          "manifest_trusted_suffix": true,
+          "boundary": "unproved_semantic_or_mathematical_law_or_proof_bearing_construction",
+          "upstream_ref": "IEEE754/Bits.v:129-157,368-370",
+          "semantic_status": "algorithm_placeholder_with_lost_format_context",
+          "semantic_note": "Source positive width/precision context is missing. A joint all-zero decoder interpretation satisfies the pair; this establishes no IEEE behavior."
+        },
+        {
+          "name": "bplus",
+          "kind": "axiom",
+          "line": 91,
+          "source": "benchmarks/Flocq/Flocq/IEEE754/Impl/Bits.lean",
+          "in_formal_import_closure": true,
+          "classification": "nonstandard_unreviewed_axiom",
+          "manifest_trusted_exact": true,
+          "manifest_trusted_suffix": true,
+          "boundary": "abstract_external_interface",
+          "upstream_ref": "IEEE754/Binary.v:149-150,1049-1050",
+          "semantic_status": "algorithm_placeholder_no_ieee_semantics",
+          "semantic_group": "ieee_algorithm_placeholders"
+        },
+        {
+          "name": "bminus",
+          "kind": "axiom",
+          "line": 96,
+          "source": "benchmarks/Flocq/Flocq/IEEE754/Impl/Bits.lean",
+          "in_formal_import_closure": true,
+          "classification": "nonstandard_unreviewed_axiom",
+          "manifest_trusted_exact": true,
+          "manifest_trusted_suffix": true,
+          "boundary": "abstract_external_interface",
+          "upstream_ref": "IEEE754/Binary.v:149-150,1086-1087",
+          "semantic_status": "algorithm_placeholder_no_ieee_semantics",
+          "semantic_group": "ieee_algorithm_placeholders"
+        },
+        {
+          "name": "bmult",
+          "kind": "axiom",
+          "line": 101,
+          "source": "benchmarks/Flocq/Flocq/IEEE754/Impl/Bits.lean",
+          "in_formal_import_closure": true,
+          "classification": "nonstandard_unreviewed_axiom",
+          "manifest_trusted_exact": true,
+          "manifest_trusted_suffix": true,
+          "boundary": "abstract_external_interface",
+          "upstream_ref": "IEEE754/Binary.v:149-150,947-948",
+          "semantic_status": "algorithm_placeholder_no_ieee_semantics",
+          "semantic_group": "ieee_algorithm_placeholders"
+        },
+        {
+          "name": "bdiv",
+          "kind": "axiom",
+          "line": 106,
+          "source": "benchmarks/Flocq/Flocq/IEEE754/Impl/Bits.lean",
+          "in_formal_import_closure": true,
+          "classification": "nonstandard_unreviewed_axiom",
+          "manifest_trusted_exact": true,
+          "manifest_trusted_suffix": true,
+          "boundary": "abstract_external_interface",
+          "upstream_ref": "IEEE754/Binary.v:149-150,1162-1163",
+          "semantic_status": "algorithm_placeholder_no_ieee_semantics",
+          "semantic_group": "ieee_algorithm_placeholders"
+        },
+        {
+          "name": "bsqrt",
+          "kind": "axiom",
+          "line": 111,
+          "source": "benchmarks/Flocq/Flocq/IEEE754/Impl/Bits.lean",
+          "in_formal_import_closure": true,
+          "classification": "nonstandard_unreviewed_axiom",
+          "manifest_trusted_exact": true,
+          "manifest_trusted_suffix": true,
+          "boundary": "abstract_external_interface",
+          "upstream_ref": "IEEE754/Binary.v:149-150,1193-1194",
+          "semantic_status": "algorithm_placeholder_no_ieee_semantics",
+          "semantic_group": "ieee_algorithm_placeholders"
+        },
+        {
+          "name": "bfma",
+          "kind": "axiom",
+          "line": 116,
+          "source": "benchmarks/Flocq/Flocq/IEEE754/Impl/Bits.lean",
+          "in_formal_import_closure": true,
+          "classification": "nonstandard_unreviewed_axiom",
+          "manifest_trusted_exact": true,
+          "manifest_trusted_suffix": true,
+          "boundary": "abstract_external_interface",
+          "upstream_ref": "IEEE754/Binary.v:149-150,1126-1127",
+          "semantic_status": "algorithm_placeholder_no_ieee_semantics",
+          "semantic_group": "ieee_algorithm_placeholders"
+        }
+      ],
+      "audit_status": "current_source_inventory_only_no_consistency_or_final_checker_claim",
+      "replaced_declarations": [
+        {
+          "name": "validBinary",
+          "kind": "def",
+          "line": 75,
+          "source": "benchmarks/Flocq/Flocq/IEEE754/Impl/Bits.lean",
+          "in_formal_import_closure": true,
+          "classification": "concrete_definition_not_an_assumption",
+          "candidate_evidence": "certificates/Flocq/spec-amendments.json"
+        },
+        {
+          "name": "ZfloorValidRnd",
+          "kind": "theorem",
+          "line": 104,
+          "source": "benchmarks/Flocq/Flocq/Core/Impl/GenericFmt.lean",
+          "in_formal_import_closure": true,
+          "classification": "standard_derived_theorem",
+          "kernel_axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ],
+          "candidate_evidence": "flocq_mathematical_replacements",
+          "upstream_ref": "Core/Generic_fmt.v:868-873",
+          "semantic_status": "source_premises_matched_and_same_type_theorem_independently_compiled"
+        },
+        {
+          "name": "ZceilValidRnd",
+          "kind": "theorem",
+          "line": 114,
+          "source": "benchmarks/Flocq/Flocq/Core/Impl/GenericFmt.lean",
+          "in_formal_import_closure": true,
+          "classification": "standard_derived_theorem",
+          "kernel_axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ],
+          "candidate_evidence": "flocq_mathematical_replacements",
+          "upstream_ref": "Core/Generic_fmt.v:875-880",
+          "semantic_status": "source_premises_matched_and_same_type_theorem_independently_compiled"
+        },
+        {
+          "name": "canonicalGenericFormat",
+          "kind": "theorem",
+          "line": 132,
+          "source": "benchmarks/Flocq/Flocq/Core/Impl/GenericFmt.lean",
+          "in_formal_import_closure": true,
+          "classification": "standard_derived_theorem",
+          "kernel_axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ],
+          "candidate_evidence": "flocq_mathematical_replacements",
+          "upstream_ref": "Core/Generic_fmt.v:115-126",
+          "semantic_status": "source_premises_matched_and_same_type_theorem_independently_compiled"
+        },
+        {
+          "name": "cexpOpp",
+          "kind": "theorem",
+          "line": 143,
+          "source": "benchmarks/Flocq/Flocq/Core/Impl/GenericFmt.lean",
+          "in_formal_import_closure": true,
+          "classification": "standard_derived_theorem",
+          "kernel_axioms": [
+            "propext",
+            "Classical.choice",
+            "Quot.sound"
+          ],
+          "candidate_evidence": "flocq_mathematical_replacements",
+          "upstream_ref": "Core/Generic_fmt.v:97-103",
+          "semantic_status": "source_premises_matched_and_same_type_theorem_independently_compiled"
+        }
+      ],
+      "source_sha256": {
+        "benchmarks/Flocq/Flocq/Core/Impl/GenericFmt.lean": "5928e435be3307fd0ca08c8fa9886071e124140e05c8edfd3b56a54eaf6fa084",
+        "benchmarks/Flocq/Flocq/Core/Impl/Raux.lean": "c5231297a2f1b2febfc51afe19d6bfce22e14214752713eee63b3a30434c669d",
+        "benchmarks/Flocq/Flocq/IEEE754/Impl/Bits.lean": "8ebfabc243d2974b3646a417e1352b510520ee0811d2c100e5aefd0dee20ce02"
+      },
+      "declaration_check_source": "certificates/axiom-audit/FlocqDeclarations.lean",
+      "unresolved_external_semantics": {
+        "native_float": "Native Float conversion/roundtrip semantics remain unresolved; no new axiom was introduced to claim them.",
+        "source": "benchmarks/Flocq/Flocq/IEEE754/Impl/PrimFloat.lean",
+        "source_sha256": "254f42e28119ccace03cd9f3398c17cee840e90580dc2bb0b1b13a7586e92616",
+        "amendment_evidence": "certificates/Flocq/spec-amendments.json"
+      },
+      "semantic_audit": {
+        "upstream_commit": "7aab8f55bceec0cfafc3b3bc0e77e0dbb5a70c5f",
+        "remaining_math_axioms": 7,
+        "algorithm_placeholder_declarations": 8,
+        "ieee_algorithm_placeholders": "Source has real arithmetic algorithms under positive precision and prec<emax with valid constructors; Lean retains function types over raw constructors. Zero-result interpretations witness inhabitation, not IEEE correctness.",
+        "counterexample_status": "No machine False found in bounded specialist review; neither full consistency nor correctness follows.",
+        "specialist_local_ignored_record": ".cache/flocq-axiom-review-20261103/semantic-review.json",
+        "specialist_record_lf_sha256": "07c814a8ce2f95d4f7687ab1d39e5a1e24dcc44537e2f308494e76fed9dfec6a"
+      }
+    },
+    {
+      "benchmark": "galoistools",
+      "directory": "benchmarks/galoistools",
+      "manifest_sha256": "817e512e30f4f0b99cd713d146d644334efa54a8ce847be649305cfbf048a122",
+      "apis": 11,
+      "specifications": 48,
+      "trusted_axioms": [],
+      "formal_source_snapshot": {
+        "files": 8,
+        "sha256": "bab24e2799b65bf9b24214fbfe9f04923612c9a91d92c57cf0693a958086bb91"
+      },
+      "declarations": [],
+      "audit_status": "current_source_inventory_only_no_consistency_or_final_checker_claim"
+    },
+    {
+      "benchmark": "greenery",
+      "directory": "benchmarks/greenery",
+      "manifest_sha256": "15c3ebd1987ed4dac186c0b409fd7135f889bf24ad5d25661409b950c6884722",
+      "apis": 7,
+      "specifications": 26,
+      "trusted_axioms": [],
+      "formal_source_snapshot": {
+        "files": 8,
+        "sha256": "049d134f55bfcdad28e10d456c06fbfc0586607d8be3936e5033be6f007517c7"
+      },
+      "declarations": [],
+      "audit_status": "current_source_inventory_only_no_consistency_or_final_checker_claim"
+    },
+    {
+      "benchmark": "huffman",
+      "directory": "benchmarks/Huffman",
+      "manifest_sha256": "efa1b5b8ba49f6a9552f928f186f8577082dc9838cf649f80516ce8f66dbd907",
+      "apis": 27,
+      "specifications": 127,
+      "trusted_axioms": [
+        "Huffman.build_fun_witness",
+        "Huffman.huffman_witness",
+        "huffman_aux",
+        "huffman_aux_F"
+      ],
+      "formal_source_snapshot": {
+        "files": 48,
+        "sha256": "3a2af5066d5ff0d83f0a114f09b9d30b964b5fdb63bde535cb60098db18da2fc"
+      },
+      "declarations": [
+        {
+          "name": "Huffman.build_fun_witness",
+          "kind": "axiom",
+          "line": 52,
+          "source": "benchmarks/Huffman/Huffman/Impl/Build.lean",
+          "in_formal_import_closure": true,
+          "classification": "nonstandard_unreviewed_axiom",
+          "manifest_trusted_exact": true,
+          "manifest_trusted_suffix": true,
+          "boundary": "unproved_semantic_or_mathematical_law_or_proof_bearing_construction",
+          "upstream_ref": "theories/Build.v:272-278",
+          "semantic_status": "source_signature_retained_unproved_construction",
+          "type_shape": "∀ A f l, l≠[] → {t // cover_min A f l t}",
+          "semantic_note": "After restoring cover, signature matches source. Greedy optimality construction remains axiomatized."
+        },
+        {
+          "name": "huffman_aux_F",
+          "kind": "axiom",
+          "line": 63,
+          "source": "benchmarks/Huffman/Huffman/Impl/Huffman.lean",
+          "in_formal_import_closure": true,
+          "classification": "nonstandard_unreviewed_axiom",
+          "manifest_trusted_exact": true,
+          "manifest_trusted_suffix": true,
+          "boundary": "unproved_semantic_or_mathematical_law_or_proof_bearing_construction",
+          "upstream_ref": "theories/Huffman.v:140-170",
+          "semantic_status": "source_signature_retained_unproved_construction",
+          "type_shape": "shorter-list recursion hypothesis → HuffmanAuxType l1",
+          "semantic_note": "AuxType retains nonempty/ordered list, code roundtrip, matching weights and nonempty code premises. No independent constructor proof."
+        },
+        {
+          "name": "huffman_aux",
+          "kind": "axiom",
+          "line": 73,
+          "source": "benchmarks/Huffman/Huffman/Impl/Huffman.lean",
+          "in_formal_import_closure": true,
+          "classification": "nonstandard_unreviewed_axiom",
+          "manifest_trusted_exact": true,
+          "manifest_trusted_suffix": true,
+          "boundary": "unproved_semantic_or_mathematical_law_or_proof_bearing_construction",
+          "upstream_ref": "theories/Huffman.v:316-317",
+          "semantic_status": "source_signature_retained_unproved_construction",
+          "type_shape": "∀ l, HuffmanAuxType l",
+          "semantic_note": "Source derives this by well-founded length induction; Lean still assumes it."
+        },
+        {
+          "name": "Huffman.huffman_witness",
+          "kind": "axiom",
+          "line": 98,
+          "source": "benchmarks/Huffman/Huffman/Impl/Huffman.lean",
+          "in_formal_import_closure": true,
+          "classification": "nonstandard_unreviewed_axiom",
+          "manifest_trusted_exact": true,
+          "manifest_trusted_suffix": true,
+          "boundary": "unproved_semantic_or_mathematical_law_or_proof_bearing_construction",
+          "upstream_ref": "theories/Huffman.v:31,319-334",
+          "semantic_status": "source_domain_extended_unproved_full_extension",
+          "type_shape": "∀ A [DecidableEq A] empty m, {c // unique_prefix c ∧ in_alphabet m c ∧ optimal_weight c}",
+          "semantic_note": "Source uses 1<length(frequency_list m); Lean quantifies all messages. Empty and single-element messages were independently checked, not all unary inputs or the full extension."
+        }
+      ],
+      "audit_status": "current_source_inventory_only_no_consistency_or_final_checker_claim",
+      "replaced_declarations": [
+        {
+          "name": "Huffman.buildf_witness",
+          "kind": "def",
+          "line": 79,
+          "source": "benchmarks/Huffman/Huffman/Impl/Build.lean",
+          "in_formal_import_closure": true,
+          "classification": "standard_derived_definition",
+          "kernel_axioms": [
+            "propext",
+            "Quot.sound"
+          ],
+          "candidate_evidence": "bitmasks_huffman_replacements"
+        },
+        {
+          "name": "Huffman.obuildf_witness",
+          "kind": "def",
+          "line": 108,
+          "source": "benchmarks/Huffman/Huffman/Impl/Build.lean",
+          "in_formal_import_closure": true,
+          "classification": "standard_derived_definition",
+          "kernel_axioms": [
+            "propext",
+            "Quot.sound"
+          ],
+          "candidate_evidence": "bitmasks_huffman_replacements"
+        }
+      ],
+      "source_sha256": {
+        "benchmarks/Huffman/Huffman/Impl/Build.lean": "7528c6855598f5d19e9ffb7ce4fd6e3ae97bdfd3f724aef68c74b4507a90e786",
+        "benchmarks/Huffman/Huffman/Impl/Huffman.lean": "276f6a6ec9f8c9883110cdc1d1954165991882e9ab7bab301517d94cf8ad9d9c"
+      },
+      "declaration_check_source": "certificates/axiom-audit/HuffmanDeclarations.lean",
+      "semantic_audit": {
+        "upstream_repository": "https://github.com/rocq-community/huffman.git",
+        "upstream_commit": "cc7d4cc41ef623f85b417e723cd8e4c2e5be1f6a",
+        "current_False_established": false,
+        "source_faithfulness_or_standard_derivation_established": false,
+        "boundary_tests": {
+          "empty_message": "proved",
+          "single_element_message": "proved",
+          "kernel_axioms": [
+            "propext",
+            "Quot.sound"
+          ],
+          "scope_limit": "These concrete boundary constructions do not prove the full omitted-premise extension or implement the general algorithm."
+        }
+      }
+    },
+    {
+      "benchmark": "intervaltree",
+      "directory": "benchmarks/intervaltree",
+      "manifest_sha256": "75f5b33b685ff50af6fcdbdf436282a011e92d883b4ce75e4a16fe74c2f99c93",
+      "apis": 3,
+      "specifications": 56,
+      "trusted_axioms": [],
+      "formal_source_snapshot": {
+        "files": 6,
+        "sha256": "e9e2d87127956a487660fbbce6f514e8e8d42656936f1a05cfe5ad881123e8e1"
+      },
+      "declarations": [],
+      "audit_status": "current_source_inventory_only_no_consistency_or_final_checker_claim"
+    },
+    {
+      "benchmark": "ipaddress",
+      "directory": "benchmarks/ipaddress",
+      "manifest_sha256": "1c5c3fe21d3ecb874217860ab5e983fa9db20cac86bb11398afe5bb6c2e19813",
+      "apis": 5,
+      "specifications": 68,
+      "trusted_axioms": [],
+      "formal_source_snapshot": {
+        "files": 6,
+        "sha256": "121612273b648065444ceab3e0fd29a6d599c8c9216ff7de28974e1e955744c1"
+      },
+      "declarations": [],
+      "audit_status": "current_source_inventory_only_no_consistency_or_final_checker_claim"
+    },
+    {
+      "benchmark": "json-v2",
+      "directory": "benchmarks/Json",
+      "manifest_sha256": "24c910e41a98423bc1a9f909d17727323b2cc815c55574a2e9fce7dbeb8bdd38",
+      "apis": 31,
+      "specifications": 64,
+      "trusted_axioms": [],
+      "formal_source_snapshot": {
+        "files": 48,
+        "sha256": "1b7d200914cdeb6777d8d9ec324da0509ebd855d8a8b8eeb3d42c2788f8fd6cb"
+      },
+      "declarations": [],
+      "audit_status": "current_source_inventory_only_no_consistency_or_final_checker_claim"
+    },
+    {
+      "benchmark": "jsonpatch",
+      "directory": "benchmarks/jsonpatch",
+      "manifest_sha256": "053db8828c88a0a7dc33df85aa5ab66bf42c65d46f33e47fba3e9a99fc4e07fa",
+      "apis": 5,
+      "specifications": 27,
+      "trusted_axioms": [],
+      "formal_source_snapshot": {
+        "files": 8,
+        "sha256": "a37ce68ef4cfce7685591ea3590d9442524129ea4b534cd8ae9032ad08c30c6c"
+      },
+      "declarations": [],
+      "audit_status": "current_source_inventory_only_no_consistency_or_final_checker_claim"
+    },
+    {
+      "benchmark": "linked_list",
+      "directory": "benchmarks/linked_list",
+      "manifest_sha256": "8c7597d0f17bb691d9ca2239c2fc2f187c242dc32b93a3131dafaa43a5dcefe1",
+      "apis": 64,
+      "specifications": 109,
+      "trusted_axioms": [],
+      "formal_source_snapshot": {
+        "files": 39,
+        "sha256": "6acff17be762560450f55cb52d26274c37d3243c0ebc6e1cd563ba7a200b15a2"
+      },
+      "declarations": [],
+      "audit_status": "current_source_inventory_only_no_consistency_or_final_checker_claim"
+    },
+    {
+      "benchmark": "munkres",
+      "directory": "benchmarks/munkres",
+      "manifest_sha256": "b92814b1c79db8198b092372c022d84739a8b6bd2bdee4c8268314503240df4d",
+      "apis": 4,
+      "specifications": 19,
+      "trusted_axioms": [],
+      "formal_source_snapshot": {
+        "files": 6,
+        "sha256": "27311754e1cd1696ed8c74f6980b4bca78f050c142afcc42ab1c209214efe16d"
+      },
+      "declarations": [],
+      "audit_status": "current_source_inventory_only_no_consistency_or_final_checker_claim"
+    },
+    {
+      "benchmark": "netaddr",
+      "directory": "benchmarks/netaddr",
+      "manifest_sha256": "eb06747e25355112c11facb46306e598423ab0437361729749aef5f10fe615e8",
+      "apis": 5,
+      "specifications": 40,
+      "trusted_axioms": [],
+      "formal_source_snapshot": {
+        "files": 6,
+        "sha256": "06c63e3fb745dadb866850a356fd0c2f16cedac9750328bd3f470f48584cda6e"
+      },
+      "declarations": [],
+      "audit_status": "current_source_inventory_only_no_consistency_or_final_checker_claim"
+    },
+    {
+      "benchmark": "networkx",
+      "directory": "benchmarks/networkx",
+      "manifest_sha256": "951e1ebe793a7f482d3d3188d06c7a94364ee36ed590401640b7f0e20419bff4",
+      "apis": 6,
+      "specifications": 40,
+      "trusted_axioms": [],
+      "formal_source_snapshot": {
+        "files": 8,
+        "sha256": "7860affc49054c0ab40ad92f6389eb636120d35a59c7d4719b595a49672489c0"
+      },
+      "declarations": [],
+      "audit_status": "current_source_inventory_only_no_consistency_or_final_checker_claim"
+    },
+    {
+      "benchmark": "ntheory",
+      "directory": "benchmarks/ntheory",
+      "manifest_sha256": "a14b68cfc7f65c6cb70f130e2ecdf6890461e420b27652ca10f5872ac41eb360",
+      "apis": 8,
+      "specifications": 62,
+      "trusted_axioms": [],
+      "formal_source_snapshot": {
+        "files": 6,
+        "sha256": "696486f6708a9c21f87d8661b1760cd3585c86840f44331a94fb6c19f34a3498"
+      },
+      "declarations": [],
+      "audit_status": "current_source_inventory_only_no_consistency_or_final_checker_claim"
+    },
+    {
+      "benchmark": "packaging_version",
+      "directory": "benchmarks/packaging_version",
+      "manifest_sha256": "26d6532b98dbb235aa167532345c0c0c6aadc54a5fe3aa2e87887cf3eb37bbf7",
+      "apis": 5,
+      "specifications": 74,
+      "trusted_axioms": [],
+      "formal_source_snapshot": {
+        "files": 6,
+        "sha256": "af831db8fad4c1c2e1e41093112723740c787a5f3066bb347a90876e21b58342"
+      },
+      "declarations": [],
+      "audit_status": "current_source_inventory_only_no_consistency_or_final_checker_claim"
+    },
+    {
+      "benchmark": "piggybank-v2",
+      "directory": "benchmarks/piggybank",
+      "manifest_sha256": "1d98366a6dd8242a887d214fc4cdb937ee5412a8e361cfa27779eabb5c757054",
+      "apis": 4,
+      "specifications": 23,
+      "trusted_axioms": [
+        "ChainState",
+        "DeploymentInfo",
+        "WeakContract",
+        "Contract",
+        "ChainTrace",
+        "build_contract",
+        "toWeakContract",
+        "empty_state",
+        "env_contracts",
+        "outgoing_acts",
+        "contract_state",
+        "env_account_balances",
+        "deployment_info",
+        "deployment_from",
+        "account_balance_nonnegative",
+        "contract_induction"
+      ],
+      "formal_source_snapshot": {
+        "files": 10,
+        "sha256": "b4a3ea9ab6b5204ef8a4fed1e88ff8ee0959992b0c9de2e3cd864746617b0bcd"
+      },
+      "declarations": [
+        {
+          "name": "ChainState",
+          "kind": "opaque",
+          "line": 21,
+          "source": "benchmarks/piggybank/PiggybankV2/Impl/ConcertShim.lean",
+          "in_formal_import_closure": true,
+          "classification": "opaque_abstract_interface",
+          "manifest_trusted_exact": true,
+          "manifest_trusted_suffix": true
+        },
+        {
+          "name": "DeploymentInfo",
+          "kind": "opaque",
+          "line": 23,
+          "source": "benchmarks/piggybank/PiggybankV2/Impl/ConcertShim.lean",
+          "in_formal_import_closure": true,
+          "classification": "opaque_abstract_interface",
+          "manifest_trusted_exact": true,
+          "manifest_trusted_suffix": true
+        },
+        {
+          "name": "WeakContract",
+          "kind": "opaque",
+          "line": 25,
+          "source": "benchmarks/piggybank/PiggybankV2/Impl/ConcertShim.lean",
+          "in_formal_import_closure": true,
+          "classification": "opaque_abstract_interface",
+          "manifest_trusted_exact": true,
+          "manifest_trusted_suffix": true
+        },
+        {
+          "name": "Contract",
+          "kind": "opaque",
+          "line": 33,
+          "source": "benchmarks/piggybank/PiggybankV2/Impl/ConcertShim.lean",
+          "in_formal_import_closure": true,
+          "classification": "opaque_abstract_interface",
+          "manifest_trusted_exact": true,
+          "manifest_trusted_suffix": true
+        },
+        {
+          "name": "ChainTrace",
+          "kind": "opaque",
+          "line": 35,
+          "source": "benchmarks/piggybank/PiggybankV2/Impl/ConcertShim.lean",
+          "in_formal_import_closure": true,
+          "classification": "opaque_abstract_interface",
+          "manifest_trusted_exact": true,
+          "manifest_trusted_suffix": true
+        },
+        {
+          "name": "build_contract",
+          "kind": "axiom",
+          "line": 41,
+          "source": "benchmarks/piggybank/PiggybankV2/Impl/ConcertShim.lean",
+          "in_formal_import_closure": true,
+          "classification": "nonstandard_unreviewed_axiom",
+          "manifest_trusted_exact": true,
+          "manifest_trusted_suffix": true,
+          "boundary": "abstract_external_interface",
+          "upstream_ref": "execution/theories/BlockchainBase.v:235-258",
+          "type_shape": "two entrypoint functions → Contract Setup Msg State Error",
+          "semantic_note": "Source record constructor; four Serializable instances erased. No init/receive projection equations for the opaque Contract are supplied.",
+          "semantic_status": "opaque_source_definition_boundary_unimplemented_semantics"
+        },
+        {
+          "name": "toWeakContract",
+          "kind": "axiom",
+          "line": 47,
+          "source": "benchmarks/piggybank/PiggybankV2/Impl/ConcertShim.lean",
+          "in_formal_import_closure": true,
+          "classification": "nonstandard_unreviewed_axiom",
+          "manifest_trusted_exact": true,
+          "manifest_trusted_suffix": true,
+          "boundary": "abstract_external_interface",
+          "upstream_ref": "execution/theories/BlockchainBase.v:267-291",
+          "type_shape": "Contract Setup Msg State Error → WeakContract",
+          "semantic_note": "Source contract_to_weak_contract serializes/deserializes state and messages; serialization premises/behavior are opaque here.",
+          "semantic_status": "opaque_source_definition_boundary_unimplemented_semantics"
+        },
+        {
+          "name": "empty_state",
+          "kind": "axiom",
+          "line": 51,
+          "source": "benchmarks/piggybank/PiggybankV2/Impl/ConcertShim.lean",
+          "in_formal_import_closure": true,
+          "classification": "nonstandard_unreviewed_axiom",
+          "manifest_trusted_exact": true,
+          "manifest_trusted_suffix": true,
+          "boundary": "abstract_external_interface",
+          "upstream_ref": "execution/theories/BlockchainBase.v:683-692",
+          "type_shape": "ChainState",
+          "semantic_note": "Source concrete zero-balance, empty-contract/state/queue state; corresponding equations are not asserted by this value axiom.",
+          "semantic_status": "opaque_source_definition_boundary_unimplemented_semantics"
+        },
+        {
+          "name": "env_contracts",
+          "kind": "axiom",
+          "line": 57,
+          "source": "benchmarks/piggybank/PiggybankV2/Impl/ConcertShim.lean",
+          "in_formal_import_closure": true,
+          "classification": "nonstandard_unreviewed_axiom",
+          "manifest_trusted_exact": true,
+          "manifest_trusted_suffix": true,
+          "boundary": "abstract_external_interface",
+          "upstream_ref": "execution/theories/BlockchainBase.v:348-354",
+          "type_shape": "ChainState → Address → Option WeakContract",
+          "semantic_note": "Source environment projection via ChainState coercion; current projection is uninterpreted.",
+          "semantic_status": "opaque_source_definition_boundary_unimplemented_semantics"
+        },
+        {
+          "name": "outgoing_acts",
+          "kind": "axiom",
+          "line": 59,
+          "source": "benchmarks/piggybank/PiggybankV2/Impl/ConcertShim.lean",
+          "in_formal_import_closure": true,
+          "classification": "nonstandard_unreviewed_axiom",
+          "manifest_trusted_exact": true,
+          "manifest_trusted_suffix": true,
+          "boundary": "abstract_external_interface",
+          "upstream_ref": "execution/theories/BlockchainBase.v:707-711",
+          "type_shape": "ChainState → Address → List ActionBody",
+          "semantic_note": "Source filters the action queue by sender; current function is uninterpreted and action payloads are simplified.",
+          "semantic_status": "opaque_source_definition_boundary_unimplemented_semantics"
+        },
+        {
+          "name": "contract_state",
+          "kind": "axiom",
+          "line": 61,
+          "source": "benchmarks/piggybank/PiggybankV2/Impl/ConcertShim.lean",
+          "in_formal_import_closure": true,
+          "classification": "nonstandard_unreviewed_axiom",
+          "manifest_trusted_exact": true,
+          "manifest_trusted_suffix": true,
+          "boundary": "abstract_external_interface",
+          "upstream_ref": "execution/theories/BlockchainBase.v:367-373",
+          "type_shape": "{State : Type} → ChainState → Address → Option State",
+          "semantic_note": "Source deserializes serialized storage under Serializable State; this relationship is erased.",
+          "semantic_status": "opaque_source_definition_boundary_unimplemented_semantics"
+        },
+        {
+          "name": "env_account_balances",
+          "kind": "axiom",
+          "line": 63,
+          "source": "benchmarks/piggybank/PiggybankV2/Impl/ConcertShim.lean",
+          "in_formal_import_closure": true,
+          "classification": "nonstandard_unreviewed_axiom",
+          "manifest_trusted_exact": true,
+          "manifest_trusted_suffix": true,
+          "boundary": "abstract_external_interface",
+          "upstream_ref": "execution/theories/BlockchainBase.v:348-354",
+          "type_shape": "ChainState → Address → Int",
+          "semantic_note": "Source unrestricted environment field; current function is uninterpreted and constrained globally by the separate nonnegative axiom.",
+          "semantic_status": "opaque_source_definition_boundary_unimplemented_semantics"
+        },
+        {
+          "name": "deployment_info",
+          "kind": "axiom",
+          "line": 67,
+          "source": "benchmarks/piggybank/PiggybankV2/Impl/ConcertShim.lean",
+          "in_formal_import_closure": true,
+          "classification": "nonstandard_unreviewed_axiom",
+          "manifest_trusted_exact": true,
+          "manifest_trusted_suffix": true,
+          "boundary": "abstract_external_interface",
+          "upstream_ref": "execution/theories/BlockchainBase.v:807-839",
+          "type_shape": "{Setup bstate} → ChainTrace empty_state bstate → Address → Option DeploymentInfo",
+          "semantic_note": "Source traverses the trace and deserializes setup; DeploymentInfo Setup contains origin/from/amount/setup. Current metadata is opaque and unindexed.",
+          "semantic_status": "opaque_source_definition_boundary_unimplemented_semantics"
+        },
+        {
+          "name": "deployment_from",
+          "kind": "axiom",
+          "line": 74,
+          "source": "benchmarks/piggybank/PiggybankV2/Impl/ConcertShim.lean",
+          "in_formal_import_closure": true,
+          "classification": "nonstandard_unreviewed_axiom",
+          "manifest_trusted_exact": true,
+          "manifest_trusted_suffix": true,
+          "boundary": "abstract_external_interface",
+          "upstream_ref": "execution/theories/BlockchainBase.v:807-819",
+          "type_shape": "DeploymentInfo → Address",
+          "semantic_note": "Source record field; current abstract function retains only this observation.",
+          "semantic_status": "opaque_source_definition_boundary_unimplemented_semantics"
+        },
+        {
+          "name": "account_balance_nonnegative",
+          "kind": "axiom",
+          "line": 76,
+          "source": "benchmarks/piggybank/PiggybankV2/Impl/ConcertShim.lean",
+          "in_formal_import_closure": true,
+          "classification": "nonstandard_unreviewed_axiom",
+          "manifest_trusted_exact": true,
+          "manifest_trusted_suffix": true,
+          "boundary": "unproved_semantic_or_mathematical_law_or_proof_bearing_construction",
+          "upstream_ref": "execution/theories/BlockchainTheories.v:653-655",
+          "type_shape": "∀ bstate addr, 0 ≤ env_account_balances bstate addr",
+          "semantic_note": "Source requires reachable bstate. The opaque carrier may intentionally restrict exposed states; no bridge to all source ChainState values is proved. This is an explicit global model law, not current False.",
+          "semantic_status": "explicit_abstract_model_law_not_source_derivation"
+        },
+        {
+          "name": "contract_induction",
+          "kind": "axiom",
+          "line": 99,
+          "source": "benchmarks/piggybank/PiggybankV2/Impl/ConcertShim.lean",
+          "in_formal_import_closure": true,
+          "classification": "nonstandard_unreviewed_axiom",
+          "manifest_trusted_exact": true,
+          "manifest_trusted_suffix": true,
+          "boundary": "unproved_semantic_or_mathematical_law_or_proof_bearing_construction",
+          "upstream_ref": "execution/theories/BlockchainInduction.v:34-225",
+          "type_shape": "five invariant cases → trace from empty → deployed contract → ∃ dep/state with lookups and P at actual balance/queue",
+          "semantic_note": "Retains actual-balance/queue conclusion. Serialization, height/history/Facts and context/action payloads are erased; block case can be trivial for the reduced P. This specialization is assumed, not derived from ChainStep.",
+          "semantic_status": "explicit_abstract_model_law_not_source_derivation"
+        }
+      ],
+      "audit_status": "current_source_inventory_only_no_consistency_or_final_checker_claim",
+      "source_sha256": {
+        "benchmarks/piggybank/PiggybankV2/Impl/ConcertShim.lean": "758befdb892dc72db30fa774a9e6f80af41f01683b78c2db58264aeb7395abd2"
+      },
+      "declaration_check_source": "certificates/axiom-audit/piggybankDeclarations.lean",
+      "semantic_audit": {
+        "upstream_repository": "https://github.com/AU-COBRA/ConCert.git",
+        "upstream_commit": "341f440abb955b58066c269ebe0a231e8172e403",
+        "semantic_axioms": [
+          "account_balance_nonnegative",
+          "contract_induction"
+        ],
+        "usage": {
+          "referenced_outside_their_declarations_in_formal_Impl_Spec": false,
+          "canonical_kernel_axioms": [],
+          "four_API_kernel_axioms": [],
+          "existing_candidate_files": [
+            "certificates/piggybank/Canonical.lean",
+            "certificates/piggybank/Structural.lean"
+          ],
+          "candidate_compilation_exit_code": 0,
+          "canonical_candidate_count": 4,
+          "canonical_candidate_kernel_axioms": [
+            "propext",
+            "Quot.sound"
+          ],
+          "structural_candidate_count": 2,
+          "structural_candidate_kernel_axioms": [],
+          "candidate_source_lf_sha256": {
+            "certificates/piggybank/Canonical.lean": "eee13daa5a74d9de73e64da8515e5b5ac237dd6799222444d638a7b596d68b39",
+            "certificates/piggybank/Structural.lean": "ab9f693f2d4e7fb855feb95e3697b45966abbd80c61d639285ee487bdb8afb00"
+          }
+        },
+        "trace_specs_still_unresolved": [
+          "spec_no_self_calls",
+          "spec_owner_correct",
+          "spec_balance_on_chain",
+          "spec_no_outgoing_actions_when_intact",
+          "spec_balance_is_zero_when_smashed",
+          "spec_balance_on_pos"
+        ],
+        "source_scope_countermodel": {
+          "shape": "Unrestricted source balance projection s.balances : Nat → Int with constant -1 refutes global nonnegativity.",
+          "kernel_axioms": [],
+          "not_a_current_shim_counterexample": true,
+          "not_a_full_mechanized_CoQ_translation": true
+        },
+        "minimal_honest_interpretation": "Retain these as explicit laws over a potentially constrained opaque state carrier. Source-model faithfulness would additionally require a carrier-refinement bridge or a reachable-qualified law; no source change was made.",
+        "current_False_established": false,
+        "complete_consistency_claim": false
+      }
+    },
+    {
+      "benchmark": "portion",
+      "directory": "benchmarks/portion",
+      "manifest_sha256": "9aecac323b840846d24d77c357000e9cfa0bf78d51362f91d6e238feb6eb353a",
+      "apis": 6,
+      "specifications": 63,
+      "trusted_axioms": [],
+      "formal_source_snapshot": {
+        "files": 6,
+        "sha256": "9b43a49e53cc2f569924e85e67ef99ccb7becba5c7ee02daaae03ffae7f41328"
+      },
+      "declarations": [],
+      "audit_status": "current_source_inventory_only_no_consistency_or_final_checker_claim"
+    },
+    {
+      "benchmark": "primefac",
+      "directory": "benchmarks/primefac",
+      "manifest_sha256": "c44af779a020a226a69bf543a0c2468e76c6c81031536b84f4fdbf23b3c07182",
+      "apis": 3,
+      "specifications": 56,
+      "trusted_axioms": [],
+      "formal_source_snapshot": {
+        "files": 6,
+        "sha256": "2350b2a807cd7341881d2ec5c008b80458fcb40c2a5841645d97ea5304c91e17"
+      },
+      "declarations": [],
+      "audit_status": "current_source_inventory_only_no_consistency_or_final_checker_claim"
+    },
+    {
+      "benchmark": "primepy",
+      "directory": "benchmarks/primepy",
+      "manifest_sha256": "8e5200f4b2a4ab09aa908f35f4005b314481589c93d1af5342857ffbf6f1e9ce",
+      "apis": 7,
+      "specifications": 9,
+      "trusted_axioms": [],
+      "formal_source_snapshot": {
+        "files": 6,
+        "sha256": "a3bd81581968d69533ada152c944f945393ef53e9d5364277de12eebab7c915d"
+      },
+      "declarations": [],
+      "audit_status": "current_source_inventory_only_no_consistency_or_final_checker_claim"
+    },
+    {
+      "benchmark": "prolepticgregorian",
+      "directory": "benchmarks/prolepticgregorian",
+      "manifest_sha256": "adfb067f316791e3bd78bdbc5b9f8bf5ed06e002aba30de5ef9153760c6d2405",
+      "apis": 6,
+      "specifications": 61,
+      "trusted_axioms": [],
+      "formal_source_snapshot": {
+        "files": 6,
+        "sha256": "47816bf8476eeb5661c995142c7138fceeedd830ea940b6163b33c371b938c8b"
+      },
+      "declarations": [],
+      "audit_status": "current_source_inventory_only_no_consistency_or_final_checker_claim"
+    },
+    {
+      "benchmark": "pyradix",
+      "directory": "benchmarks/pyradix",
+      "manifest_sha256": "91ad74aaed4890b97ec21c5f672fccd5ac912b17b10f68e77861c8a8b487814e",
+      "apis": 6,
+      "specifications": 52,
+      "trusted_axioms": [],
+      "formal_source_snapshot": {
+        "files": 6,
+        "sha256": "484e0f3f38326141efc5e2a0fb7c7d235316d357a17129e702eb710e12ae8b5d"
+      },
+      "declarations": [],
+      "audit_status": "current_source_inventory_only_no_consistency_or_final_checker_claim"
+    },
+    {
+      "benchmark": "pythonconstraint",
+      "directory": "benchmarks/pythonconstraint",
+      "manifest_sha256": "3210ac4cd1483bcc9e803f4e41fd88a98f23367851ac71e69bd388a6a9637a6f",
+      "apis": 4,
+      "specifications": 20,
+      "trusted_axioms": [],
+      "formal_source_snapshot": {
+        "files": 6,
+        "sha256": "c0431ba3c0064ba219969f7500a168f96b4cddd9e4c0f8ffdbe5df0af704fd4e"
+      },
+      "declarations": [],
+      "audit_status": "current_source_inventory_only_no_consistency_or_final_checker_claim"
+    },
+    {
+      "benchmark": "reedsolo",
+      "directory": "benchmarks/reedsolo",
+      "manifest_sha256": "b3c88fad6c0b8334c8ae97923094f7b27a8f3c7064e8f0ae1fb7dab33f5534d5",
+      "apis": 5,
+      "specifications": 48,
+      "trusted_axioms": [],
+      "formal_source_snapshot": {
+        "files": 6,
+        "sha256": "1e8b746c39851a3dea940052c338109763d766f0293eec27d536e9b5fa77b6a3"
+      },
+      "declarations": [],
+      "audit_status": "current_source_inventory_only_no_consistency_or_final_checker_claim"
+    },
+    {
+      "benchmark": "rsa",
+      "directory": "benchmarks/rsa",
+      "manifest_sha256": "ab9e3431012613e6fc57b4338b3b6bff61d06c1b6c83510e8560d7b9b280e192",
+      "apis": 6,
+      "specifications": 63,
+      "trusted_axioms": [],
+      "formal_source_snapshot": {
+        "files": 8,
+        "sha256": "2445204bb2d018da621b0d88081f0853ec6a304fdffe316cb31b1c0140ecbd49"
+      },
+      "declarations": [],
+      "audit_status": "current_source_inventory_only_no_consistency_or_final_checker_claim"
+    },
+    {
+      "benchmark": "semver",
+      "directory": "benchmarks/semver",
+      "manifest_sha256": "ec547c0cb1e615b550e1045bc3dd350c08fc00fdbfa50680a646a72d6b7bb060",
+      "apis": 5,
+      "specifications": 53,
+      "trusted_axioms": [],
+      "formal_source_snapshot": {
+        "files": 6,
+        "sha256": "2e44d1bf38f9dc42d8353fc2a33c6fef85a72381c37c1c98fb2729d963f9dd5f"
+      },
+      "declarations": [],
+      "audit_status": "current_source_inventory_only_no_consistency_or_final_checker_claim"
+    },
+    {
+      "benchmark": "sequences-v2",
+      "directory": "benchmarks/Sequences",
+      "manifest_sha256": "452d7f2145b9424eb425217ff3e44b171a5bcefc0bbaea56c2e10b3dfe8d5b9f",
+      "apis": 39,
+      "specifications": 84,
+      "trusted_axioms": [],
+      "formal_source_snapshot": {
+        "files": 14,
+        "sha256": "ca14e423a23f8fa50c8fb79389b1e6f4dedcc5152ae76a00606f7bce2f0a9c7d"
+      },
+      "declarations": [],
+      "audit_status": "current_source_inventory_only_no_consistency_or_final_checker_claim"
+    },
+    {
+      "benchmark": "sortedcontainers/core",
+      "directory": "benchmarks/sortedcontainers",
+      "manifest_sha256": "900a0a41846cf635bd51c8cf10f3a3a07afef0c26fa38036774d3b322908def3",
+      "apis": 71,
+      "specifications": 49,
+      "trusted_axioms": [],
+      "formal_source_snapshot": {
+        "files": 11,
+        "sha256": "3765e88154a02d9aab8a89654eddd3062a1fc2e1522bb15aea2ded53878f5668"
+      },
+      "declarations": [],
+      "audit_status": "current_source_inventory_only_no_consistency_or_final_checker_claim"
+    },
+    {
+      "benchmark": "textdistance",
+      "directory": "benchmarks/textdistance",
+      "manifest_sha256": "8873503b8cc8a2474ec0ff7de484a6650aabf5546f59679d2db8aa494bd65168",
+      "apis": 2,
+      "specifications": 59,
+      "trusted_axioms": [],
+      "formal_source_snapshot": {
+        "files": 6,
+        "sha256": "1ff5baa44c4480a87976cf4735a1ae87070d361a09bd52bc077c69f81b68df38"
+      },
+      "declarations": [],
+      "audit_status": "current_source_inventory_only_no_consistency_or_final_checker_claim"
+    },
+    {
+      "benchmark": "textwrap",
+      "directory": "benchmarks/textwrap",
+      "manifest_sha256": "84f3e7f76387a272e86cec9c0438c7dd46fcfb0c18683f327455e5d214199df1",
+      "apis": 2,
+      "specifications": 60,
+      "trusted_axioms": [],
+      "formal_source_snapshot": {
+        "files": 6,
+        "sha256": "5cfdc30ef70add77975b443c11b4388887c7349eb91dd0cda86b91bb78b5b49c"
+      },
+      "declarations": [],
+      "audit_status": "current_source_inventory_only_no_consistency_or_final_checker_claim"
+    },
+    {
+      "benchmark": "toposort/sort",
+      "directory": "benchmarks/toposort",
+      "manifest_sha256": "35a70bfaeaf929710883f9ed9cbead6a04cc35c8389cc4776c6287a19de8b87c",
+      "apis": 2,
+      "specifications": 15,
+      "trusted_axioms": [],
+      "formal_source_snapshot": {
+        "files": 7,
+        "sha256": "5c350d54cb7e50003bae828bc1b507d54831edc10688ac0e99c395de70ac7001"
+      },
+      "declarations": [],
+      "audit_status": "current_source_inventory_only_no_consistency_or_final_checker_claim"
+    },
+    {
+      "benchmark": "unicode-v2",
+      "directory": "benchmarks/Unicode",
+      "manifest_sha256": "ab608fec9b94b861eb16733d1dcadf842f46b6a0c8cad49deed75495a58050d5",
+      "apis": 30,
+      "specifications": 46,
+      "trusted_axioms": [],
+      "formal_source_snapshot": {
+        "files": 20,
+        "sha256": "f343cb8cfe0f960e57eab1a35b723a9ffbace714c39d684935ea1e4d47783ae0"
+      },
+      "declarations": [],
+      "audit_status": "current_source_inventory_only_no_consistency_or_final_checker_claim"
+    },
+    {
+      "benchmark": "verdict",
+      "directory": "benchmarks/verdict",
+      "manifest_sha256": "a82b33db1cb9cef326b0a76e930a0f6d262f11e5a09bfa80e0956ab47699b803",
+      "apis": 31,
+      "specifications": 119,
+      "trusted_axioms": [],
+      "formal_source_snapshot": {
+        "files": 26,
+        "sha256": "44c416489f4e5e14fab0160540395abd5206a1aca349cd919e46ae14febc0b31"
+      },
+      "declarations": [
+        {
+          "name": "Verdict.parseX509Der",
+          "kind": "opaque",
+          "line": 95,
+          "source": "benchmarks/verdict/Verdict/Impl/Asn1.lean",
+          "in_formal_import_closure": true,
+          "classification": "opaque_abstract_interface",
+          "manifest_trusted_exact": false,
+          "manifest_trusted_suffix": false
+        },
+        {
+          "name": "Verdict.certFromParsed",
+          "kind": "opaque",
+          "line": 33,
+          "source": "benchmarks/verdict/Verdict/Impl/Convert.lean",
+          "in_formal_import_closure": true,
+          "classification": "opaque_abstract_interface",
+          "manifest_trusted_exact": false,
+          "manifest_trusted_suffix": false
+        },
+        {
+          "name": "Verdict.RsaPublicKey",
+          "kind": "opaque",
+          "line": 56,
+          "source": "benchmarks/verdict/Verdict/Impl/Crypto.lean",
+          "in_formal_import_closure": true,
+          "classification": "opaque_abstract_interface",
+          "manifest_trusted_exact": false,
+          "manifest_trusted_suffix": false
+        },
+        {
+          "name": "Verdict.pkcs1V15LoadPubKey",
+          "kind": "opaque",
+          "line": 69,
+          "source": "benchmarks/verdict/Verdict/Impl/Crypto.lean",
+          "in_formal_import_closure": true,
+          "classification": "opaque_abstract_interface",
+          "manifest_trusted_exact": false,
+          "manifest_trusted_suffix": false
+        },
+        {
+          "name": "Verdict.pkcs1V15Verify",
+          "kind": "opaque",
+          "line": 73,
+          "source": "benchmarks/verdict/Verdict/Impl/Crypto.lean",
+          "in_formal_import_closure": true,
+          "classification": "opaque_abstract_interface",
+          "manifest_trusted_exact": false,
+          "manifest_trusted_suffix": false
+        },
+        {
+          "name": "Verdict.p256Verify",
+          "kind": "opaque",
+          "line": 76,
+          "source": "benchmarks/verdict/Verdict/Impl/Crypto.lean",
+          "in_formal_import_closure": true,
+          "classification": "opaque_abstract_interface",
+          "manifest_trusted_exact": false,
+          "manifest_trusted_suffix": false
+        },
+        {
+          "name": "Verdict.p384Verify",
+          "kind": "opaque",
+          "line": 79,
+          "source": "benchmarks/verdict/Verdict/Impl/Crypto.lean",
+          "in_formal_import_closure": true,
+          "classification": "opaque_abstract_interface",
+          "manifest_trusted_exact": false,
+          "manifest_trusted_suffix": false
+        },
+        {
+          "name": "Verdict.sha256Digest",
+          "kind": "opaque",
+          "line": 82,
+          "source": "benchmarks/verdict/Verdict/Impl/Crypto.lean",
+          "in_formal_import_closure": true,
+          "classification": "opaque_abstract_interface",
+          "manifest_trusted_exact": false,
+          "manifest_trusted_suffix": false
+        },
+        {
+          "name": "Verdict.charLower",
+          "kind": "opaque",
+          "line": 86,
+          "source": "benchmarks/verdict/Verdict/Impl/Crypto.lean",
+          "in_formal_import_closure": true,
+          "classification": "opaque_abstract_interface",
+          "manifest_trusted_exact": false,
+          "manifest_trusted_suffix": false
+        }
+      ],
+      "audit_status": "current_source_inventory_only_no_consistency_or_final_checker_claim",
+      "source_sha256": {
+        "benchmarks/verdict/Verdict/Impl/Asn1.lean": "2818b9d5bff6652493595e2d7d20890cfd6124e4b83cd903a07547702fe12640",
+        "benchmarks/verdict/Verdict/Impl/Convert.lean": "34b7ecff9c3cdda0d69cb97068ac9b6b76543c61dcd00cfc3a166663d6729c44",
+        "benchmarks/verdict/Verdict/Impl/Crypto.lean": "f698c9d6af82e2e21518a0cb5a27bb15b78f07af7e675aed600829f8a1109edd"
+      },
+      "declaration_check_source": "certificates/axiom-audit/verdictDeclarations.lean"
+    },
+    {
+      "benchmark": "verified-bitmasks",
+      "directory": "benchmarks/VerifiedBitmasks",
+      "manifest_sha256": "13fb6b504276020655ec73258f2bdbba887bd15fae1ce8e14e56da90e0edbf49",
+      "apis": 88,
+      "specifications": 124,
+      "trusted_axioms": [],
+      "formal_source_snapshot": {
+        "files": 24,
+        "sha256": "0c5c84b78badefb0364160e776985a81e7920f6a4d278a3f8e99271cd458d77e"
+      },
+      "declarations": [
+        {
+          "name": "axiom_as_uint64_as_bv64",
+          "kind": "axiom",
+          "line": 25,
+          "source": "benchmarks/VerifiedBitmasks/VerifiedBitmasks/BitFields/BitFieldsAxioms.lean",
+          "in_formal_import_closure": false,
+          "classification": "nonstandard_machine_derived_statement",
+          "manifest_trusted_exact": false,
+          "manifest_trusted_suffix": false,
+          "boundary": "unproved_semantic_or_mathematical_law_or_proof_bearing_construction",
+          "independent_statement_evidence": "bitfield_replacements",
+          "same_statement_formal_theorem": "axiom_as_uint64_as_bv64",
+          "statement_kernel_axioms": [
+            "propext"
+          ],
+          "semantic_status": "direct_application_of_current_formal_cast_theorem_checked; dead_axiom_unchanged"
+        },
+        {
+          "name": "axiom_as_bv64_as_uint64",
+          "kind": "axiom",
+          "line": 29,
+          "source": "benchmarks/VerifiedBitmasks/VerifiedBitmasks/BitFields/BitFieldsAxioms.lean",
+          "in_formal_import_closure": false,
+          "classification": "nonstandard_machine_derived_statement",
+          "manifest_trusted_exact": false,
+          "manifest_trusted_suffix": false,
+          "boundary": "unproved_semantic_or_mathematical_law_or_proof_bearing_construction",
+          "independent_statement_evidence": "bitfield_replacements",
+          "same_statement_formal_theorem": "axiom_as_bv64_as_uint64",
+          "statement_kernel_axioms": [
+            "propext"
+          ],
+          "semantic_status": "direct_application_of_current_formal_cast_theorem_checked; dead_axiom_unchanged"
+        },
+        {
+          "name": "axiom_as_uint32_as_bv32",
+          "kind": "axiom",
+          "line": 33,
+          "source": "benchmarks/VerifiedBitmasks/VerifiedBitmasks/BitFields/BitFieldsAxioms.lean",
+          "in_formal_import_closure": false,
+          "classification": "nonstandard_machine_derived_statement",
+          "manifest_trusted_exact": false,
+          "manifest_trusted_suffix": false,
+          "boundary": "unproved_semantic_or_mathematical_law_or_proof_bearing_construction",
+          "independent_statement_evidence": "bitfield_replacements",
+          "same_statement_formal_theorem": "axiom_as_uint32_as_bv32",
+          "statement_kernel_axioms": [
+            "propext"
+          ],
+          "semantic_status": "direct_application_of_current_formal_cast_theorem_checked; dead_axiom_unchanged"
+        },
+        {
+          "name": "axiom_as_bv32_as_uint32",
+          "kind": "axiom",
+          "line": 37,
+          "source": "benchmarks/VerifiedBitmasks/VerifiedBitmasks/BitFields/BitFieldsAxioms.lean",
+          "in_formal_import_closure": false,
+          "classification": "nonstandard_machine_derived_statement",
+          "manifest_trusted_exact": false,
+          "manifest_trusted_suffix": false,
+          "boundary": "unproved_semantic_or_mathematical_law_or_proof_bearing_construction",
+          "independent_statement_evidence": "bitfield_replacements",
+          "same_statement_formal_theorem": "axiom_as_bv32_as_uint32",
+          "statement_kernel_axioms": [
+            "propext"
+          ],
+          "semantic_status": "direct_application_of_current_formal_cast_theorem_checked; dead_axiom_unchanged"
+        },
+        {
+          "name": "axiom_as_uint16_as_bv16",
+          "kind": "axiom",
+          "line": 41,
+          "source": "benchmarks/VerifiedBitmasks/VerifiedBitmasks/BitFields/BitFieldsAxioms.lean",
+          "in_formal_import_closure": false,
+          "classification": "nonstandard_machine_derived_statement",
+          "manifest_trusted_exact": false,
+          "manifest_trusted_suffix": false,
+          "boundary": "unproved_semantic_or_mathematical_law_or_proof_bearing_construction",
+          "independent_statement_evidence": "bitfield_replacements",
+          "same_statement_formal_theorem": "axiom_as_uint16_as_bv16",
+          "statement_kernel_axioms": [
+            "propext"
+          ],
+          "semantic_status": "direct_application_of_current_formal_cast_theorem_checked; dead_axiom_unchanged"
+        },
+        {
+          "name": "axiom_as_bv16_as_uint16",
+          "kind": "axiom",
+          "line": 45,
+          "source": "benchmarks/VerifiedBitmasks/VerifiedBitmasks/BitFields/BitFieldsAxioms.lean",
+          "in_formal_import_closure": false,
+          "classification": "nonstandard_machine_derived_statement",
+          "manifest_trusted_exact": false,
+          "manifest_trusted_suffix": false,
+          "boundary": "unproved_semantic_or_mathematical_law_or_proof_bearing_construction",
+          "independent_statement_evidence": "bitfield_replacements",
+          "same_statement_formal_theorem": "axiom_as_bv16_as_uint16",
+          "statement_kernel_axioms": [
+            "propext"
+          ],
+          "semantic_status": "direct_application_of_current_formal_cast_theorem_checked; dead_axiom_unchanged"
+        },
+        {
+          "name": "axiom_as_uint8_as_bv8",
+          "kind": "axiom",
+          "line": 49,
+          "source": "benchmarks/VerifiedBitmasks/VerifiedBitmasks/BitFields/BitFieldsAxioms.lean",
+          "in_formal_import_closure": false,
+          "classification": "nonstandard_machine_derived_statement",
+          "manifest_trusted_exact": false,
+          "manifest_trusted_suffix": false,
+          "boundary": "unproved_semantic_or_mathematical_law_or_proof_bearing_construction",
+          "independent_statement_evidence": "bitfield_replacements",
+          "same_statement_formal_theorem": "axiom_as_uint8_as_bv8",
+          "statement_kernel_axioms": [
+            "propext"
+          ],
+          "semantic_status": "direct_application_of_current_formal_cast_theorem_checked; dead_axiom_unchanged"
+        },
+        {
+          "name": "axiom_as_bv8_as_uint8",
+          "kind": "axiom",
+          "line": 53,
+          "source": "benchmarks/VerifiedBitmasks/VerifiedBitmasks/BitFields/BitFieldsAxioms.lean",
+          "in_formal_import_closure": false,
+          "classification": "nonstandard_machine_derived_statement",
+          "manifest_trusted_exact": false,
+          "manifest_trusted_suffix": false,
+          "boundary": "unproved_semantic_or_mathematical_law_or_proof_bearing_construction",
+          "independent_statement_evidence": "bitfield_replacements",
+          "same_statement_formal_theorem": "axiom_as_bv8_as_uint8",
+          "statement_kernel_axioms": [
+            "propext"
+          ],
+          "semantic_status": "direct_application_of_current_formal_cast_theorem_checked; dead_axiom_unchanged"
+        }
+      ],
+      "audit_status": "current_source_inventory_only_no_consistency_or_final_checker_claim",
+      "replaced_declarations": [
+        {
+          "name": "axiom_as_uint64_as_bv64",
+          "kind": "theorem",
+          "line": 21,
+          "source": "benchmarks/VerifiedBitmasks/VerifiedBitmasks/Impl/BitFieldsAxioms.lean",
+          "in_formal_import_closure": true,
+          "classification": "standard_derived_theorem",
+          "kernel_axioms": [
+            "propext"
+          ],
+          "candidate_evidence": "bitfield_replacements"
+        },
+        {
+          "name": "axiom_as_bv64_as_uint64",
+          "kind": "theorem",
+          "line": 25,
+          "source": "benchmarks/VerifiedBitmasks/VerifiedBitmasks/Impl/BitFieldsAxioms.lean",
+          "in_formal_import_closure": true,
+          "classification": "standard_derived_theorem",
+          "kernel_axioms": [
+            "propext"
+          ],
+          "candidate_evidence": "bitfield_replacements"
+        },
+        {
+          "name": "axiom_as_uint32_as_bv32",
+          "kind": "theorem",
+          "line": 29,
+          "source": "benchmarks/VerifiedBitmasks/VerifiedBitmasks/Impl/BitFieldsAxioms.lean",
+          "in_formal_import_closure": true,
+          "classification": "standard_derived_theorem",
+          "kernel_axioms": [
+            "propext"
+          ],
+          "candidate_evidence": "bitfield_replacements"
+        },
+        {
+          "name": "axiom_as_bv32_as_uint32",
+          "kind": "theorem",
+          "line": 33,
+          "source": "benchmarks/VerifiedBitmasks/VerifiedBitmasks/Impl/BitFieldsAxioms.lean",
+          "in_formal_import_closure": true,
+          "classification": "standard_derived_theorem",
+          "kernel_axioms": [
+            "propext"
+          ],
+          "candidate_evidence": "bitfield_replacements"
+        },
+        {
+          "name": "axiom_as_uint16_as_bv16",
+          "kind": "theorem",
+          "line": 37,
+          "source": "benchmarks/VerifiedBitmasks/VerifiedBitmasks/Impl/BitFieldsAxioms.lean",
+          "in_formal_import_closure": true,
+          "classification": "standard_derived_theorem",
+          "kernel_axioms": [
+            "propext"
+          ],
+          "candidate_evidence": "bitfield_replacements"
+        },
+        {
+          "name": "axiom_as_bv16_as_uint16",
+          "kind": "theorem",
+          "line": 41,
+          "source": "benchmarks/VerifiedBitmasks/VerifiedBitmasks/Impl/BitFieldsAxioms.lean",
+          "in_formal_import_closure": true,
+          "classification": "standard_derived_theorem",
+          "kernel_axioms": [
+            "propext"
+          ],
+          "candidate_evidence": "bitfield_replacements"
+        },
+        {
+          "name": "axiom_as_uint8_as_bv8",
+          "kind": "theorem",
+          "line": 45,
+          "source": "benchmarks/VerifiedBitmasks/VerifiedBitmasks/Impl/BitFieldsAxioms.lean",
+          "in_formal_import_closure": true,
+          "classification": "standard_derived_theorem",
+          "kernel_axioms": [
+            "propext"
+          ],
+          "candidate_evidence": "bitfield_replacements"
+        },
+        {
+          "name": "axiom_as_bv8_as_uint8",
+          "kind": "theorem",
+          "line": 49,
+          "source": "benchmarks/VerifiedBitmasks/VerifiedBitmasks/Impl/BitFieldsAxioms.lean",
+          "in_formal_import_closure": true,
+          "classification": "standard_derived_theorem",
+          "kernel_axioms": [
+            "propext"
+          ],
+          "candidate_evidence": "bitfield_replacements"
+        },
+        {
+          "name": "lemma_BFC_IResult",
+          "kind": "theorem",
+          "line": 50,
+          "source": "benchmarks/VerifiedBitmasks/VerifiedBitmasks/Impl/BitmaskFixedChunks.lean",
+          "in_formal_import_closure": true,
+          "classification": "standard_derived_theorem",
+          "kernel_axioms": [
+            "propext",
+            "Quot.sound"
+          ],
+          "candidate_evidence": "bitmasks_huffman_replacements"
+        },
+        {
+          "name": "lemma_BFC_IStep",
+          "kind": "theorem",
+          "line": 73,
+          "source": "benchmarks/VerifiedBitmasks/VerifiedBitmasks/Impl/BitmaskFixedChunks.lean",
+          "in_formal_import_closure": true,
+          "classification": "standard_derived_theorem",
+          "kernel_axioms": [],
+          "candidate_evidence": "bitmasks_huffman_replacements"
+        },
+        {
+          "name": "lemma_BFC_IEqual",
+          "kind": "theorem",
+          "line": 80,
+          "source": "benchmarks/VerifiedBitmasks/VerifiedBitmasks/Impl/BitmaskFixedChunks.lean",
+          "in_formal_import_closure": true,
+          "classification": "standard_derived_theorem",
+          "kernel_axioms": [
+            "propext",
+            "Quot.sound"
+          ],
+          "candidate_evidence": "bitmasks_huffman_replacements"
+        },
+        {
+          "name": "lemma_SeqToBitsToSeq",
+          "kind": "theorem",
+          "line": 96,
+          "source": "benchmarks/VerifiedBitmasks/VerifiedBitmasks/Impl/MachineWords.lean",
+          "in_formal_import_closure": true,
+          "classification": "standard_derived_theorem",
+          "kernel_axioms": [
+            "propext",
+            "Quot.sound"
+          ],
+          "candidate_evidence": "bitmasks_huffman_replacements"
+        },
+        {
+          "name": "lemma_BitsToSeqToBits",
+          "kind": "theorem",
+          "line": 109,
+          "source": "benchmarks/VerifiedBitmasks/VerifiedBitmasks/Impl/MachineWords.lean",
+          "in_formal_import_closure": true,
+          "classification": "standard_derived_theorem",
+          "kernel_axioms": [
+            "propext",
+            "Quot.sound"
+          ],
+          "candidate_evidence": "bitmasks_huffman_replacements"
+        },
+        {
+          "name": "lemma_BitwiseAllBitsEqualBVEq",
+          "kind": "theorem",
+          "line": 118,
+          "source": "benchmarks/VerifiedBitmasks/VerifiedBitmasks/Impl/MachineWords.lean",
+          "in_formal_import_closure": true,
+          "classification": "standard_derived_theorem",
+          "kernel_axioms": [
+            "propext",
+            "Quot.sound"
+          ],
+          "candidate_evidence": "bitmasks_huffman_replacements"
+        },
+        {
+          "name": "lemma_BitwiseEq",
+          "kind": "theorem",
+          "line": 132,
+          "source": "benchmarks/VerifiedBitmasks/VerifiedBitmasks/Impl/MachineWords.lean",
+          "in_formal_import_closure": true,
+          "classification": "standard_derived_theorem",
+          "kernel_axioms": [
+            "propext",
+            "Quot.sound"
+          ],
+          "candidate_evidence": "bitmasks_huffman_replacements"
+        }
+      ],
+      "source_sha256": {
+        "benchmarks/VerifiedBitmasks/VerifiedBitmasks/BitFields/BitFieldsAxioms.lean": "713d67bc72c5ebb7c6155c1d5b76bbdb373d73caa2f80030812c5c6cb4e6b6e7",
+        "benchmarks/VerifiedBitmasks/VerifiedBitmasks/Impl/BitFieldsAxioms.lean": "c2f125f9753f5001e2ae077e67b54cfd30144b79d4a0c0deb5d07d88a98bdaf6",
+        "benchmarks/VerifiedBitmasks/VerifiedBitmasks/Impl/BitmaskFixedChunks.lean": "37064a7e7b4a176012e8088abb0d94af557789de80fce4036933fd376d569213",
+        "benchmarks/VerifiedBitmasks/VerifiedBitmasks/Impl/MachineWords.lean": "488cdb0c170f640b97a8f675c6ff76ac57252d54dde2920a59140005e0c06aac"
+      },
+      "declaration_check_source": "certificates/axiom-audit/VerifiedBitmasksDeclarations.lean",
+      "semantic_audit": {
+        "dead_declaration_count": 8,
+        "direct_same_type_theorem_applications_compiled": 8,
+        "imported_for_test": "VerifiedBitmasks.Impl.BitFieldsAxioms only; dead BitFields module not imported",
+        "statement_kernel_axioms": [
+          "propext"
+        ],
+        "scope_limit": "A proof of each statement does not alter the unimported axiom declarations or their dependency status."
+      }
+    },
+    {
+      "benchmark": "verified_ironkv",
+      "directory": "benchmarks/VerifiedIronkv",
+      "manifest_sha256": "80d4c9ca1dae6bfc3ad717f3b3fc5d70efce41bbf5d9f9ea772eb70c015bb905",
+      "apis": 23,
+      "specifications": 22,
+      "trusted_axioms": [],
+      "formal_source_snapshot": {
+        "files": 45,
+        "sha256": "a4180873926922c5feeb4804760338a021d071935a9505acd23e79650bfb4d2b"
+      },
+      "declarations": [
+        {
+          "name": "Bank.new_l202",
+          "kind": "opaque",
+          "line": 109,
+          "source": "benchmarks/VerifiedIronkv/VerifiedIronkv/Impl/IoT.lean",
+          "in_formal_import_closure": true,
+          "classification": "opaque_abstract_interface",
+          "manifest_trusted_exact": false,
+          "manifest_trusted_suffix": false
+        },
+        {
+          "name": "Bank.receive_internal",
+          "kind": "opaque",
+          "line": 111,
+          "source": "benchmarks/VerifiedIronkv/VerifiedIronkv/Impl/IoT.lean",
+          "in_formal_import_closure": true,
+          "classification": "opaque_abstract_interface",
+          "manifest_trusted_exact": false,
+          "manifest_trusted_suffix": false
+        },
+        {
+          "name": "Bank.send_internal",
+          "kind": "opaque",
+          "line": 113,
+          "source": "benchmarks/VerifiedIronkv/VerifiedIronkv/Impl/IoT.lean",
+          "in_formal_import_closure": true,
+          "classification": "opaque_abstract_interface",
+          "manifest_trusted_exact": false,
+          "manifest_trusted_suffix": false
+        },
+        {
+          "name": "Bank.send_internal_wrapper",
+          "kind": "opaque",
+          "line": 115,
+          "source": "benchmarks/VerifiedIronkv/VerifiedIronkv/Impl/IoT.lean",
+          "in_formal_import_closure": true,
+          "classification": "opaque_abstract_interface",
+          "manifest_trusted_exact": false,
+          "manifest_trusted_suffix": false
+        },
+        {
+          "name": "Bank.reset",
+          "kind": "opaque",
+          "line": 121,
+          "source": "benchmarks/VerifiedIronkv/VerifiedIronkv/Impl/IoT.lean",
+          "in_formal_import_closure": true,
+          "classification": "opaque_abstract_interface",
+          "manifest_trusted_exact": false,
+          "manifest_trusted_suffix": false
+        }
+      ],
+      "audit_status": "current_source_inventory_only_no_consistency_or_final_checker_claim",
+      "source_sha256": {
+        "benchmarks/VerifiedIronkv/VerifiedIronkv/Impl/IoT.lean": "518834edfdba12da72455e077d85e6fe5a94224ac0087576d93cbc4d6c4000e5"
+      },
+      "declaration_check_source": "certificates/axiom-audit/VerifiedIronkvDeclarations.lean"
+    },
+    {
+      "benchmark": "vest_v2",
+      "directory": "benchmarks/vest",
+      "manifest_sha256": "8a1541d2f730e85b8116738f2f563b6d11b4d1149c65dadcf1ad35effb40c00a",
+      "apis": 29,
+      "specifications": 42,
+      "trusted_axioms": [],
+      "formal_source_snapshot": {
+        "files": 44,
+        "sha256": "9fe198e9d696898c9cba817885ff7a94ac6bcadfab5a5b29348b41be9e1a24e6"
+      },
+      "declarations": [],
+      "audit_status": "current_source_inventory_only_no_consistency_or_final_checker_claim"
+    }
+  ],
+  "candidate_checks": {
+    "dedekind_replacements": {
+      "source": "certificates/DedekindReals/axiom-replacements.json",
+      "source_sha256": "30ea5a379de44705b43c74aea588721657ed4a8ffda8c822e29daa2dc40c758f",
+      "declaration_check_source": "certificates/axiom-audit/DedekindRealsDeclarations.lean",
+      "status": "specialist_reported_lean_compilation_and_same_type_checks; no_final_leanchecker_claim",
+      "count": 22,
+      "kernel_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "binding_limit": "Specialist evidence did not store its compile-time Impl hashes; current source hashes are inventory hashes, not a retroactive compile snapshot."
+    },
+    "bitfield_replacements": {
+      "source": "certificates/axiom-audit/BitFieldsDerived.lean",
+      "source_sha256": "80002db1611f99e5f6dd22ad0dcb6375c4e760a0c4c955a9b6880ac79f973863",
+      "declaration_check_source": "certificates/axiom-audit/VerifiedBitmasksDeclarations.lean",
+      "status": "prior_specialist_lean_compilation_record; formal_Impl_now_frozen_at_snapshot_commit; no_final_leanchecker_claim",
+      "count": 8,
+      "kernel_axioms": [
+        "propext"
+      ],
+      "distinction": "Independent statement proofs have no imports; formal Impl definitions were also replaced and their declaration dependencies printed. The dead BitFields copy remains axiomatized.",
+      "recorded_hash_encoding": "Original specialist binding was checked against raw-byte records; current source and evidence hashes in this inventory use LF normalization."
+    },
+    "bitmasks_huffman_replacements": {
+      "source": "certificates/axiom-audit/RemainingAxiomsResults.json",
+      "source_sha256": "9894b4da4cd216384097322d5b4f220bfc561417aa2ff42663df4c826c8fe76c",
+      "status": "specialist_lean_compilation; formal_sources_now_frozen_at_snapshot_commit; no_final_leanchecker_claim",
+      "count": 9,
+      "lean_version": "4.29.1",
+      "image": "alaya-pr81-flocq-raux-candidate-codeproof:8278072",
+      "kernel_axioms": [
+        "propext",
+        "Quot.sound"
+      ],
+      "mode_boundary_evidence": "mode_boundary_checks in the same file; generated placeholders are not correctness certificates",
+      "recorded_hash_encoding": "Embedded source_sha256 values in the specialist record remain original raw-byte snapshots. Their raw binding was checked in the original checkout; this inventory supplies cross-platform LF hashes without rewriting that evidence."
+    },
+    "flocq_mathematical_replacements": {
+      "source": "benchmarks/Flocq/Flocq/Core/Impl/GenericFmt.lean",
+      "source_sha256": "5928e435be3307fd0ca08c8fa9886071e124140e05c8edfd3b56a54eaf6fa084",
+      "count": 4,
+      "status": "specialist_Lean_exact_type_and_standard_dependency_checks; proof/codeproof_closures_compiled; no_final_leanchecker_claim",
+      "kernel_axioms": [
+        "propext",
+        "Classical.choice",
+        "Quot.sound"
+      ],
+      "local_ignored_evidence": ".cache/flocq-axiom-review-20261103/evidence/integrated.log",
+      "local_evidence_lf_sha256": "132f62c7a774d86f98501ee33648a6eb637cd215b919e7fe1487c002511e4f70",
+      "evidence_availability": "Specialist temporary evidence is ignored and not guaranteed in a fresh clone; the committed theorem source is the portable proof artifact."
+    }
+  },
+  "historical_evidence": {
+    "dedekind_removed_inconsistent_placeholders": {
+      "base_commit": "4fe74b399dfbb89f51261b79ac03517a1ad20bdb",
+      "status": "historical_direct_False_before_user_approved_removal; not_current_environment",
+      "removed": [
+        {
+          "name": "DedekindReals.unfinishedMinMax",
+          "source": "benchmarks/DedekindReals/DedekindReals/Impl/MinMax.lean",
+          "historical_source_sha256": "1676123d10568af2ce213d4b507160fd9d9bce7ac70c4fae4a7bdf320a4ebf1a"
+        },
+        {
+          "name": "DedekindReals.unfinishedOrder",
+          "source": "benchmarks/DedekindReals/DedekindReals/Impl/Order.lean",
+          "historical_source_sha256": "802b05a6376c243600813e04bee63dd0098b25382f0028280968af533a07ec1a"
+        }
+      ],
+      "historical_dependencies": {
+        "CanonicalAxiomAudit.unfinishedOrder_false": [
+          "DedekindReals.unfinishedOrder"
+        ],
+        "CanonicalAxiomAudit.unfinishedMinMax_false": [
+          "DedekindReals.unfinishedMinMax"
+        ]
+      },
+      "current_conditional_refutation": {
+        "source": "certificates/axiom-audit/DedekindRealsFalse.lean",
+        "source_sha256": "dfcd34857f877677fc8bd9179608c46304d7030bc80b0b64969371d32efe0743",
+        "theorem": "CanonicalAxiomAudit.unfinished_assumption_false",
+        "type": "(forall A : Type, A) -> False",
+        "kernel_axioms": [],
+        "candidate_only": true
+      },
+      "current_placeholder_presence": false,
+      "historical_source_hash_encoding": "Original historical raw-file-byte SHA256; values unchanged; not LF-normalized."
+    },
+    "huffman_old_cover_refutation": {
+      "amendment_source": "certificates/axiom-audit/spec-amendments.json",
+      "amendment_sha256": "3593c92934f3138f1a7c964c4d39b9306080a8c876d93f90ed32e918f416e7ee",
+      "source": "certificates/axiom-audit/HuffmanBuildFunFalse.lean",
+      "source_sha256": "0b5995809212ab9e5970f2bf1fe9a7a7ab026c2891feee4e4c69c5e205ce9dc4",
+      "theorem": "CanonicalAxiomAudit.old_build_fun_assumption_false",
+      "type": "(forall A l, l != [] -> exists t, OldCover l t) -> False",
+      "status": "conditional_refutation_of_old_leaf_only_cover; not_current_False",
+      "kernel_axioms": [
+        "propext",
+        "Quot.sound"
+      ],
+      "candidate_evidence": "bitmasks_huffman_replacements",
+      "applies_to_current_cover": false,
+      "embedded_amendment_hash_encoding": "The referenced amendment JSON retains its original embedded old/new raw-byte hashes; amendment_sha256 here hashes the current evidence file after LF normalization."
+    }
+  },
+  "summary": {
+    "replaced_axioms": 43,
+    "formal_axiom": 30,
+    "concretized_external_functions": 1,
+    "formal_opaque": 19,
+    "nonformal_axiom": 8,
+    "benchmarks_with_formal_axioms": {
+      "flocq": 15,
+      "huffman": 4,
+      "piggybank-v2": 11
+    }
+  },
+  "bounded_semantic_checks": {
+    "status": "candidate_Lean_compilation_and_print_axioms_only; not_final_leanchecker_or_full_consistency",
+    "local_ignored_source": ".lake/semantic-audit/remainder-20261103.lean",
+    "source_lf_sha256": "e9ef8ab7fa7b5fb8b67ab83e4bf76af745b77888c64d159b9b6b48b5a5616ed5",
+    "evidence_availability": "Temporary scratch source is ignored and not guaranteed in fresh clones; statements and limits are summarized here.",
+    "lean_version": "4.29.1",
+    "image": "alaya-pr81-flocq-raux-candidate-codeproof:8278072",
+    "exit_code": 0,
+    "source_projection_counterexample": {
+      "theorem": "RemainderSemanticAudit.source_global_nonnegative_refuted",
+      "kernel_axioms": [],
+      "not_a_current_opaque_shim_False": true
+    },
+    "huffman_concrete_boundaries": {
+      "theorems": [
+        "RemainderSemanticAudit.empty_message_boundary",
+        "RemainderSemanticAudit.singleton_message_boundary"
+      ],
+      "kernel_axioms": [
+        "propext",
+        "Quot.sound"
+      ]
+    },
+    "eight_dead_cast_statements": {
+      "proof": "Direct applications of the eight current formal same-name cast theorems.",
+      "kernel_axioms": [
+        "propext"
+      ]
+    }
+  }
+}

@@ -1,0 +1,377 @@
+{
+  "schema_version": 1,
+  "image": "alaya-pr81-flocq-raux-candidate-codeproof:8278072",
+  "lean_version": "4.29.1",
+  "lean_commit": "f72c35b3f637c8c6571d353742168ab66cc22c00",
+  "resource_limits": {
+    "cpus": 1,
+    "memory": "2g"
+  },
+  "verified": [
+    {
+      "name": "lemma_BFC_IStep",
+      "kind": "theorem",
+      "source": "benchmarks/VerifiedBitmasks/VerifiedBitmasks/Impl/BitmaskFixedChunks.lean",
+      "source_sha256": "50f1a407ae8695310aab4046a75cb845a58c9222d1680a453b428a8a135eee8f",
+      "same_name_same_type": true,
+      "in_formal_import_closure": true,
+      "evidence": "certificates/axiom-audit/BitmaskFixedChunksDerived.lean",
+      "exit_code": 0,
+      "kernel_axioms": []
+    },
+    {
+      "name": "lemma_BFC_IEqual",
+      "kind": "theorem",
+      "source": "benchmarks/VerifiedBitmasks/VerifiedBitmasks/Impl/BitmaskFixedChunks.lean",
+      "source_sha256": "50f1a407ae8695310aab4046a75cb845a58c9222d1680a453b428a8a135eee8f",
+      "same_name_same_type": true,
+      "in_formal_import_closure": true,
+      "evidence": "certificates/axiom-audit/BitmaskFixedChunksDerived.lean",
+      "exit_code": 0,
+      "kernel_axioms": [
+        "propext",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "lemma_BFC_IResult",
+      "kind": "theorem",
+      "source": "benchmarks/VerifiedBitmasks/VerifiedBitmasks/Impl/BitmaskFixedChunks.lean",
+      "source_sha256": "50f1a407ae8695310aab4046a75cb845a58c9222d1680a453b428a8a135eee8f",
+      "same_name_same_type": true,
+      "in_formal_import_closure": true,
+      "evidence": "certificates/axiom-audit/BitmaskFixedChunksDerived.lean",
+      "exit_code": 0,
+      "kernel_axioms": [
+        "propext",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "lemma_SeqToBitsToSeq",
+      "kind": "theorem",
+      "source": "benchmarks/VerifiedBitmasks/VerifiedBitmasks/Impl/MachineWords.lean",
+      "source_sha256": "225088faeffd79b96a1e4c01d990e834d81d68c4a236d54489dbb540442629fe",
+      "same_name_same_type": true,
+      "in_formal_import_closure": true,
+      "evidence": "certificates/axiom-audit/MachineWordsDerived.lean",
+      "exit_code": 0,
+      "kernel_axioms": [
+        "propext",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "lemma_BitsToSeqToBits",
+      "kind": "theorem",
+      "source": "benchmarks/VerifiedBitmasks/VerifiedBitmasks/Impl/MachineWords.lean",
+      "source_sha256": "225088faeffd79b96a1e4c01d990e834d81d68c4a236d54489dbb540442629fe",
+      "same_name_same_type": true,
+      "in_formal_import_closure": true,
+      "evidence": "certificates/axiom-audit/MachineWordsDerived.lean",
+      "exit_code": 0,
+      "kernel_axioms": [
+        "propext",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "lemma_BitwiseAllBitsEqualBVEq",
+      "kind": "theorem",
+      "source": "benchmarks/VerifiedBitmasks/VerifiedBitmasks/Impl/MachineWords.lean",
+      "source_sha256": "225088faeffd79b96a1e4c01d990e834d81d68c4a236d54489dbb540442629fe",
+      "same_name_same_type": true,
+      "in_formal_import_closure": true,
+      "evidence": "certificates/axiom-audit/MachineWordsDerived.lean",
+      "exit_code": 0,
+      "kernel_axioms": [
+        "propext",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "lemma_BitwiseEq",
+      "kind": "theorem",
+      "source": "benchmarks/VerifiedBitmasks/VerifiedBitmasks/Impl/MachineWords.lean",
+      "source_sha256": "225088faeffd79b96a1e4c01d990e834d81d68c4a236d54489dbb540442629fe",
+      "same_name_same_type": true,
+      "in_formal_import_closure": true,
+      "evidence": "certificates/axiom-audit/MachineWordsDerived.lean",
+      "exit_code": 0,
+      "kernel_axioms": [
+        "propext",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "Huffman.buildf_witness",
+      "kind": "def",
+      "source": "benchmarks/Huffman/Huffman/Impl/Build.lean",
+      "source_sha256": "8632fb978d8c15ceeece2f396f0944a00ff8cdf6f3422cf2e2b8256050a9860a",
+      "same_name_same_type": true,
+      "in_formal_import_closure": true,
+      "evidence": "certificates/axiom-audit/HuffmanBuildDerived.lean",
+      "exit_code": 0,
+      "kernel_axioms": [
+        "propext",
+        "Quot.sound"
+      ]
+    },
+    {
+      "name": "Huffman.obuildf_witness",
+      "kind": "def",
+      "source": "benchmarks/Huffman/Huffman/Impl/Build.lean",
+      "source_sha256": "8632fb978d8c15ceeece2f396f0944a00ff8cdf6f3422cf2e2b8256050a9860a",
+      "same_name_same_type": true,
+      "in_formal_import_closure": true,
+      "evidence": "certificates/axiom-audit/HuffmanBuildDerived.lean",
+      "exit_code": 0,
+      "kernel_axioms": [
+        "propext",
+        "Quot.sound"
+      ]
+    }
+  ],
+  "remaining": {
+    "huffman": [
+      "Huffman.build_fun_witness",
+      "huffman_aux_F",
+      "huffman_aux",
+      "Huffman.huffman_witness"
+    ],
+    "piggybank-v2": {
+      "external_interface_axioms": [
+        "build_contract",
+        "toWeakContract",
+        "empty_state",
+        "env_contracts",
+        "outgoing_acts",
+        "contract_state",
+        "env_account_balances",
+        "deployment_info",
+        "deployment_from"
+      ],
+      "semantic_assumptions": [
+        "account_balance_nonnegative",
+        "contract_induction"
+      ],
+      "status": "not_derived_no_consistency_claim"
+    }
+  },
+  "cover_repair": "certificates/axiom-audit/spec-amendments.json",
+  "old_cover_refutation": {
+    "source": "certificates/axiom-audit/HuffmanBuildFunFalse.lean",
+    "theorem": "CanonicalAxiomAudit.old_build_fun_assumption_false",
+    "type": "(forall A l, l != [] -> exists t, OldCover l t) -> False",
+    "axioms": [
+      "propext",
+      "Quot.sound"
+    ],
+    "applies_to_current_cover": false
+  },
+  "proof_policy": "No existing nonstandard axiom used in any replacement. Returned Huffman tree is computed by recursive sorting and merging the two minimum-weight trees; no existential choice/oracle.",
+  "manifest_removed_trusted_axiom_sources": {
+    "VerifiedBitmasks": {
+      "axiom_as_uint64_as_bv64": {
+        "source_name": "axiom_as_uint64_as_bv64",
+        "source_id": "src/BitFields/Spec/BitFields.s.dfy:axiom_as_uint64_as_bv64:1574",
+        "source_file": "src/BitFields/Spec/BitFields.s.dfy",
+        "source_signature": "lemma {:axiom} axiom_as_uint64_as_bv64(a: bv64)",
+        "reason": "Frozen proof/helper boundary carried from the Dafny source; represented explicitly for trusted-surface validation."
+      },
+      "axiom_as_bv64_as_uint64": {
+        "source_name": "axiom_as_bv64_as_uint64",
+        "source_id": "src/BitFields/Spec/BitFields.s.dfy:axiom_as_bv64_as_uint64:1670",
+        "source_file": "src/BitFields/Spec/BitFields.s.dfy",
+        "source_signature": "lemma {:axiom} axiom_as_bv64_as_uint64(a: uint64)",
+        "reason": "Frozen proof/helper boundary carried from the Dafny source; represented explicitly for trusted-surface validation."
+      },
+      "axiom_as_uint32_as_bv32": {
+        "source_name": "axiom_as_uint32_as_bv32",
+        "source_id": "src/BitFields/Spec/BitFields.s.dfy:axiom_as_uint32_as_bv32:1768",
+        "source_file": "src/BitFields/Spec/BitFields.s.dfy",
+        "source_signature": "lemma {:axiom} axiom_as_uint32_as_bv32(a: bv32)",
+        "reason": "Frozen proof/helper boundary carried from the Dafny source; represented explicitly for trusted-surface validation."
+      },
+      "axiom_as_bv32_as_uint32": {
+        "source_name": "axiom_as_bv32_as_uint32",
+        "source_id": "src/BitFields/Spec/BitFields.s.dfy:axiom_as_bv32_as_uint32:1868",
+        "source_file": "src/BitFields/Spec/BitFields.s.dfy",
+        "source_signature": "lemma {:axiom} axiom_as_bv32_as_uint32(a: uint32)",
+        "reason": "Frozen proof/helper boundary carried from the Dafny source; represented explicitly for trusted-surface validation."
+      },
+      "axiom_as_uint16_as_bv16": {
+        "source_name": "axiom_as_uint16_as_bv16",
+        "source_id": "src/BitFields/Spec/BitFields.s.dfy:axiom_as_uint16_as_bv16:1966",
+        "source_file": "src/BitFields/Spec/BitFields.s.dfy",
+        "source_signature": "lemma {:axiom} axiom_as_uint16_as_bv16(a: bv16)",
+        "reason": "Frozen proof/helper boundary carried from the Dafny source; represented explicitly for trusted-surface validation."
+      },
+      "axiom_as_bv16_as_uint16": {
+        "source_name": "axiom_as_bv16_as_uint16",
+        "source_id": "src/BitFields/Spec/BitFields.s.dfy:axiom_as_bv16_as_uint16:2066",
+        "source_file": "src/BitFields/Spec/BitFields.s.dfy",
+        "source_signature": "lemma {:axiom} axiom_as_bv16_as_uint16(a: uint16)",
+        "reason": "Frozen proof/helper boundary carried from the Dafny source; represented explicitly for trusted-surface validation."
+      },
+      "axiom_as_uint8_as_bv8": {
+        "source_name": "axiom_as_uint8_as_bv8",
+        "source_id": "src/BitFields/Spec/BitFields.s.dfy:axiom_as_uint8_as_bv8:2164",
+        "source_file": "src/BitFields/Spec/BitFields.s.dfy",
+        "source_signature": "lemma {:axiom} axiom_as_uint8_as_bv8(a: bv8)",
+        "reason": "Frozen proof/helper boundary carried from the Dafny source; represented explicitly for trusted-surface validation."
+      },
+      "axiom_as_bv8_as_uint8": {
+        "source_name": "axiom_as_bv8_as_uint8",
+        "source_id": "src/BitFields/Spec/BitFields.s.dfy:axiom_as_bv8_as_uint8:2259",
+        "source_file": "src/BitFields/Spec/BitFields.s.dfy",
+        "source_signature": "lemma {:axiom} axiom_as_bv8_as_uint8(a: uint8)",
+        "reason": "Frozen proof/helper boundary carried from the Dafny source; represented explicitly for trusted-surface validation."
+      },
+      "lemma_SeqToBitsToSeq": {
+        "source_name": "lemma_SeqToBitsToSeq",
+        "source_id": "src/BitFields/BitFields.i.dfy:lemma_SeqToBitsToSeq:6728",
+        "source_file": "src/BitFields/BitFields.i.dfy",
+        "source_signature": "lemma lemma_SeqToBitsToSeq(b: seq<bool>)",
+        "reason": "Frozen proof/helper boundary carried from the Dafny source; represented explicitly for trusted-surface validation."
+      },
+      "lemma_BitsToSeqToBits": {
+        "source_name": "lemma_BitsToSeqToBits",
+        "source_id": "src/BitFields/BitFields.i.dfy:lemma_BitsToSeqToBits:6880",
+        "source_file": "src/BitFields/BitFields.i.dfy",
+        "source_signature": "lemma lemma_BitsToSeqToBits(b: BV)",
+        "reason": "Frozen proof/helper boundary carried from the Dafny source; represented explicitly for trusted-surface validation."
+      },
+      "lemma_BitwiseAllBitsEqualBVEq": {
+        "source_name": "lemma_BitwiseAllBitsEqualBVEq",
+        "source_id": "src/BitFields/MachineWords.i.dfy:lemma_BitwiseAllBitsEqualBVEq:27146",
+        "source_file": "src/BitFields/MachineWords.i.dfy",
+        "source_signature": "lemma lemma_BitwiseAllBitsEqualBVEq(a: uint64, b: uint64)",
+        "reason": "Frozen proof/helper boundary carried from the Dafny source; represented explicitly for trusted-surface validation."
+      },
+      "lemma_BitwiseEq": {
+        "source_name": "lemma_BitwiseEq",
+        "source_id": "src/BitFields/MachineWords.i.dfy:lemma_BitwiseEq:27642",
+        "source_file": "src/BitFields/MachineWords.i.dfy",
+        "source_signature": "lemma lemma_BitwiseEq(a: uint64, b: uint64)",
+        "reason": "Frozen proof/helper boundary carried from the Dafny source; represented explicitly for trusted-surface validation."
+      },
+      "lemma_BFC_IResult": {
+        "source_name": "IResult",
+        "source_id": "src/BitMask/BitmaskFixedChunks.i.dfy:IResult:2217",
+        "source_file": "src/BitMask/BitmaskFixedChunks.i.dfy",
+        "source_signature": "lemma IResult(A: T, i: nat)",
+        "reason": "Frozen proof/helper boundary carried from the Dafny source; represented explicitly for trusted-surface validation."
+      },
+      "lemma_BFC_IStep": {
+        "source_name": "lemma_IStep",
+        "source_id": "src/BitMask/BitmaskFixedChunks.i.dfy:lemma_IStep:4457",
+        "source_file": "src/BitMask/BitmaskFixedChunks.i.dfy",
+        "source_signature": "lemma lemma_IStep(A:T)",
+        "reason": "Frozen proof/helper boundary carried from the Dafny source; represented explicitly for trusted-surface validation."
+      },
+      "lemma_BFC_IEqual": {
+        "source_name": "IEqual",
+        "source_id": "src/BitMask/BitmaskFixedChunks.i.dfy:IEqual:2388",
+        "source_file": "src/BitMask/BitmaskFixedChunks.i.dfy",
+        "source_signature": "lemma IEqual(A: T, B: T)",
+        "reason": "Frozen proof/helper boundary carried from the Dafny source; represented explicitly for trusted-surface validation."
+      }
+    },
+    "Huffman": {
+      "Huffman.buildf_witness": {
+        "source": "Build.v:buildf",
+        "reason": "proof-bearing construction preserved as requires_human_review"
+      },
+      "Huffman.obuildf_witness": {
+        "source": "Build.v:obuildf",
+        "reason": "proof-bearing ordered construction preserved as requires_human_review"
+      }
+    }
+  },
+  "manifest_sha256": {
+    "Huffman": "52af208e7d72868f476cc3a31afe7b41252b092627693f6bd286d9a1818ab86f",
+    "VerifiedBitmasks": "fc8bfbd9dddd721ae0a396a1b436f45e96e064b0c90a89771fae4a757875dc84"
+  },
+  "mode_boundary_checks": {
+    "renderer": "vero.generation.sandbox.create_sandbox",
+    "renderer_source_sha256": "8f85ca8ae70e8415e3e80022a3ba5e8951ce1989ff58cf29299b6cb6f55dabdd",
+    "render_note": "Only external mathlib-cache provisioning was bypassed on Windows; mode transformation used the actual renderer. Lean ran with the already-installed Docker mathlib cache.",
+    "lean_flags": [
+      "-DautoImplicit=false"
+    ],
+    "entry_modules": [
+      "Huffman.Impl.Huffman",
+      "VerifiedBitmasks.Impl.MachineWords",
+      "VerifiedBitmasks.Impl.BitmaskFixedChunks"
+    ],
+    "input_bodies": "Generated mode bodies compiled verbatim; codeproof placeholders were not filled or patched.",
+    "proof": {
+      "exit_code": 0,
+      "new_greedy_symbols_present": true
+    },
+    "codeproof": {
+      "exit_code": 0,
+      "new_greedy_symbols_absent_everywhere_in_Build": true,
+      "unknown_names": 0,
+      "frozen_proof_errors": 0,
+      "bitmask_new_theorems_still_standard_axioms_only": true,
+      "generated_slot_sorry_warnings_expected": true,
+      "not_a_correctness_certificate_for_unfilled_slots": true
+    },
+    "visibility_symbols": [
+      "huffman_sorted_ordered",
+      "huffman_sort_ordered",
+      "Huffman.buildf_witness",
+      "Huffman.obuildf_witness"
+    ],
+    "rendered_module_sha256": {
+      "proof": {
+        "Huffman.Impl.Huffman": "276f6a6ec9f8c9883110cdc1d1954165991882e9ab7bab301517d94cf8ad9d9c",
+        "Huffman.Impl.BTree": "db189d51a62bdc30c88e041729636aa300bec95dc4b42d8e5f9384596eac6195",
+        "Huffman.Impl.Code": "339572fcd4ec85e19abe096b6bf1e0e0b5ba3cd889cf79e785ca937d83ab5531",
+        "Huffman.Impl.UniqueKey": "21595661a97d66bc2ef52dd7bafec204e5242d7bc0e302c759d48ec40931d158",
+        "Huffman.Impl.Frequency": "37fdf6381c93b9740bc16dae5fcd8d9b7675a67a6116d6ebcd396130896d14a0",
+        "Huffman.Impl.PBTree": "dd284bff64b8f15069c6c82706d39091f92bac3dc9b43d4a798a57551592be6e",
+        "Huffman.Impl.Restrict": "83b3545329cb51386fad3f123ce7e106cc7be1efb96713d2e84b010b78c113af",
+        "Huffman.Impl.Build": "8632fb978d8c15ceeece2f396f0944a00ff8cdf6f3422cf2e2b8256050a9860a",
+        "Huffman.Impl.WeightTree": "d33385a5d004b75697c50e30d908742471968cff790fb17754c71dea695990ad",
+        "Huffman.Impl.Ordered": "5bf2719665a3d24ae6fd34136e9499d8b820f024017c8236dbb4428c1eebb566",
+        "Huffman.Impl.Weight": "223642bc2e29aa4d6b5b726f5a20f26262f130b91fd71f0c01d83346f58907eb",
+        "Huffman.Impl.SameSumLeaves": "2d39d4fe2614daf34dee9b8280fb896ecc52e6343b08d8efba44b4c195932fb1",
+        "Huffman.Impl.ISort": "aa4a2beb3b8e1890996f92a47d1bb176c078735458f8290d728b473ce267a7bc",
+        "Huffman.Impl.Cover": "270a07035fe327da00587214cad05bd649de92269a7631f5ea89b9670540640e",
+        "Huffman.Impl.AuxLib": "199b6e9fab1d4be476743acfa0ea67e1ab0260276ea0be42015d1fe8786d905f",
+        "Huffman.Impl.CoverMin": "a735afb56dd05fd01ee456ca428bdb3e0f4f63450a5437e2039dda7664c0020e",
+        "Huffman.Impl.OneStep": "7f88dc27a862b329219ad315099a1347dd48d260665114fadfef613ba01aec07",
+        "Huffman.Impl.PBTree2BTree": "e7c6c3eb9814cda170ebc4aac2cf14b7abb6b49cac3db326efe05b8150d65799",
+        "VerifiedBitmasks.Impl.MachineWords": "225088faeffd79b96a1e4c01d990e834d81d68c4a236d54489dbb540442629fe",
+        "VerifiedBitmasks.Impl.BitFields": "b8c2f2653d087319ee45003143e3b1b90871ecae7d646ce8abc6e1b55781fa32",
+        "VerifiedBitmasks.Impl.BitmaskFixedChunks": "50f1a407ae8695310aab4046a75cb845a58c9222d1680a453b428a8a135eee8f"
+      },
+      "codeproof": {
+        "Huffman.Impl.Huffman": "6db2a4bbc685ed1db3a65869497d1d823a985e4c6998a9bec75948450d87109c",
+        "Huffman.Impl.BTree": "698a43fd958fd7b97e954c8deccbbfa768805f95ef6564e0efa5d99604d146b8",
+        "Huffman.Impl.Code": "c4b745def992c275a4811fb614178d9f5bc59cb69977d1fa8a1d351d7f738572",
+        "Huffman.Impl.UniqueKey": "88d018c32d7815c4f0582fda64cce12544387e0f5964ec956c99eb8514a15f08",
+        "Huffman.Impl.Frequency": "25808d08dd6d2b238d60c125e0d85b224243ad95e9f71735cb3384cbe304ede6",
+        "Huffman.Impl.PBTree": "f88bfa7f2067fa8281f55cd86538c70cce55dee821792603e6dc5b4690ea6b6a",
+        "Huffman.Impl.Restrict": "4c0c1f3f2ebb81e3a910858e07e9c37f2890d469c241c90776296472d1cbf785",
+        "Huffman.Impl.Build": "bdb3ce0a7370df7ec61431e61901fc8fdccaa358368c03398124933f41c35fab",
+        "Huffman.Impl.WeightTree": "067ac174f84ad0e9cb88e8a9e6880040b3b80b9f9011a2e13f53af62618e6241",
+        "Huffman.Impl.Ordered": "149840e104d65cb75094f708964e694b30fb1bf40748e4c6a1bf88885932b678",
+        "Huffman.Impl.Weight": "f7459727e3c69be4a343a60878dc61ceb9932a2a2c064b81c0e5656337bb4578",
+        "Huffman.Impl.SameSumLeaves": "2bd1ca56796a7848900d26b4f26335764b18f7d6a68cdf867c25c445865ff793",
+        "Huffman.Impl.ISort": "41eaa22dc0bf71c93cc739088af948ab2ac2414ac4ff6ad8b35838c07ec30367",
+        "Huffman.Impl.Cover": "270a07035fe327da00587214cad05bd649de92269a7631f5ea89b9670540640e",
+        "Huffman.Impl.AuxLib": "8a37e686fdeee0ae3ff93671a72984ef340aef6fbe80d9bbe4b6e492c822dfce",
+        "Huffman.Impl.CoverMin": "d1fd2bdff5f19e9b717a4c42852aeb96aa676d6eb83d86b3193804a61e495872",
+        "Huffman.Impl.OneStep": "eb024d652c95d403533e40bfb9e429371cfa9430f119e8d75995d871a1239075",
+        "Huffman.Impl.PBTree2BTree": "8ba3b616ca23213ba2d3e9d65d204c1b5eb9729416fe38622cfeeccc74b1ed4a",
+        "VerifiedBitmasks.Impl.MachineWords": "67004d859b98931c75792183940a12edcbfdfe50b544f1b776971d1a8150e993",
+        "VerifiedBitmasks.Impl.BitFields": "b8c2f2653d087319ee45003143e3b1b90871ecae7d646ce8abc6e1b55781fa32",
+        "VerifiedBitmasks.Impl.BitmaskFixedChunks": "10dc3648a2745c10634d8e25ecf0726a4034cf52b00f907d5f000535bc428949"
+      }
+    }
+  }
+}

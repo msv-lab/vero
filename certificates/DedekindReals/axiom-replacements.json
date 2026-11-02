@@ -1,0 +1,266 @@
+[
+  {
+    "assumption": "DedekindReals.Rplus_lower_bound",
+    "proof": "DedekindCertificates.plus_lower_bound",
+    "source": "benchmarks/DedekindReals/DedekindReals/Impl/Additive.lean",
+    "type": "\u2200 x y : R, \u2203 q : Rat, \u2203 r s : Rat, q < r + s \u2227 x.lower r \u2227 y.lower s",
+    "status": "proved_and_replaced",
+    "dependencies": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  {
+    "assumption": "DedekindReals.Rplus_upper_bound",
+    "proof": "DedekindCertificates.plus_upper_bound",
+    "source": "benchmarks/DedekindReals/DedekindReals/Impl/Additive.lean",
+    "type": "\u2200 x y : R, \u2203 q : Rat, \u2203 r s : Rat, r + s < q \u2227 x.upper r \u2227 y.upper s",
+    "status": "proved_and_replaced",
+    "dependencies": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  {
+    "assumption": "DedekindReals.Rplus_lower_open",
+    "proof": "DedekindCertificates.plus_lower_open",
+    "source": "benchmarks/DedekindReals/DedekindReals/Impl/Additive.lean",
+    "type": "\u2200 (x y : R) (q : Rat),\n    (\u2203 r s : Rat, q < r + s \u2227 x.lower r \u2227 y.lower s) \u2192\n      \u2203 r : Rat, q < r \u2227 \u2203 u v : Rat, r < u + v \u2227 x.lower u \u2227 y.lower v",
+    "status": "proved_and_replaced",
+    "dependencies": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  {
+    "assumption": "DedekindReals.Rplus_upper_open",
+    "proof": "DedekindCertificates.plus_upper_open",
+    "source": "benchmarks/DedekindReals/DedekindReals/Impl/Additive.lean",
+    "type": "\u2200 (x y : R) (q : Rat),\n    (\u2203 r s : Rat, r + s < q \u2227 x.upper r \u2227 y.upper s) \u2192\n      \u2203 r : Rat, r < q \u2227 \u2203 u v : Rat, u + v < r \u2227 x.upper u \u2227 y.upper v",
+    "status": "proved_and_replaced",
+    "dependencies": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  {
+    "assumption": "DedekindReals.Rplus_disjoint",
+    "proof": "DedekindCertificates.plus_disjoint",
+    "source": "benchmarks/DedekindReals/DedekindReals/Impl/Additive.lean",
+    "type": "\u2200 (x y : R) (q : Rat),\n    \u00ac ((\u2203 r s : Rat, q < r + s \u2227 x.lower r \u2227 y.lower s) \u2227\n      (\u2203 r s : Rat, r + s < q \u2227 x.upper r \u2227 y.upper s))",
+    "status": "proved_and_replaced",
+    "dependencies": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  {
+    "assumption": "DedekindReals.Rplus_located",
+    "proof": "DedekindCertificates.plus_located",
+    "source": "benchmarks/DedekindReals/DedekindReals/Impl/Additive.lean",
+    "type": "\u2200 (x y : R) (q r : Rat), q < r \u2192\n    (\u2203 u v : Rat, q < u + v \u2227 x.lower u \u2227 y.lower v) \u2228\n      (\u2203 u v : Rat, u + v < r \u2227 x.upper u \u2227 y.upper v)",
+    "status": "proved_and_replaced",
+    "dependencies": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  {
+    "assumption": "DedekindReals.Rmult_lower_bound",
+    "proof": "DedekindCertificates.mult_lower_bound",
+    "source": "benchmarks/DedekindReals/DedekindReals/Impl/Multiplication.lean",
+    "type": "\u2200 x y : R, \u2203 q : Rat, mult_lower x y q",
+    "status": "proved_and_replaced",
+    "dependencies": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  {
+    "assumption": "DedekindReals.Rmult_upper_bound",
+    "proof": "DedekindCertificates.mult_upper_bound",
+    "source": "benchmarks/DedekindReals/DedekindReals/Impl/Multiplication.lean",
+    "type": "\u2200 x y : R, \u2203 q : Rat, mult_upper x y q",
+    "status": "proved_and_replaced",
+    "dependencies": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  {
+    "assumption": "DedekindReals.Rmult_lower_open",
+    "proof": "DedekindCertificates.mult_lower_open",
+    "source": "benchmarks/DedekindReals/DedekindReals/Impl/Multiplication.lean",
+    "type": "\u2200 (x y : R) (q : Rat), mult_lower x y q \u2192 \u2203 r : Rat, q < r \u2227 mult_lower x y r",
+    "status": "proved_and_replaced",
+    "dependencies": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  {
+    "assumption": "DedekindReals.Rmult_upper_open",
+    "proof": "DedekindCertificates.mult_upper_open",
+    "source": "benchmarks/DedekindReals/DedekindReals/Impl/Multiplication.lean",
+    "type": "\u2200 (x y : R) (q : Rat), mult_upper x y q \u2192 \u2203 r : Rat, r < q \u2227 mult_upper x y r",
+    "status": "proved_and_replaced",
+    "dependencies": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  {
+    "assumption": "DedekindReals.Rmult_disjoint",
+    "proof": "DedekindCertificates.mult_disjoint",
+    "source": "benchmarks/DedekindReals/DedekindReals/Impl/Multiplication.lean",
+    "type": "\u2200 (x y : R) (q : Rat), \u00ac (mult_lower x y q \u2227 mult_upper x y q)",
+    "status": "proved_and_replaced",
+    "dependencies": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  {
+    "assumption": "DedekindReals.Rmult_located",
+    "proof": "DedekindCertificates.mult_located",
+    "source": "benchmarks/DedekindReals/DedekindReals/Impl/Multiplication.lean",
+    "type": "\u2200 (x y : R) (q r : Rat), q < r \u2192 mult_lower x y q \u2228 mult_upper x y r",
+    "status": "proved_and_replaced",
+    "dependencies": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  {
+    "assumption": "DedekindReals.Rinv_lower_proper",
+    "proof": "DedekindCertificates.inv_lower_proper",
+    "source": "benchmarks/DedekindReals/DedekindReals/Impl/Multiplication.lean",
+    "type": "\u2200 x : R, Rneq x (R_of_Q 0) \u2192 \u2200 q r : Rat, q = r \u2192 (inv_lower x q \u2194 inv_lower x r)",
+    "status": "proved_and_replaced",
+    "dependencies": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  {
+    "assumption": "DedekindReals.Rinv_upper_proper",
+    "proof": "DedekindCertificates.inv_upper_proper",
+    "source": "benchmarks/DedekindReals/DedekindReals/Impl/Multiplication.lean",
+    "type": "\u2200 x : R, Rneq x (R_of_Q 0) \u2192 \u2200 q r : Rat, q = r \u2192 (inv_upper x q \u2194 inv_upper x r)",
+    "status": "proved_and_replaced",
+    "dependencies": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  {
+    "assumption": "DedekindReals.Rinv_lower_bound",
+    "proof": "DedekindCertificates.inv_lower_bound",
+    "source": "benchmarks/DedekindReals/DedekindReals/Impl/Multiplication.lean",
+    "type": "\u2200 x : R, Rneq x (R_of_Q 0) \u2192 \u2203 q : Rat, inv_lower x q",
+    "status": "proved_and_replaced",
+    "dependencies": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  {
+    "assumption": "DedekindReals.Rinv_upper_bound",
+    "proof": "DedekindCertificates.inv_upper_bound",
+    "source": "benchmarks/DedekindReals/DedekindReals/Impl/Multiplication.lean",
+    "type": "\u2200 x : R, Rneq x (R_of_Q 0) \u2192 \u2203 q : Rat, inv_upper x q",
+    "status": "proved_and_replaced",
+    "dependencies": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  {
+    "assumption": "DedekindReals.Rinv_lower_lower",
+    "proof": "DedekindCertificates.inv_lower_lower",
+    "source": "benchmarks/DedekindReals/DedekindReals/Impl/Multiplication.lean",
+    "type": "\u2200 x : R, Rneq x (R_of_Q 0) \u2192 \u2200 q r : Rat, q < r \u2192 inv_lower x r \u2192 inv_lower x q",
+    "status": "proved_and_replaced",
+    "dependencies": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  {
+    "assumption": "DedekindReals.Rinv_lower_open",
+    "proof": "DedekindCertificates.inv_lower_open",
+    "source": "benchmarks/DedekindReals/DedekindReals/Impl/Multiplication.lean",
+    "type": "\u2200 x : R, Rneq x (R_of_Q 0) \u2192 \u2200 q : Rat, inv_lower x q \u2192 \u2203 r : Rat, q < r \u2227 inv_lower x r",
+    "status": "proved_and_replaced",
+    "dependencies": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  {
+    "assumption": "DedekindReals.Rinv_upper_upper",
+    "proof": "DedekindCertificates.inv_upper_upper",
+    "source": "benchmarks/DedekindReals/DedekindReals/Impl/Multiplication.lean",
+    "type": "\u2200 x : R, Rneq x (R_of_Q 0) \u2192 \u2200 q r : Rat, q < r \u2192 inv_upper x q \u2192 inv_upper x r",
+    "status": "proved_and_replaced",
+    "dependencies": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  {
+    "assumption": "DedekindReals.Rinv_upper_open",
+    "proof": "DedekindCertificates.inv_upper_open",
+    "source": "benchmarks/DedekindReals/DedekindReals/Impl/Multiplication.lean",
+    "type": "\u2200 x : R, Rneq x (R_of_Q 0) \u2192 \u2200 r : Rat, inv_upper x r \u2192 \u2203 q : Rat, q < r \u2227 inv_upper x q",
+    "status": "proved_and_replaced",
+    "dependencies": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  {
+    "assumption": "DedekindReals.Rinv_disjoint",
+    "proof": "DedekindCertificates.inv_disjoint",
+    "source": "benchmarks/DedekindReals/DedekindReals/Impl/Multiplication.lean",
+    "type": "\u2200 x : R, Rneq x (R_of_Q 0) \u2192 \u2200 q : Rat, \u00ac (inv_lower x q \u2227 inv_upper x q)",
+    "status": "proved_and_replaced",
+    "dependencies": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  },
+  {
+    "assumption": "DedekindReals.Rinv_located",
+    "proof": "DedekindCertificates.inv_located",
+    "source": "benchmarks/DedekindReals/DedekindReals/Impl/Multiplication.lean",
+    "type": "\u2200 x : R, Rneq x (R_of_Q 0) \u2192 \u2200 q r : Rat, q < r \u2192 inv_lower x q \u2228 inv_upper x r",
+    "status": "proved_and_replaced",
+    "dependencies": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ]
+  }
+]

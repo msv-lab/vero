@@ -1,0 +1,439 @@
+{
+  "schema_version": 2,
+  "upstream": "secure-foundations/verdict@9bc18bc5a287c1608dcb74a6eee7b9ca94a62b67",
+  "amendments": [
+    {
+      "stage": "prior_approval",
+      "source_lines": [
+        "verdict/src/convert.rs:71,193",
+        "verdict/src/policy/chrome.rs:323,363,500-515,548-569"
+      ],
+      "upstream": "secure-foundations/verdict@9bc18bc5a287c1608dcb74a6eee7b9ca94a62b67",
+      "authorization": "User approved three narrowly scoped corrections: shared extension version=2; Chrome time excludes root; Chrome CA applies only to intermediates. All other specifications stay frozen.",
+      "changes": [
+        "Standard.ValidVersion: version >= 3 -> version = 2",
+        "spec_chrome_time_validity: i < length -> i + 1 < length",
+        "spec_chrome_basic_constraints_ca: 0 < i and i < length -> 0 < i and i + 1 < length"
+      ],
+      "files": [
+        {
+          "new_sha256": "7765ca8d18a7692394fe900c79745ac7c9ccffdfdfa544b22666386c54695255",
+          "file": "benchmarks/verdict/Verdict/Impl/PolicyStandard.lean",
+          "old_sha256": "c3b777c05f7acfcd04e89c6df1a5aa3e16db59ecc10e9f4a24641fb2f167ab5b"
+        },
+        {
+          "new_sha256": "c81ea01a7df34c9787a4ecc05cc31ffc8c639bb5b562284ca50c612576ab2feb",
+          "file": "benchmarks/verdict/Verdict/Spec/PolicyStandard.lean",
+          "old_sha256": "47736c9ed1fb7d44a9ec1280a0975885a49835f01de0d237f727337469bb6232"
+        }
+      ]
+    },
+    {
+      "date": "2026-11-03",
+      "authorization": "User explicitly approved all three decisions: ten source-alignment spec corrections; Firefox/OpenSSL issuance-stage AKI premises plus a new actual Chrome AKI check; retain extension version=2 and add actual Firefox/OpenSSL guards. This supersedes the earlier freeze only for these enumerated obligations.",
+      "base": "independent codex/canonical-certificates clone stacked on PR8 74fca26 via 7d39fc2; original PR8 branch and its decisions are unchanged",
+      "upstream": "secure-foundations/verdict@9bc18bc5a287c1608dcb74a6eee7b9ca94a62b67",
+      "approved_groups": [
+        {
+          "nature": "source_alignment_of_specification",
+          "specs": [
+            "spec_chrome_sig_alg_consistency",
+            "spec_firefox_sig_alg_consistency",
+            "spec_openssl_sig_alg_consistency",
+            "spec_chrome_strong_signature",
+            "spec_firefox_strong_signature",
+            "spec_chrome_key_usage_leaf",
+            "spec_chrome_extended_key_usage_leaf",
+            "spec_chrome_not_revoked",
+            "spec_firefox_subject_alt_name_present",
+            "spec_openssl_subject_alt_name_present"
+          ],
+          "changes": [
+            "SigAlgConsistency compares AlgorithmIdentifier bytes",
+            "StrongSignature inspects inner.id",
+            "Chrome leaf KU follows the CA/non-CA branch",
+            "Chrome EKU accepts serverAuth or any",
+            "Chrome CRL consequence excludes root",
+            "Firefox/OpenSSL SAN consequence admits an absent-SAN matching-CN fallback"
+          ]
+        },
+        {
+          "nature": "explicit_stage_premise_and_intentional_runtime_strengthening",
+          "specs": [
+            "spec_firefox_authority_key_id_valid",
+            "spec_openssl_authority_key_id_valid",
+            "spec_chrome_authority_key_id_valid"
+          ],
+          "changes": [
+            "Firefox/OpenSSL specs require actual adjacent likelyIssued results before policy acceptance",
+            "Chrome validChain additionally runs a Bool helper over all adjacent AKI comparisons; no Spec predicate is called"
+          ]
+        },
+        {
+          "nature": "retain_specification_and_intentionally_strengthen_runtime_policy",
+          "specs": [
+            "spec_firefox_valid_version",
+            "spec_openssl_valid_version"
+          ],
+          "changes": [
+            "The existing allExts.isSome -> version=2 conclusion remains unchanged",
+            "Firefox and OpenSSL leaf/intermediate/root verification run actual isNone-or-version==2 Bool guards; no Spec predicate is called"
+          ]
+        }
+      ],
+      "files": [
+        {
+          "file": "benchmarks/verdict/Verdict/Impl/PolicyStandard.lean",
+          "old_sha256": "7765ca8d18a7692394fe900c79745ac7c9ccffdfdfa544b22666386c54695255",
+          "new_sha256": "efc6a4b4db0985f3c5ba2665b7242e6d92b8131fc3980596ec0e0623859aea17",
+          "hash_mode": "raw_file_bytes",
+          "new_lf_sha256": "c556a233c2b0d6663a5d5aa03238eb278466310c39d1aeb976f2b21450b1d69d",
+          "new_sha256_mode": "raw local file bytes",
+          "new_lf_sha256_mode": "file bytes with CRLF -> LF; BOM retained"
+        },
+        {
+          "file": "benchmarks/verdict/Verdict/Spec/PolicyStandard.lean",
+          "old_sha256": "c81ea01a7df34c9787a4ecc05cc31ffc8c639bb5b562284ca50c612576ab2feb",
+          "new_sha256": "9e08f9bb452126caa9442a9a46397d7cd3493355b70fb2f7a2cb5c51c4ae65a5",
+          "hash_mode": "raw_file_bytes",
+          "new_lf_sha256": "1acafb70dfe9645abc68f69ec2a2de71fc80a211e53de52ee033b7a36d1b4e78",
+          "new_sha256_mode": "raw local file bytes",
+          "new_lf_sha256_mode": "file bytes with CRLF -> LF; BOM retained"
+        }
+      ],
+      "runtime_files": [
+        {
+          "file": "benchmarks/verdict/Verdict/Impl/PolicyChrome.lean",
+          "old_lf_sha256": "043481ec76545d5e1693aa05e8a7604b6fd69ecbe7278f1a655b53c50d927bce",
+          "new_lf_sha256": "0e6ab64536e1fcc0cda25aa72d5c4d2221daad991dd24b324f66f22aff3ac4da",
+          "new_sha256": "981bef8b0e9bf71fca6a4f7ed5d619f898df559d01a8c171c1fd32a89663ff35",
+          "old_hash_mode": "Previously captured UTF-8 text (read using utf-8-sig) normalized to LF; original raw bytes were not captured. This historical hash is unchanged.",
+          "intermediate_after_raw_sha256": "991a6f8744d7e95d69a07dc5bee11dae3726b123d4c35ed403c1b12d8e9f5a87",
+          "final_marker_cleanup": "Removed duplicate empty code_aux markers only; executable Lean definitions unchanged; final source rebuilt and rechecked.",
+          "new_sha256_mode": "raw local file bytes",
+          "new_lf_sha256_mode": "file bytes with CRLF -> LF; BOM retained"
+        },
+        {
+          "file": "benchmarks/verdict/Verdict/Impl/PolicyFirefox.lean",
+          "old_lf_sha256": "165dd89491fdedf54611da05912b600ada512856a86a45ff33c2281b0d24c612",
+          "new_lf_sha256": "1ad6b3a662f9f4a49378ce576d77012c373e3dcc9a912baaa9bfe8505aabc94f",
+          "new_sha256": "9a64bb471004f3a1351858f9c1557ab354ed97321aa70b54166df5a5b48ff7b6",
+          "old_hash_mode": "Previously captured UTF-8 text (read using utf-8-sig) normalized to LF; original raw bytes were not captured. This historical hash is unchanged.",
+          "new_sha256_mode": "raw local file bytes",
+          "new_lf_sha256_mode": "file bytes with CRLF -> LF; BOM retained"
+        },
+        {
+          "file": "benchmarks/verdict/Verdict/Impl/PolicyOpenSSL.lean",
+          "old_lf_sha256": "1389f8c032134edf29e3b465527022ae343c9e639dcc9d35a246b16e8a7d9c75",
+          "new_lf_sha256": "5e23528917ec6c063685dddf9705591b1eda4321b92afbd1daf709926d17c177",
+          "new_sha256": "573abd5d9c372c9e1bf98900d7ac8cedf7a61f37bd644db1622447918fab282c",
+          "old_hash_mode": "Previously captured UTF-8 text (read using utf-8-sig) normalized to LF; original raw bytes were not captured. This historical hash is unchanged.",
+          "new_sha256_mode": "raw local file bytes",
+          "new_lf_sha256_mode": "file bytes with CRLF -> LF; BOM retained"
+        }
+      ],
+      "source_evidence": [
+        {
+          "group": "signature_id_vs_bytes",
+          "sources": [
+            {
+              "file": "verdict/src/policy/standard.rs",
+              "lines": [
+                21,
+                30
+              ],
+              "url": "https://github.com/secure-foundations/verdict/blob/9bc18bc5a287c1608dcb74a6eee7b9ca94a62b67/verdict/src/policy/standard.rs#L21-L30"
+            },
+            {
+              "file": "verdict/src/policy/common.rs",
+              "lines": [
+                138,
+                141
+              ],
+              "url": "https://github.com/secure-foundations/verdict/blob/9bc18bc5a287c1608dcb74a6eee7b9ca94a62b67/verdict/src/policy/common.rs#L138-L141"
+            },
+            {
+              "file": "verdict/src/policy/chrome.rs",
+              "lines": [
+                322,
+                329
+              ],
+              "url": "https://github.com/secure-foundations/verdict/blob/9bc18bc5a287c1608dcb74a6eee7b9ca94a62b67/verdict/src/policy/chrome.rs#L322-L329"
+            },
+            {
+              "file": "verdict/src/policy/chrome.rs",
+              "lines": [
+                362,
+                368
+              ],
+              "url": "https://github.com/secure-foundations/verdict/blob/9bc18bc5a287c1608dcb74a6eee7b9ca94a62b67/verdict/src/policy/chrome.rs#L362-L368"
+            },
+            {
+              "file": "verdict/src/policy/firefox.rs",
+              "lines": [
+                367,
+                379
+              ],
+              "url": "https://github.com/secure-foundations/verdict/blob/9bc18bc5a287c1608dcb74a6eee7b9ca94a62b67/verdict/src/policy/firefox.rs#L367-L379"
+            },
+            {
+              "file": "verdict/src/policy/firefox.rs",
+              "lines": [
+                574,
+                601
+              ],
+              "url": "https://github.com/secure-foundations/verdict/blob/9bc18bc5a287c1608dcb74a6eee7b9ca94a62b67/verdict/src/policy/firefox.rs#L574-L601"
+            },
+            {
+              "file": "verdict/src/policy/openssl.rs",
+              "lines": [
+                440,
+                443
+              ],
+              "url": "https://github.com/secure-foundations/verdict/blob/9bc18bc5a287c1608dcb74a6eee7b9ca94a62b67/verdict/src/policy/openssl.rs#L440-L443"
+            },
+            {
+              "file": "verdict/src/convert.rs",
+              "lines": [
+                48,
+                80
+              ],
+              "url": "https://github.com/secure-foundations/verdict/blob/9bc18bc5a287c1608dcb74a6eee7b9ca94a62b67/verdict/src/convert.rs#L48-L80"
+            }
+          ]
+        },
+        {
+          "group": "strong_signature_checked_on_inner",
+          "sources": [
+            {
+              "file": "verdict/src/policy/chrome.rs",
+              "lines": [
+                329,
+                354
+              ],
+              "url": "https://github.com/secure-foundations/verdict/blob/9bc18bc5a287c1608dcb74a6eee7b9ca94a62b67/verdict/src/policy/chrome.rs#L329-L354"
+            },
+            {
+              "file": "verdict/src/policy/chrome.rs",
+              "lines": [
+                500,
+                517
+              ],
+              "url": "https://github.com/secure-foundations/verdict/blob/9bc18bc5a287c1608dcb74a6eee7b9ca94a62b67/verdict/src/policy/chrome.rs#L500-L517"
+            },
+            {
+              "file": "verdict/src/policy/firefox.rs",
+              "lines": [
+                566,
+                570
+              ],
+              "url": "https://github.com/secure-foundations/verdict/blob/9bc18bc5a287c1608dcb74a6eee7b9ca94a62b67/verdict/src/policy/firefox.rs#L566-L570"
+            },
+            {
+              "file": "verdict/src/policy/firefox.rs",
+              "lines": [
+                597,
+                603
+              ],
+              "url": "https://github.com/secure-foundations/verdict/blob/9bc18bc5a287c1608dcb74a6eee7b9ca94a62b67/verdict/src/policy/firefox.rs#L597-L603"
+            }
+          ]
+        },
+        {
+          "group": "aki_belongs_to_link_filter_not_raw_valid_chain",
+          "sources": [
+            {
+              "file": "verdict/src/policy/chrome.rs",
+              "lines": [
+                580,
+                599
+              ],
+              "url": "https://github.com/secure-foundations/verdict/blob/9bc18bc5a287c1608dcb74a6eee7b9ca94a62b67/verdict/src/policy/chrome.rs#L580-L599"
+            },
+            {
+              "file": "verdict/src/policy/firefox.rs",
+              "lines": [
+                623,
+                642
+              ],
+              "url": "https://github.com/secure-foundations/verdict/blob/9bc18bc5a287c1608dcb74a6eee7b9ca94a62b67/verdict/src/policy/firefox.rs#L623-L642"
+            },
+            {
+              "file": "verdict/src/policy/openssl.rs",
+              "lines": [
+                527,
+                544
+              ],
+              "url": "https://github.com/secure-foundations/verdict/blob/9bc18bc5a287c1608dcb74a6eee7b9ca94a62b67/verdict/src/policy/openssl.rs#L527-L544"
+            },
+            {
+              "file": "verdict/src/validator.rs",
+              "lines": [
+                102,
+                134
+              ],
+              "url": "https://github.com/secure-foundations/verdict/blob/9bc18bc5a287c1608dcb74a6eee7b9ca94a62b67/verdict/src/validator.rs#L102-L134"
+            },
+            {
+              "file": "verdict/src/policy/common.rs",
+              "lines": [
+                219,
+                239
+              ],
+              "url": "https://github.com/secure-foundations/verdict/blob/9bc18bc5a287c1608dcb74a6eee7b9ca94a62b67/verdict/src/policy/common.rs#L219-L239"
+            }
+          ]
+        },
+        {
+          "group": "chrome_leaf_may_be_ca",
+          "sources": [
+            {
+              "file": "verdict/src/policy/chrome.rs",
+              "lines": [
+                223,
+                235
+              ],
+              "url": "https://github.com/secure-foundations/verdict/blob/9bc18bc5a287c1608dcb74a6eee7b9ca94a62b67/verdict/src/policy/chrome.rs#L223-L235"
+            },
+            {
+              "file": "verdict/src/policy/chrome.rs",
+              "lines": [
+                322,
+                359
+              ],
+              "url": "https://github.com/secure-foundations/verdict/blob/9bc18bc5a287c1608dcb74a6eee7b9ca94a62b67/verdict/src/policy/chrome.rs#L322-L359"
+            }
+          ]
+        },
+        {
+          "group": "chrome_eku_allows_any",
+          "sources": [
+            {
+              "file": "verdict/src/policy/chrome.rs",
+              "lines": [
+                237,
+                247
+              ],
+              "url": "https://github.com/secure-foundations/verdict/blob/9bc18bc5a287c1608dcb74a6eee7b9ca94a62b67/verdict/src/policy/chrome.rs#L237-L247"
+            },
+            {
+              "file": "verdict/src/policy/chrome.rs",
+              "lines": [
+                351,
+                354
+              ],
+              "url": "https://github.com/secure-foundations/verdict/blob/9bc18bc5a287c1608dcb74a6eee7b9ca94a62b67/verdict/src/policy/chrome.rs#L351-L354"
+            }
+          ]
+        },
+        {
+          "group": "chrome_crl_excludes_root",
+          "sources": [
+            {
+              "file": "verdict/src/policy/chrome.rs",
+              "lines": [
+                351,
+                354
+              ],
+              "url": "https://github.com/secure-foundations/verdict/blob/9bc18bc5a287c1608dcb74a6eee7b9ca94a62b67/verdict/src/policy/chrome.rs#L351-L354"
+            },
+            {
+              "file": "verdict/src/policy/chrome.rs",
+              "lines": [
+                500,
+                517
+              ],
+              "url": "https://github.com/secure-foundations/verdict/blob/9bc18bc5a287c1608dcb74a6eee7b9ca94a62b67/verdict/src/policy/chrome.rs#L500-L517"
+            },
+            {
+              "file": "verdict/src/policy/chrome.rs",
+              "lines": [
+                548,
+                569
+              ],
+              "url": "https://github.com/secure-foundations/verdict/blob/9bc18bc5a287c1608dcb74a6eee7b9ca94a62b67/verdict/src/policy/chrome.rs#L548-L569"
+            }
+          ]
+        },
+        {
+          "group": "hostname_allows_cn_fallback",
+          "sources": [
+            {
+              "file": "verdict/src/policy/firefox.rs",
+              "lines": [
+                574,
+                585
+              ],
+              "url": "https://github.com/secure-foundations/verdict/blob/9bc18bc5a287c1608dcb74a6eee7b9ca94a62b67/verdict/src/policy/firefox.rs#L574-L585"
+            },
+            {
+              "file": "verdict/src/policy/openssl.rs",
+              "lines": [
+                476,
+                508
+              ],
+              "url": "https://github.com/secure-foundations/verdict/blob/9bc18bc5a287c1608dcb74a6eee7b9ca94a62b67/verdict/src/policy/openssl.rs#L476-L508"
+            }
+          ]
+        },
+        {
+          "group": "version_constraint_not_enforced_by_source",
+          "sources": [
+            {
+              "file": "verdict/src/policy/firefox.rs",
+              "lines": [
+                367,
+                402
+              ],
+              "url": "https://github.com/secure-foundations/verdict/blob/9bc18bc5a287c1608dcb74a6eee7b9ca94a62b67/verdict/src/policy/firefox.rs#L367-L402"
+            },
+            {
+              "file": "verdict/src/policy/firefox.rs",
+              "lines": [
+                574,
+                612
+              ],
+              "url": "https://github.com/secure-foundations/verdict/blob/9bc18bc5a287c1608dcb74a6eee7b9ca94a62b67/verdict/src/policy/firefox.rs#L574-L612"
+            },
+            {
+              "file": "verdict/src/policy/openssl.rs",
+              "lines": [
+                202,
+                223
+              ],
+              "url": "https://github.com/secure-foundations/verdict/blob/9bc18bc5a287c1608dcb74a6eee7b9ca94a62b67/verdict/src/policy/openssl.rs#L202-L223"
+            },
+            {
+              "file": "verdict/src/policy/openssl.rs",
+              "lines": [
+                413,
+                462
+              ],
+              "url": "https://github.com/secure-foundations/verdict/blob/9bc18bc5a287c1608dcb74a6eee7b9ca94a62b67/verdict/src/policy/openssl.rs#L413-L462"
+            },
+            {
+              "file": "verdict-parser/src/x509/tbs_cert.rs",
+              "lines": [
+                7,
+                22
+              ],
+              "url": "https://github.com/secure-foundations/verdict/blob/9bc18bc5a287c1608dcb74a6eee7b9ca94a62b67/verdict-parser/src/x509/tbs_cert.rs#L7-L22"
+            },
+            {
+              "file": "verdict/src/convert.rs",
+              "lines": [
+                48,
+                80
+              ],
+              "url": "https://github.com/secure-foundations/verdict/blob/9bc18bc5a287c1608dcb74a6eee7b9ca94a62b67/verdict/src/convert.rs#L48-L80"
+            }
+          ]
+        }
+      ],
+      "historical_evidence": "The prior fifteen counterexamples now live only under VerdictCertificates.Standard.Historical, with executable pre-amendment validation snapshots and old predicates; standard-history-map.json sets scored=false. All forty-four current map entries name positive theorems.",
+      "validation": "Final marker-cleaned source at benchmark commit 36dd3a950b6e0c087ada92f80e2f2c60c044b94e: lake build exit 0; Standard.lean compile exit 0; 44 exact current-spec annotations exit 0; all 59 current/historical axiom closures use only propext/Classical.choice/Quot.sound; 8 concrete policy acceptance/rejection/issuance-stage cases pass. Declaration-level results and both LF/current raw-local source hashes are in standard-validation.json.",
+      "canonical_benchmark_commit": "36dd3a950b6e0c087ada92f80e2f2c60c044b94e"
+    }
+  ],
+  "hash_convention": "Current new_lf_sha256 fields are preferred for portable checker comparisons: raw bytes CRLF -> LF, BOM retained. old_sha256/new_sha256 retain their recorded raw-local meaning. Original historical hashes are unchanged."
+}
