@@ -191,10 +191,12 @@ def hostnameMatches (cert : AbstractCertificate) (domain : String) : Bool :=
       | .dnsName dns => validName dns
       | _ => true) &&
     san.names.any fun name => match name with
-      | .dnsName dns => matchName dns.toLower domain.toLower
+      | .dnsName dns => matchName (Verdict.Policy.Reference.lowerString dns)
+          (Verdict.Policy.Reference.lowerString domain)
       | _ => false
   | none => cert.subject.rdns.any fun rdn => rdn.any fun attr =>
-      attr.oid == "2.5.4.3" && validName attr.value && matchName attr.value domain.toLower
+      attr.oid == "2.5.4.3" && validName attr.value &&
+        matchName attr.value (Verdict.Policy.Reference.lowerString domain)
 
 def internationalValid (env : FirefoxPolicyEnv)
     (cert leaf : AbstractCertificate) : Bool :=

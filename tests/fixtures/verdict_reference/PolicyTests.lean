@@ -218,6 +218,33 @@ private def ipv6Range : ByteArray :=
 -- Non-ASCII case folding is delegated, preserving the existing opaque abstraction.
 example : Verdict.Policy.Reference.lowerChar 'É' = Verdict.charLower 'É' := rfl
 example : Verdict.Policy.Reference.lowerChar 'İ' = Verdict.charLower 'İ' := rfl
+example (name : String) :
+    Reference.lowerString name = Reference.lowerStringWith Reference.lowerChar name := rfl
+example : Reference.lowerString "Éİ" =
+    String.ofList (Verdict.charLower 'É' ++ Verdict.charLower 'İ') := by
+  change String.ofList (Verdict.charLower 'É' ++ (Verdict.charLower 'İ' ++ [])) = _
+  rw [List.append_nil]
+#guard Reference.lowerString " EXAMPLE.COM " == " example.com "
+
+-- Inject only the otherwise opaque scalar mapping into the real contextual algorithm.
+private def unicodeLowerProbe (c : Char) : List Char :=
+  if c == 'Ο' then ['ο'] else if c == 'Α' then ['α'] else
+  if c == 'Σ' then ['σ'] else if c == 'É' then ['é'] else
+  if c == 'İ' then ['i', '̇'] else [c.toLower]
+
+#guard Reference.lowerStringWith unicodeLowerProbe "Éİ" == "éi̇" &&
+  Reference.lowerStringWith unicodeLowerProbe "ΟΣ" == "ος" &&
+  Reference.lowerStringWith unicodeLowerProbe "Σ" == "σ" &&
+  Reference.lowerStringWith unicodeLowerProbe "Ο.Σ" == "ο.ς" &&
+  Reference.lowerStringWith unicodeLowerProbe "Ο/Σ" == "ο/σ" &&
+  Reference.lowerStringWith unicodeLowerProbe "ΟΣΑ" == "οσα" &&
+  Reference.lowerStringWith unicodeLowerProbe "ΌΣ" == "ός" &&
+  Reference.lowerStringWith unicodeLowerProbe "ΟΣ́" == "ος́" &&
+  Reference.lowerStringWith unicodeLowerProbe "ΟΣ́Α" == "οσ́α"
+-- U+0345 is both Cased and Case_Ignorable; skipping it takes precedence.
+#guard Reference.isCased 'ͅ' && Reference.isCaseIgnorable 'ͅ' &&
+  Reference.lowerStringWith unicodeLowerProbe "ͅΣ" == "ͅσ" &&
+  Reference.lowerStringWith unicodeLowerProbe "ΟΣͅΑ" == "οσͅα"
 
 -- Both IP families apply the mask, accepting an in-range host and rejecting another subnet.
 #guard ([((⟨#[192, 0, 2, 123]⟩ : ByteArray), true), (⟨#[192, 0, 3, 123]⟩, false)]).all
@@ -266,6 +293,32 @@ example : Verdict.Policy.Reference.lowerChar 'İ' = Verdict.charLower 'İ' := rf
     { leaf with issuer := dn "ca", extAuthorityKeyId := some ⟨none, some "wrong", none, none⟩ }
 #guard firefoxLikelyIssued { root with subject := dn "issuer" } leaf &&
   !chromeLikelyIssued leaf root && !firefoxLikelyIssued leaf root && !opensslLikelyIssued leaf root
+
+-- Exact Unicode values short-circuit normalization; DN equality preserves both orders.
+#guard Reference.sameDN (dn "ÉİΟΣ") (dn "ÉİΟΣ") true &&
+  Reference.sameDN (dn " CA  Name ") (dn "ca name") true &&
+  !Reference.sameDN (dn " CA  Name ") (dn "ca name") false &&
+  !Reference.sameDN dnTarget ⟨dnTarget.rdns.reverse⟩ true &&
+  !Reference.sameDN dnTarget
+    ⟨[[⟨"2.5.4.6", "US"⟩], [⟨"2.5.4.10", "Acme"⟩, ⟨"2.5.4.7", "Town"⟩],
+      [⟨"2.5.4.3", "service"⟩]]⟩ true
+
+-- These APIs share the source-faithful DN normalization, including opaque Unicode folding.
+example (issuer subject : AbstractCertificate) :
+    chromeLikelyIssued issuer subject = Reference.sameDN issuer.subject subject.issuer true := rfl
+example (issuer subject : AbstractCertificate) :
+    opensslLikelyIssued issuer subject =
+      (Reference.sameDN issuer.subject subject.issuer true && checkAuthKeyId issuer subject) := rfl
+
+-- OpenSSL recognizes a self-issued non-leaf after DN case/space normalization.
+#guard opensslCheckNameConstraints
+    [leaf, { blocked with
+      issuer := dn " WWW.EXAMPLE.TEST "
+      subject := dn "www.example.test" }, constrained, root] &&
+  !opensslCheckNameConstraints
+    [leaf, { blocked with
+      issuer := dn "different"
+      subject := dn "www.example.test" }, constrained, root]
 
 #guard toHexUpper [] == "" &&
   toHexUpper [0, 1, 15, 16, 127, 128, 171, 205, 239, 255] == "00010F107F80ABCDEFFF"

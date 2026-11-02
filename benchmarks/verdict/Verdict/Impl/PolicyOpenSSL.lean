@@ -201,7 +201,8 @@ def matchDnsName (pattern name : String) : Bool :=
     (name.toList.getD (name.length - pattern.length - 1) ' ' == '.' ||
      pattern.startsWith ".") &&
     String.ofList (name.toList.drop (name.length - pattern.length)) == pattern) ||
-  (name.length == pattern.length && pattern.toLower == name.toLower)
+  (name.length == pattern.length &&
+    Verdict.Policy.Reference.lowerString pattern == Verdict.Policy.Reference.lowerString name)
 
 def isGeneralSubtreeOf (constraint name : GeneralName) : Bool :=
   match constraint, name with
@@ -290,7 +291,7 @@ def Verdict.opensslCheckNameConstraints : Verdict.OpensslCheckNameConstraintsSig
       i == 0 || match chain[i]!.extNameConstraints with
       | none => true
       | some nc => (List.range i).all fun j =>
-        Verdict.Policy.sameDN chain[j]!.subject chain[j]!.issuer true ||
+        Verdict.Policy.Reference.sameDN chain[j]!.subject chain[j]!.issuer true ||
         Verdict.Policy.OpenSSL.checkNameConstraintsHelper chain[j]! nc (j == 0)
 -- !benchmark @end code def=opensslCheckNameConstraints
 
@@ -300,17 +301,17 @@ def Verdict.opensslCheckNameConstraints : Verdict.OpensslCheckNameConstraintsSig
 def Verdict.opensslCheckHostname : Verdict.OpensslCheckHostnameSig :=
 -- !benchmark @start code def=opensslCheckHostname
   fun cert hostname =>
-    let hostname := hostname.toLower
+    let hostname := Verdict.Policy.Reference.lowerString hostname
     cert.extSubjectAltName.any (fun san => san.names.any (fun name =>
       match name with
       | .dnsName dnsName =>
         Verdict.Policy.OpenSSL.checkValidPattern dnsName &&
-        Verdict.Policy.matchName dnsName.toLower hostname
+        Verdict.Policy.matchName (Verdict.Policy.Reference.lowerString dnsName) hostname
       | _ => false)) ||
     (!Verdict.Policy.OpenSSL.checkSanHasDns cert &&
       cert.subject.rdns.any (fun rdn => rdn.any (fun attr =>
         attr.oid == "2.5.4.3" && Verdict.Policy.OpenSSL.checkValidPattern attr.value &&
-        Verdict.Policy.matchName attr.value.toLower hostname)))
+        Verdict.Policy.matchName (Verdict.Policy.Reference.lowerString attr.value) hostname)))
 -- !benchmark @end code def=opensslCheckHostname
 
 /-! ## § 4  OpenSSL Policy Composition (LLM Implements) -/
@@ -321,7 +322,7 @@ def Verdict.opensslCheckHostname : Verdict.OpensslCheckHostnameSig :=
 def Verdict.opensslLikelyIssued : Verdict.OpensslLikelyIssuedSig :=
 -- !benchmark @start code def=opensslLikelyIssued
   fun issuer subject =>
-    Verdict.Policy.sameDN issuer.subject subject.issuer true &&
+    Verdict.Policy.Reference.sameDN issuer.subject subject.issuer true &&
     Verdict.Policy.checkAuthKeyId issuer subject
 -- !benchmark @end code def=opensslLikelyIssued
 

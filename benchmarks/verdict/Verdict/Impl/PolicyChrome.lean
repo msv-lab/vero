@@ -186,7 +186,7 @@ namespace Verdict.Policy.Chrome.Reference
 open Verdict.Policy
 
 def cleanName (name : String) : String :=
-  let lower := name.toLower
+  let lower := Verdict.Policy.Reference.lowerString name
   if lower.endsWith "." && !lower.isEmpty then
     String.ofList (lower.toList.take (lower.length - 1))
   else lower
@@ -316,7 +316,7 @@ def validRootFingerprint (env : ChromePolicyEnv) (task : PolicyTask)
   match task.hostname with
   | none => true
   | some domain =>
-    let domain := domain.toLower
+    let domain := Verdict.Policy.Reference.lowerString domain
     (!env.indiaTrusted.contains cert.fingerprint ||
       env.indiaDomains.any (fun pattern => matchName pattern domain)) &&
     (!env.anssiTrusted.contains cert.fingerprint ||
@@ -338,7 +338,8 @@ def Verdict.chromeCertVerifiedLeaf : Verdict.ChromeCertVerifiedLeafSig :=
     cert.notBefore ≤ task.now && cert.notAfter ≥ task.now &&
     (match task.hostname with
       | none => true
-      | some domain => Verdict.Policy.Chrome.Reference.matchSanDomain env cert domain.toLower) &&
+      | some domain => Verdict.Policy.Chrome.Reference.matchSanDomain env cert
+          (Verdict.Policy.Reference.lowerString domain)) &&
     Verdict.Policy.checkDuplicateExtensions cert && Verdict.Policy.Chrome.Reference.checkAia cert &&
     (!Verdict.Policy.Chrome.isKnownRoot env root || Verdict.Policy.Chrome.leafDurationValid cert) &&
     (!cert.subject.rdns.isEmpty ||
@@ -403,7 +404,7 @@ def Verdict.chromeCheckAllNameConstraints : Verdict.ChromeCheckAllNameConstraint
 
 def Verdict.chromeLikelyIssued : Verdict.ChromeLikelyIssuedSig :=
 -- !benchmark @start code def=chromeLikelyIssued
-  fun issuer subject => Verdict.Policy.sameDN issuer.subject subject.issuer true
+  fun issuer subject => Verdict.Policy.Reference.sameDN issuer.subject subject.issuer true
 -- !benchmark @end code def=chromeLikelyIssued
 
 -- !benchmark @start code_aux def=chromeValidChain
