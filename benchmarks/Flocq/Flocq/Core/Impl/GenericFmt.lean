@@ -98,15 +98,25 @@ noncomputable def genericFormat (beta : Radix) (fexp : Int → Int) (x : ℝ) : 
 def genericCanonical (beta : Radix) (fexp : Int → Int) (f : FloatNum) : Prop :=
   f.Fexp = cexp beta fexp (F2R beta f)
 
--- ── ValidRnd instances (axiomatized — proofs require real-analysis) ──────────
+-- ── ValidRnd instances ─────────────────────────────────────────────────────
 
 /-- `Zfloor` is a valid rounding function (monotone and integer-idempotent). -/
-axiom ZfloorValidRnd : ValidRnd Zfloor
+theorem ZfloorValidRnd : ValidRnd Zfloor := by
+  constructor
+  · intro x y h
+    exact Int.floor_mono h
+  · intro n
+    exact Int.floor_intCast n
 
 instance : ValidRnd Zfloor := ZfloorValidRnd
 
 /-- `Zceil` is a valid rounding function (monotone and integer-idempotent). -/
-axiom ZceilValidRnd : ValidRnd Zceil
+theorem ZceilValidRnd : ValidRnd Zceil := by
+  constructor
+  · intro x y h
+    exact Int.ceil_mono h
+  · intro n
+    exact Int.ceil_intCast n
 
 instance : ValidRnd Zceil := ZceilValidRnd
 
@@ -119,13 +129,21 @@ instance (choice : Int → Bool) : ValidRnd (Znearest choice) :=
 -- ── Additional spec-helper axioms (DO NOT MODIFY) ────────────────────────────
 
 /-- Every number in generic format has a canonical float representation. -/
-axiom canonicalGenericFormat : ∀ (beta : Radix) (fexp : Int → Int) (x : ℝ),
+theorem canonicalGenericFormat : ∀ (beta : Radix) (fexp : Int → Int) (x : ℝ),
   genericFormat beta fexp x →
-  ∃ f : FloatNum, x = F2R beta f ∧ genericCanonical beta fexp f
+  ∃ f : FloatNum, x = F2R beta f ∧ genericCanonical beta fexp f := by
+  intro beta fexp x hx
+  let f : FloatNum := ⟨Ztrunc (scaledMantissa beta fexp x), cexp beta fexp x⟩
+  change x = F2R beta f at hx
+  refine ⟨f, hx, ?_⟩
+  change cexp beta fexp x = cexp beta fexp (F2R beta f)
+  rw [← hx]
 
 /-- `cexp(-x) = cexp(x)` — the canonical exponent is symmetric. -/
-axiom cexpOpp : ∀ (beta : Radix) (fexp : Int → Int) (x : ℝ),
-  cexp beta fexp (-x) = cexp beta fexp x
+theorem cexpOpp : ∀ (beta : Radix) (fexp : Int → Int) (x : ℝ),
+  cexp beta fexp (-x) = cexp beta fexp x := by
+  intro beta fexp x
+  simp [cexp, Flocq.mag, mag, abs_neg]
 
 /-- The ceil mantissa of a small positive `x` (where `ex ≤ fexp ex`) equals 1. -/
 axiom mantissaUPSmallPos : ∀ (beta : Radix) (fexp : Int → Int) (x : ℝ) (ex : Int),

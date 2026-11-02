@@ -3929,18 +3929,13 @@
     }
   ],
   "trusted_axioms": [
-    "ZfloorValidRnd",
-    "ZceilValidRnd",
     "ZnearestValidRnd",
-    "canonicalGenericFormat",
-    "cexpOpp",
     "mantissaUPSmallPos",
     "mantissaSmallPos",
     "expSmallRound0Pos",
     "magDN",
     "roundUPSmallPos",
     "magUniquePos",
-    "validBinary",
     "binaryFloatOfBitsAux",
     "binaryFloatOfBitsAuxCorrect",
     "bplus",
@@ -3951,23 +3946,7 @@
     "bfma"
   ],
   "trusted_axiom_sources": {
-    "ZfloorValidRnd": {
-      "kind": "curated_boundary",
-      "reason": "Existing Flocq translation relies on this source-backed mathematical or IEEE operation boundary; trusted for benchmark curation."
-    },
-    "ZceilValidRnd": {
-      "kind": "curated_boundary",
-      "reason": "Existing Flocq translation relies on this source-backed mathematical or IEEE operation boundary; trusted for benchmark curation."
-    },
     "ZnearestValidRnd": {
-      "kind": "curated_boundary",
-      "reason": "Existing Flocq translation relies on this source-backed mathematical or IEEE operation boundary; trusted for benchmark curation."
-    },
-    "canonicalGenericFormat": {
-      "kind": "curated_boundary",
-      "reason": "Existing Flocq translation relies on this source-backed mathematical or IEEE operation boundary; trusted for benchmark curation."
-    },
-    "cexpOpp": {
       "kind": "curated_boundary",
       "reason": "Existing Flocq translation relies on this source-backed mathematical or IEEE operation boundary; trusted for benchmark curation."
     },
@@ -3992,10 +3971,6 @@
       "reason": "Existing Flocq translation relies on this source-backed mathematical or IEEE operation boundary; trusted for benchmark curation."
     },
     "magUniquePos": {
-      "kind": "curated_boundary",
-      "reason": "Existing Flocq translation relies on this source-backed mathematical or IEEE operation boundary; trusted for benchmark curation."
-    },
-    "validBinary": {
       "kind": "curated_boundary",
       "reason": "Existing Flocq translation relies on this source-backed mathematical or IEEE operation boundary; trusted for benchmark curation."
     },
