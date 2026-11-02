@@ -18,8 +18,6 @@ namespace DedekindReals
 
 -- Frozen helpers translated from the Coq MinMax development.
 
-axiom unfinishedMinMax : ∀ (A : Type), A
-
 -- API signatures
 
 abbrev RminSig := R → R → R

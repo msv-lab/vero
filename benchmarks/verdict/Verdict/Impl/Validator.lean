@@ -81,7 +81,7 @@ end Verdict
 
 def Verdict.isSimplePath : Verdict.IsSimplePathSig :=
 -- !benchmark @start code def=isSimplePath
-  fun path => decide (path.eraseDups.length = path.length)
+  fun path => decide path.Nodup
 -- !benchmark @end code def=isSimplePath
 
 -- !benchmark @start code_aux def=pathInBounds
@@ -102,6 +102,16 @@ def Verdict.chainFromPath : Verdict.ChainFromPathSig :=
 -- !benchmark @end code def=chainFromPath
 
 -- !benchmark @start code_aux def=validateX509Base64
+/-- Exhaustive depth-first chain search. `remaining` contains unused bundle
+    indices and `fuel` bounds the number of further intermediates. -/
+def Verdict.searchChain (bundle roots : List Verdict.Certificate) :
+    Nat → List Nat → Nat → Bool
+  | 0, _, current => roots.any (fun root => Verdict.issuedByRaw root bundle[current]!)
+  | fuel + 1, remaining, current =>
+      roots.any (fun root => Verdict.issuedByRaw root bundle[current]!) ||
+      remaining.any (fun next =>
+        Verdict.issuedByRaw bundle[next]! bundle[current]! &&
+        Verdict.searchChain bundle roots fuel (remaining.erase next) next)
 -- !benchmark @end code_aux def=validateX509Base64
 
 /-- Parse every DER/Base64 blob with `parseX509Base64` (drop failures),
@@ -115,11 +125,6 @@ def Verdict.validateX509Base64 : Verdict.ValidateX509Base64Sig :=
     let bundle := bundleB64.filterMap Verdict.parseX509Base64
     if bundle.isEmpty then .error "empty bundle"
     else
-      -- Simplified "reference": check if leaf is directly issued by
-      -- some trusted root. Real verdict does a DFS through
-      -- intermediate certs; we keep the happy path for the
-      -- curator-side #guard tests.
-      let leaf := bundle[0]!
-      let result := roots.any (fun r => Verdict.issuedByRaw r leaf)
-      .ok result
+      .ok (Verdict.searchChain bundle roots (bundle.length - 1)
+        ((List.range bundle.length).erase 0) 0)
 -- !benchmark @end code def=validateX509Base64

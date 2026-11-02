@@ -33,3 +33,22 @@ inductive BinaryFloat (prec emax : Int) : Type where
 
 -- !benchmark @start global_aux
 -- !benchmark @end global_aux
+
+/-- Value invariant carried by Coq's proof-bearing Binary.binary_float constructors.
+    Format assumptions are supplied separately by the source theorems. -/
+def BinaryFloat.Valid (prec emax : Int) : BinaryFloat prec emax → Prop
+  | .zero _ | .inf _ => True
+  | .nan _ payload => 0 < payload ∧ payload < 2 ^ (prec - 1).toNat
+  | .finite _ m e =>
+    0 < m ∧ m < 2 ^ prec.toNat ∧
+    3 - emax - prec ≤ e ∧ e ≤ emax - prec ∧
+    (e = 3 - emax - prec ∨ 2 ^ (prec - 1).toNat ≤ m)
+
+instance (prec emax : Int) (x : BinaryFloat prec emax) :
+    Decidable (BinaryFloat.Valid prec emax x) := by
+  cases x <;> unfold BinaryFloat.Valid <;> infer_instance
+
+/-- Embed the source BinarySingleNaN value domain without changing BinaryFloat's API. -/
+def BinaryFloat.SingleNaN {prec emax : Int} : BinaryFloat prec emax → Prop
+  | .nan s payload => s = false ∧ payload = 1
+  | _ => True

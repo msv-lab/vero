@@ -252,6 +252,10 @@ def checkValidPattern (pattern : String) : Bool :=
   !pattern.startsWith "*." ||
     (pattern.length >= 2 && (String.ofList (pattern.toList.drop 2)).any (· == '.'))
 
+/-- Certificates carrying extensions use the X.509 v3 wire value, 2. -/
+def checkExtensionVersion (cert : AbstractCertificate) : Bool :=
+  cert.allExts.isNone || cert.version == 2
+
 end Verdict.Policy.OpenSSL
 -- !benchmark @end global_aux
 
@@ -262,7 +266,8 @@ end Verdict.Policy.OpenSSL
 
 def Verdict.opensslValidLeaf : Verdict.OpensslValidLeafSig :=
 -- !benchmark @start code def=opensslValidLeaf
-  fun task cert => Verdict.Policy.OpenSSL.validCertCommon task cert true false 0
+  fun task cert => Verdict.Policy.OpenSSL.validCertCommon task cert true false 0 &&
+    Verdict.Policy.OpenSSL.checkExtensionVersion cert
 -- !benchmark @end code def=opensslValidLeaf
 
 -- !benchmark @start code_aux def=opensslValidIntermediate
@@ -270,7 +275,8 @@ def Verdict.opensslValidLeaf : Verdict.OpensslValidLeafSig :=
 
 def Verdict.opensslValidIntermediate : Verdict.OpensslValidIntermediateSig :=
 -- !benchmark @start code def=opensslValidIntermediate
-  fun task cert depth => Verdict.Policy.OpenSSL.validCertCommon task cert false false depth
+  fun task cert depth => Verdict.Policy.OpenSSL.validCertCommon task cert false false depth &&
+    Verdict.Policy.OpenSSL.checkExtensionVersion cert
 -- !benchmark @end code def=opensslValidIntermediate
 
 -- !benchmark @start code_aux def=opensslValidRoot
@@ -278,7 +284,8 @@ def Verdict.opensslValidIntermediate : Verdict.OpensslValidIntermediateSig :=
 
 def Verdict.opensslValidRoot : Verdict.OpensslValidRootSig :=
 -- !benchmark @start code def=opensslValidRoot
-  fun task cert depth => Verdict.Policy.OpenSSL.validCertCommon task cert false true depth
+  fun task cert depth => Verdict.Policy.OpenSSL.validCertCommon task cert false true depth &&
+    Verdict.Policy.OpenSSL.checkExtensionVersion cert
 -- !benchmark @end code def=opensslValidRoot
 
 -- !benchmark @start code_aux def=opensslCheckNameConstraints

@@ -1,5 +1,12 @@
 import DedekindReals.Impl.Cut
 
+import Mathlib.Algebra.Order.Archimedean.Basic
+import Mathlib.Tactic.Linarith
+import Mathlib.Tactic.Positivity
+import Mathlib.Tactic.FieldSimp
+import Mathlib.Tactic.Push
+import Mathlib.Tactic.NormNum
+
 -- !benchmark @start imports
 -- !benchmark @end imports
 
@@ -15,7 +22,65 @@ Implement only the function bodies.
 namespace DedekindReals
 
 -- !benchmark @start global_aux
+
+
 -- !benchmark @end global_aux
+
+namespace DedekindClosureSupport
+open DedekindReals
+
+theorem lower_upper (x : R) {a b : Rat} (ha : x.lower a) (hb : x.upper b) : a < b := by
+  by_contra h
+  have hba : b ≤ a := le_of_not_gt h
+  rcases lt_or_eq_of_le hba with hba | hba
+  · exact x.disjoint a ⟨ha, x.upper_upper b a hba hb⟩
+  · subst a; exact x.disjoint b ⟨ha, hb⟩
+
+theorem lower_le (x : R) {a b : Rat} (h : a ≤ b) (hb : x.lower b) : x.lower a := by
+  rcases lt_or_eq_of_le h with h | h
+  · exact x.lower_lower a b h hb
+  · subst a; exact hb
+
+theorem upper_le (x : R) {a b : Rat} (h : a ≤ b) (ha : x.upper a) : x.upper b := by
+  rcases lt_or_eq_of_le h with h | h
+  · exact x.upper_upper a b h ha
+  · subst a; exact ha
+
+theorem straddle (x : R) (eps : Rat) (heps : 0 < eps) :
+    ∃ a b : Rat, x.lower a ∧ x.upper b ∧ b - a < eps := by
+  classical
+  obtain ⟨l, hl⟩ := x.lower_bound
+  obtain ⟨u, hu⟩ := x.upper_bound
+  let d := eps / 3
+  have hd : 0 < d := by dsimp [d]; positivity
+  obtain ⟨n, hn⟩ := exists_nat_gt ((u - l) / d)
+  have hn' : u < l + (n : Rat) * d := by
+    have := (div_lt_iff₀ hd).mp hn
+    linarith
+  have hex : ∃ n : Nat, x.upper (l + (n : Rat) * d) :=
+    ⟨n, x.upper_upper u _ hn' hu⟩
+  let k := Nat.find hex
+  have hfind : Nat.find hex = k := rfl
+  have hk : x.upper (l + (k : Rat) * d) := Nat.find_spec hex
+  have hkpos : 0 < k := by
+    by_contra h
+    have hk0 : k = 0 := by omega
+    simp only [hk0, Nat.cast_zero, zero_mul, add_zero] at hk
+    exact x.disjoint l ⟨hl, hk⟩
+  rcases k with _ | k
+  · omega
+  rcases k with _ | k
+  · refine ⟨l, l + (1 : Rat) * d, hl, hk, ?_⟩
+    dsimp [d]; linarith
+  · have hnot : ¬x.upper (l + ((k + 1 : Nat) : Rat) * d) :=
+      Nat.find_min hex (by omega)
+    have hlt : l + (k : Rat) * d < l + ((k + 1 : Nat) : Rat) * d := by
+      push_cast; linarith
+    have hlo := (x.located _ _ hlt).resolve_right hnot
+    refine ⟨l + (k : Rat) * d, l + ((k + 2 : Nat) : Rat) * d, hlo, hk, ?_⟩
+    push_cast; dsimp [d]; linarith
+
+end DedekindClosureSupport
 
 -- API signatures
 
@@ -30,32 +95,58 @@ end DedekindReals
 -- !benchmark @start code_aux def=Rplus
 -- !benchmark @end code_aux def=Rplus
 namespace DedekindReals
+open DedekindClosureSupport
 
-axiom Rplus_lower_bound :
-  ∀ x y : R, ∃ q : Rat, ∃ r s : Rat, q < r + s ∧ x.lower r ∧ y.lower s
+theorem Rplus_lower_bound :
+  ∀ x y : R, ∃ q : Rat, ∃ r s : Rat, q < r + s ∧ x.lower r ∧ y.lower s := by
+  intro x y
+  obtain ⟨r, hr⟩ := x.lower_bound
+  obtain ⟨s, hs⟩ := y.lower_bound
+  exact ⟨r + s - 1, r, s, by linarith, hr, hs⟩
 
-axiom Rplus_upper_bound :
-  ∀ x y : R, ∃ q : Rat, ∃ r s : Rat, r + s < q ∧ x.upper r ∧ y.upper s
+theorem Rplus_upper_bound :
+  ∀ x y : R, ∃ q : Rat, ∃ r s : Rat, r + s < q ∧ x.upper r ∧ y.upper s := by
+  intro x y
+  obtain ⟨r, hr⟩ := x.upper_bound
+  obtain ⟨s, hs⟩ := y.upper_bound
+  exact ⟨r + s + 1, r, s, by linarith, hr, hs⟩
 
-axiom Rplus_lower_open :
+theorem Rplus_lower_open :
   ∀ (x y : R) (q : Rat),
     (∃ r s : Rat, q < r + s ∧ x.lower r ∧ y.lower s) →
-      ∃ r : Rat, q < r ∧ ∃ u v : Rat, r < u + v ∧ x.lower u ∧ y.lower v
+      ∃ r : Rat, q < r ∧ ∃ u v : Rat, r < u + v ∧ x.lower u ∧ y.lower v := by
+  intro x y q h
+  obtain ⟨r, s, h, hr, hs⟩ := h
+  exact ⟨(q + (r + s)) / 2, by linarith, r, s, by linarith, hr, hs⟩
 
-axiom Rplus_upper_open :
+theorem Rplus_upper_open :
   ∀ (x y : R) (q : Rat),
     (∃ r s : Rat, r + s < q ∧ x.upper r ∧ y.upper s) →
-      ∃ r : Rat, r < q ∧ ∃ u v : Rat, u + v < r ∧ x.upper u ∧ y.upper v
+      ∃ r : Rat, r < q ∧ ∃ u v : Rat, u + v < r ∧ x.upper u ∧ y.upper v := by
+  intro x y q h
+  obtain ⟨r, s, h, hr, hs⟩ := h
+  exact ⟨(q + (r + s)) / 2, by linarith, r, s, by linarith, hr, hs⟩
 
-axiom Rplus_disjoint :
+theorem Rplus_disjoint :
   ∀ (x y : R) (q : Rat),
     ¬ ((∃ r s : Rat, q < r + s ∧ x.lower r ∧ y.lower s) ∧
-      (∃ r s : Rat, r + s < q ∧ x.upper r ∧ y.upper s))
+      (∃ r s : Rat, r + s < q ∧ x.upper r ∧ y.upper s)) := by
+  intro x y q
+  rintro ⟨⟨a, b, hab, ha, hb⟩, ⟨c, d, hcd, hc, hd⟩⟩
+  have := lower_upper x ha hc
+  have := lower_upper y hb hd
+  linarith
 
-axiom Rplus_located :
+theorem Rplus_located :
   ∀ (x y : R) (q r : Rat), q < r →
     (∃ u v : Rat, q < u + v ∧ x.lower u ∧ y.lower v) ∨
-      (∃ u v : Rat, u + v < r ∧ x.upper u ∧ y.upper v)
+      (∃ u v : Rat, u + v < r ∧ x.upper u ∧ y.upper v) := by
+  intro x y q r hqr
+  obtain ⟨a, b, ha, hb, hab⟩ := straddle x ((r - q) / 3) (by linarith)
+  obtain ⟨c, d, hc, hd, hcd⟩ := straddle y ((r - q) / 3) (by linarith)
+  by_cases h : q < a + c
+  · exact Or.inl ⟨a, c, h, ha, hc⟩
+  · exact Or.inr ⟨b, d, by linarith, hb, hd⟩
 
 end DedekindReals
 

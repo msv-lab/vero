@@ -408,6 +408,10 @@ def Verdict.chromeLikelyIssued : Verdict.ChromeLikelyIssuedSig :=
 -- !benchmark @end code def=chromeLikelyIssued
 
 -- !benchmark @start code_aux def=chromeValidChain
+/-- Check every adjacent certificate pair for matching authority/subject key IDs. -/
+def Verdict.chromeCheckAuthorityKeyIds (chain : List Verdict.Policy.AbstractCertificate) : Bool :=
+  (List.range (chain.length - 1)).all fun i =>
+    Verdict.Policy.checkAuthKeyId chain[i + 1]! chain[i]!
 -- !benchmark @end code_aux def=chromeValidChain
 
 def Verdict.chromeValidChain : Verdict.ChromeValidChainSig :=
@@ -419,5 +423,5 @@ def Verdict.chromeValidChain : Verdict.ChromeValidChainSig :=
       Verdict.chromeCertVerifiedIntermediate env task chain[depth + 1]! depth) &&
     Verdict.chromeCertVerifiedRoot env task chain[chain.length - 1]!
       chain[chain.length - 2]! (chain.length - 2) &&
-    Verdict.chromeCheckAllNameConstraints chain
+    (Verdict.chromeCheckAllNameConstraints chain && Verdict.chromeCheckAuthorityKeyIds chain)
 -- !benchmark @end code def=chromeValidChain

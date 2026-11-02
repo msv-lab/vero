@@ -28,6 +28,4 @@ def Rle_lt_trans : Prop := ∀ (x y z : R), Rle x y → Rlt y z → Rlt x z
 
 -- Pure API helpers.
 
-axiom unfinishedOrder : ∀ (A : Type), A
-
 end DedekindReals

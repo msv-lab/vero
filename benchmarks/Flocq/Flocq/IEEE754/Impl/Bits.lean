@@ -38,14 +38,14 @@ abbrev Binary64 := BinaryFloat 53 1024
     The sign bit occupies position `mw + ew`; exponent occupies bits `mw..mw+ew-1`;
     mantissa occupies bits `0..mw-1`. -/
 def joinBits (mw ew : Nat) (sign : Bool) (e m : Int) : Int :=
-  (if sign then -((2 : Int) ^ (mw + ew)) else 0) + e * (2 : Int) ^ mw + m
+  (if sign then (2 : Int) ^ (mw + ew) else 0) + e * (2 : Int) ^ mw + m
 
-/-- Split an integer bit pattern into `(sign, exponent, mantissa)` fields.
-    The sign is `x < 0`; exponent and mantissa are extracted from
-    `x mod 2^(mw+ew+1)`. -/
+/-- Split an integer into source IEEE sign/exponent/mantissa fields.
+    The sign is the positive highest bit; the exponent is masked to `ew` bits. -/
 def splitBits (mw ew : Nat) (x : Int) : Bool × Int × Int :=
-  let body := x % (2 : Int) ^ (mw + ew + 1)
-  (x < 0, body / (2 : Int) ^ mw, body % (2 : Int) ^ mw)
+  let mm := (2 : Int) ^ mw
+  let em := (2 : Int) ^ ew
+  (mm * em ≤ x, (x / mm) % em, x % mm)
 
 /-- Default NaN for binary32 binary operations. -/
 def binopNanPl32 (_ _ : Binary32) : Binary32 := BinaryFloat.nan false 1
@@ -71,8 +71,9 @@ def defaultNanPl32 : Binary32 := BinaryFloat.nan false 1
 /-- Default NaN constant for binary64. -/
 def defaultNanPl64 : Binary64 := BinaryFloat.nan false 1
 
-/-- Validity predicate for a BinaryFloat (axiomatized from Flocq's `valid_binary`). -/
-axiom validBinary : ∀ (prec emax : Int), BinaryFloat prec emax → Bool
+/-- Decidable form of the source constructor invariant, including positive mantissa/payload. -/
+def validBinary (prec emax : Int) (x : BinaryFloat prec emax) : Bool :=
+  decide (BinaryFloat.Valid prec emax x)
 
 /-- Internal helper that converts a raw integer bit pattern to a BinaryFloat.
     The result is always valid (see `binaryFloatOfBitsAuxCorrect`). -/
@@ -297,7 +298,7 @@ def Flocq.bitsOfBinaryFloat : Flocq.BitsOfBinaryFloatSig :=
     let mwn := mw.toNat
     let ewn := ew.toNat
     -- Sign bit contribution: place 1 in sign position (mw+ew) for negative
-    let sb (s : Bool) : Int := if s then -((2 : Int) ^ (mwn + ewn)) else 0
+    let sb (s : Bool) : Int := if s then (2 : Int) ^ (mwn + ewn) else 0
     -- All-ones exponent field: 2^ew - 1 (used for inf/nan)
     let expMask : Int := (2 : Int) ^ ewn - 1
     match x with

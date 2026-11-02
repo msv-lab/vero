@@ -41,17 +41,17 @@ def LeafDurationBound (validChain : List AbstractCertificate → PolicyTask → 
 
 /-! ## § 2  Signature Algorithm -/
 
-/-- Inner and outer signature algorithm OIDs match on all certificates.
+/-- Inner and outer AlgorithmIdentifier bytes match on all certificates.
     RFC 5280 §4.1.1.2: `signatureAlgorithm` must match `signature` in TBSCertificate. -/
 def SigAlgConsistency (validChain : List AbstractCertificate → PolicyTask → Bool) : Prop :=
   ∀ chain task, validChain chain task = true →
-    ∀ i, i < chain.length → chain[i]!.sigAlgOuter.id = chain[i]!.sigAlgInner.id
+    ∀ i, i < chain.length → chain[i]!.sigAlgOuter.bytes = chain[i]!.sigAlgInner.bytes
 
 /-- Non-root certificates use strong (≥ SHA-256) signature algorithms. -/
 def StrongSignature (validChain : List AbstractCertificate → PolicyTask → Bool)
     (isStrong : String → Bool) : Prop :=
   ∀ chain task, validChain chain task = true →
-    ∀ i, i + 1 < chain.length → isStrong chain[i]!.sigAlgOuter.id = true
+    ∀ i, i + 1 < chain.length → isStrong chain[i]!.sigAlgInner.id = true
 
 /-! ## § 3  Basic Constraints and Path Length -/
 
@@ -167,6 +167,6 @@ def ChainMinLength (validChain : List AbstractCertificate → PolicyTask → Boo
 def ValidVersion (validChain : List AbstractCertificate → PolicyTask → Bool) : Prop :=
   ∀ chain task, validChain chain task = true →
     ∀ i, i < chain.length →
-      chain[i]!.allExts.isSome → chain[i]!.version ≥ 3
+      chain[i]!.allExts.isSome → chain[i]!.version = 2
 
 end Verdict.Policy.Standard

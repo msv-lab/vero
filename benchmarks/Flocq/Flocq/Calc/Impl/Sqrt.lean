@@ -4,6 +4,7 @@ import Flocq.Core.Impl.Digits
 import Flocq.Calc.Impl.Bracket
 
 -- !benchmark @start imports
+import Mathlib.Data.Nat.Sqrt
 -- !benchmark @end imports
 
 /-!
@@ -30,13 +31,9 @@ the function bodies inside the `!benchmark code` markers.
 
 -- ── Spec helpers (curator-given vocabulary, DO NOT MODIFY) ────────────────────
 
-/-- Floor division by 2, matching Coq's `Z.div2` semantics (rounds toward −∞
-    for all integers, unlike Lean's truncated `/` which rounds toward zero).
-    For non-negative `n`, agrees with `n / 2`. For negative odd `n`, gives
-    one less than truncated division. Used in `fsqrt` to compute the target
-    exponent and in specifications to express the exponent relationship. -/
-def Flocq.zdiv2 (n : Int) : Int :=
-  if n < 0 ∧ n % 2 ≠ 0 then n / 2 - 1 else n / 2
+/-- Floor division by 2, matching Coq's `Z.div2`.
+    Lean `Int` division already rounds toward negative infinity for divisor 2. -/
+def Flocq.zdiv2 (n : Int) : Int := n / 2
 
 namespace Flocq
 
@@ -75,6 +72,40 @@ private def isqrtNewton (n : Nat) : Nat → Nat → Nat
 private def isqrt (n : Nat) : Nat :=
   if n = 0 then 0
   else isqrtNewton n (n + 2) n
+private theorem newton_eq_iter (n fuel guess : Nat) (hf : guess ≤ fuel) :
+    isqrtNewton n fuel guess = Nat.sqrt.iter n guess := by
+  induction fuel generalizing guess with
+  | zero =>
+    have hg : guess = 0 := by omega
+    subst guess
+    rw [Nat.sqrt.iter]
+    simp [isqrtNewton]
+  | succ fuel ih =>
+    rw [isqrtNewton]
+    by_cases h0 : guess = 0
+    · subst guess
+      rw [Nat.sqrt.iter]
+      simp
+    · rw [if_neg h0]
+      dsimp only
+      by_cases hh : (guess + n / guess) / 2 < guess
+      · rw [if_neg (Nat.not_le.mpr hh)]
+        rw [Nat.sqrt.iter, dif_pos hh]
+        exact ih _ (by omega)
+      · rw [if_pos (Nat.le_of_not_gt hh)]
+        rw [Nat.sqrt.iter, dif_neg hh]
+
+theorem Flocq.isqrt_bounds (n : Nat) :
+    isqrt n * isqrt n ≤ n ∧ n < (isqrt n + 1) * (isqrt n + 1) := by
+  by_cases hn : n = 0
+  · subst n
+    simp [isqrt]
+  · have heq : isqrt n = Nat.sqrt.iter n n := by
+      simp only [isqrt, hn, ↓reduceIte]
+      exact newton_eq_iter n (n + 2) n (by omega)
+    rw [heq]
+    exact ⟨Nat.sqrt.iter_sq_le n n, Nat.sqrt.lt_iter_succ_sq n n (lt_of_lt_of_le (Nat.lt_succ_self n) (Nat.le_mul_self (n + 1)))⟩
+
 -- !benchmark @end code_aux def=fsqrtCore
 
 def Flocq.fsqrtCore : Flocq.FsqrtCoreSig :=

@@ -52,21 +52,16 @@ def Flocq.b2Prim : Flocq.B2PrimSig :=
       Float.ofBits (if s then (0x8000000000000000 : UInt64) else (0x0000000000000000 : UInt64))
     | BinaryFloat.inf s =>
       Float.ofBits (if s then (0xFFF0000000000000 : UInt64) else (0x7FF0000000000000 : UInt64))
-    | BinaryFloat.nan s pl =>
-      -- NaN: exponent field all 1s, non-zero mantissa payload.
-      -- The 52-bit mask ensures the payload fits; if payload is 0
-      -- (ill-formed NaN) we force bit 0 to 1 to avoid encoding infinity.
-      let signBit : UInt64 := if s then 0x8000000000000000 else 0
-      let payload : UInt64 := pl.toUInt64 &&& 0x000FFFFFFFFFFFFF
-      let payload' : UInt64 := if payload == 0 then 1 else payload
-      Float.ofBits (signBit ||| 0x7FF0000000000000 ||| payload')
+    | BinaryFloat.nan _ _ =>
+      -- PrimFloat.v uses BinarySingleNaN: the native interface has one canonical NaN.
+      Float.ofBits 0x7FF8000000000000
     | BinaryFloat.finite s m e =>
       -- Finite: reconstruct sign, biased exponent, and mantissa bits.
-      -- Subnormal (e = -1074): biased exponent field = 0, mantissa = m.
-      -- Normal (otherwise): biased_exp = e + 1075, mantissa = m with
-      --   the implicit leading bit (bit 52) cleared (it is implicit in IEEE 754).
+      -- Subnormal (e = -1074 and m < 2^52): exponent field = 0, mantissa = m.
+      -- Normal (including e = -1074 and m ≥ 2^52): biased_exp = e + 1075,
+      -- with the implicit leading bit (bit 52) cleared.
       let signBit : UInt64 := if s then 0x8000000000000000 else 0
-      if e == (-1074 : Int) then
+      if e == (-1074 : Int) && m < 2 ^ 52 then
         -- Subnormal or zero-mantissa edge case: exponent field is 0.
         let frac : UInt64 := m.toUInt64 &&& 0x000FFFFFFFFFFFFF
         Float.ofBits (signBit ||| frac)
@@ -97,7 +92,7 @@ def Flocq.prim2B : Flocq.Prim2BSig :=
     if e == 0x7FF then
       -- Exponent all 1s: NaN or infinity.
       if f == 0 then BinaryFloat.inf s
-      else BinaryFloat.nan s f.toNat
+      else BinaryFloat.nan false 1
     else if e == 0 then
       -- Exponent zero: subnormal or zero.
       if f == 0 then BinaryFloat.zero s

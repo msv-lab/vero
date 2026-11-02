@@ -4851,9 +4851,7 @@
   ],
   "trusted_axioms": [
     "Huffman.build_fun_witness",
-    "Huffman.buildf_witness",
     "Huffman.huffman_witness",
-    "Huffman.obuildf_witness",
     "huffman_aux",
     "huffman_aux_F"
   ],
@@ -4861,14 +4859,6 @@
     "Huffman.build_fun_witness": {
       "source": "Build.v:build_fun",
       "reason": "proof-bearing Program Definition preserved as requires_human_review"
-    },
-    "Huffman.buildf_witness": {
-      "source": "Build.v:buildf",
-      "reason": "proof-bearing construction preserved as requires_human_review"
-    },
-    "Huffman.obuildf_witness": {
-      "source": "Build.v:obuildf",
-      "reason": "proof-bearing ordered construction preserved as requires_human_review"
     },
     "huffman_aux_F": {
       "source": "Huffman.v:huffman_aux_F",

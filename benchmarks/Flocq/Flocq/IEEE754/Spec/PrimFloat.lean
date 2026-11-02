@@ -25,7 +25,9 @@ def spec_B2Prim_Prim2B (impl : RepoImpl) : Prop :=
 /-- Prim2B after B2Prim is the identity on binary64 floats.
 
     Corresponds to `Prim2B_B2Prim` in the Coq source: for any well-formed
-    `BinaryFloat 53 1024` value `x`, converting it to a native `Float` via
+    `BinaryFloat 53 1024` value `x` in the source single-NaN domain, converting it to a native `Float` via
     `b2Prim` and back via `prim2B` recovers `x` exactly. -/
 def spec_Prim2B_B2Prim (impl : RepoImpl) : Prop :=
-  ∀ (x : BinaryFloat 53 1024), impl.flocq.prim2B (impl.flocq.b2Prim x) = x
+  ∀ (x : BinaryFloat 53 1024),
+    BinaryFloat.Valid 53 1024 x → BinaryFloat.SingleNaN x →
+    impl.flocq.prim2B (impl.flocq.b2Prim x) = x

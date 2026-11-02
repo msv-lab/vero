@@ -47,17 +47,66 @@ def BFC_ValidSize (n : Nat) : Prop := n % BFC_CHUNK_SIZE = 0
 theorem lemma_BFC_FlattenIsI (A : BFC_T) (_ : BFC_Inv A) : BFC_Flatten A = BFC_I A := by rfl
 
 /-- The i-th bit of I(A) equals the offset bit in the chunk containing i. -/
-axiom lemma_BFC_IResult (A : BFC_T) (i : Nat) (_ : BFC_Inv A)
-    (_ : i < A.length * BFC_CHUNK_SIZE) :
-    (BFC_I A).getD i false = (A.getD (BFC_GetChunk i) []).getD (BFC_GetChunkOffset i) false
+theorem lemma_BFC_IResult (A : BFC_T) (i : Nat) (hA : BFC_Inv A)
+    (hi : i < A.length * BFC_CHUNK_SIZE) :
+    (BFC_I A).getD i false = (A.getD (BFC_GetChunk i) []).getD (BFC_GetChunkOffset i) false := by
+  induction A generalizing i with
+  | nil => simp at hi
+  | cons a as ih =>
+    have ha := hA a (by simp)
+    have has : BFC_Inv as := by intro c hc; exact hA c (by simp [hc])
+    by_cases hlt : i < 64
+    · have hd : i / 64 = 0 := Nat.div_eq_of_lt hlt
+      have hm : i % 64 = i := Nat.mod_eq_of_lt hlt
+      simp [BFC_I, BFC_Flatten, BFC_GetChunk, BFC_GetChunkOffset, BFC_CHUNK_SIZE,
+        List.getD_eq_getElem?_getD, List.getElem?_append, ha, hlt, hd, hm]
+    · have hle : 64 ≤ i := by omega
+      have hi' : i - 64 < as.length * BFC_CHUNK_SIZE := by
+        simp only [List.length_cons, BFC_CHUNK_SIZE] at hi ⊢
+        omega
+      have hd : i / 64 = (i - 64) / 64 + 1 := by omega
+      have hm : i % 64 = (i - 64) % 64 := by omega
+      simpa [BFC_I, BFC_Flatten, BFC_GetChunk, BFC_GetChunkOffset, BFC_CHUNK_SIZE,
+        List.getD_eq_getElem?_getD, List.getElem?_append, ha, hlt, hd, hm] using ih (i - 64) has hi'
 
 /-- I(A) = A[0] ++ I(A[1..]) for non-empty A. -/
-axiom lemma_BFC_IStep (A : BFC_T) (_ : BFC_Inv A) (_ : A ≠ []) :
-    BFC_I A = A.head! ++ BFC_I A.tail
+theorem lemma_BFC_IStep (A : BFC_T) (_ : BFC_Inv A) (hn : A ≠ []) :
+    BFC_I A = A.head! ++ BFC_I A.tail := by
+  cases A with
+  | nil => exact False.elim (hn rfl)
+  | cons a as => rfl
 
 /-- Two valid chunk bitmasks are equal iff their interpretations are equal. -/
-axiom lemma_BFC_IEqual (A B : BFC_T) (_ : BFC_Inv A) (_ : BFC_Inv B) :
-    A = B ↔ BFC_I A = BFC_I B
+theorem lemma_BFC_IEqual (A B : BFC_T) (hA : BFC_Inv A) (hB : BFC_Inv B) :
+    A = B ↔ BFC_I A = BFC_I B := by
+  constructor
+  · intro h; exact congrArg BFC_I h
+  · intro h
+    induction A generalizing B with
+    | nil =>
+      cases B with
+      | nil => rfl
+      | cons b bs =>
+        have hb := hB b (by simp)
+        have hh := congrArg List.length h
+        simp [BFC_I, BFC_Flatten, hb, BFC_CHUNK_SIZE] at hh
+        omega
+    | cons a as ih =>
+      have ha := hA a (by simp)
+      have has : BFC_Inv as := by intro c hc; exact hA c (by simp [hc])
+      cases B with
+      | nil =>
+        have hh := congrArg List.length h
+        simp [BFC_I, BFC_Flatten, ha, BFC_CHUNK_SIZE] at hh
+      | cons b bs =>
+        have hb := hB b (by simp)
+        have hbs : BFC_Inv bs := by intro c hc; exact hB c (by simp [hc])
+        change a ++ BFC_I as = b ++ BFC_I bs at h
+        have hab := congrArg (List.take BFC_CHUNK_SIZE) h
+        have hab : a = b := by simpa [List.take_append, ← ha, hb] using hab
+        have hrest := congrArg (List.drop BFC_CHUNK_SIZE) h
+        have hrest : BFC_I as = BFC_I bs := by simpa [List.drop_append, ← ha, hb] using hrest
+        simp [hab, ih bs has hbs hrest]
 
 /-- Count set bits in a single chunk. -/
 def bFC_popcntChunk (chunk : List Bool) : Nat := chunk.countP id

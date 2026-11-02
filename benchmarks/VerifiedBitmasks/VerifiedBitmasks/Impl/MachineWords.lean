@@ -29,23 +29,112 @@ def BitwiseToSeqBool (a : UInt64) : List Bool := BitsToSeqBool (WordToBits a)
 /-- Convert a 64-element boolean list (LSB first) back to a `UInt64`. -/
 def SeqBoolToBitwise (s : List Bool) : UInt64 := BitsToWord (SeqBoolToBits s)
 
+private theorem machineWords_go_bit (s : List Bool) (idx : Nat) (acc : BV) (k : Nat) (hk : k < 64) :
+    (SeqBoolToBitsHelper.go s idx acc).getLsbD k =
+      (acc.getLsbD k || (if idx ≤ k then s.getD (k - idx) false else false)) := by
+  induction s generalizing idx acc with
+  | nil => simp [SeqBoolToBitsHelper.go]
+  | cons b rest ih =>
+    rw [SeqBoolToBitsHelper.go, ih]
+    by_cases heq : idx = k
+    · subst idx
+      cases b <;> simp [hk, show ¬ k + 1 ≤ k by omega, -BitVec.getLsbD_eq_getElem, BitVec.getLsbD_or, BitVec.getLsbD_shiftLeft, BitVec.getLsbD_one]
+    · by_cases hle : idx < k
+      · have hs : k - idx = (k - (idx + 1)) + 1 := by omega
+        have hz : k - idx ≠ 0 := by omega
+        simp [show idx ≤ k by omega, show idx + 1 ≤ k by omega, hs]
+        split <;> simp_all
+      · have hgt : k < idx := by omega
+        simp [show ¬ idx ≤ k by omega, show ¬ idx + 1 ≤ k by omega]
+        split <;> simp_all
+
+private theorem machineWords_seq_bit (s : List Bool) (k : Nat) (hk : k < 64) :
+    (SeqBoolToBits s).getLsbD k = s.getD k false := by
+  simpa [SeqBoolToBits, SeqBoolToBitsHelper] using machineWords_go_bit s 0 0 k hk
+
+private theorem machineWords_bits_round_cast (b : BV) : WordToBits (BitsToWord b) = b := by simp [WordToBits, BitsToWord]
+
+private theorem machineWords_bits_get (b : BV) (i : Nat) (hi : i < 64) :
+    (BitsToSeqBool b).getD i false = b.getLsbD i := by
+  have hj : i < (List.ofFn (fun j : Fin 64 => b.getLsb j)).length := by simpa only [List.length_ofFn]
+  unfold BitsToSeqBool
+  rw [List.getD_eq_getElem?_getD, List.getElem?_eq_getElem hj]
+  simp only [Option.getD_some, List.getElem_ofFn, BitVec.getLsb_eq_getElem, BitVec.getLsbD_eq_getElem hi]
+  rfl
+
+private theorem machineWords_mask_bit (x : BV) (k : Nat) (hk : k < 64) :
+    x &&& ((1 : BV) <<< k) = if x.getLsbD k then ((1 : BV) <<< k) else 0 := by
+  apply BitVec.eq_of_getLsbD_eq
+  intro j hj
+  by_cases heq : j = k
+  · subst j
+    cases hx : x.getLsbD k <;>
+      simp [hx, -BitVec.getLsbD_eq_getElem, BitVec.getLsbD_and,
+        BitVec.getLsbD_shiftLeft, BitVec.getLsbD_one, hk]
+  · have hz : ¬ (k ≤ j ∧ j - k = 0) := by omega
+    have hmask : (((1 : BV) <<< k).getLsbD j) = false := by
+      simp only [BitVec.getLsbD_shiftLeft, BitVec.getLsbD_one]
+      by_cases hle : k ≤ j <;> simp_all
+    cases hx : x.getLsbD k <;>
+      simp only [hx, Bool.false_eq_true, Bool.true_eq, ↓reduceIte,
+        BitVec.getLsbD_and, hmask, Bool.and_false, BitVec.getLsbD_zero]
+    simp [BitVec.getLsbD]
+
+private theorem machineWords_bit_is_get (x : BV) (j : UInt64) (hj : j < BitFields.WORD_SIZE) :
+    BitIsSet x j = x.getLsbD j.toNat := by
+  have hlt : j.toNat < 64 := by simpa [BitFields.WORD_SIZE, UInt64.lt_iff_toNat_lt] using hj
+  unfold BitIsSet BitAnd Bit
+  rw [machineWords_mask_bit x j.toNat hlt]
+  have hne : ((1 : BV) <<< j.toNat) ≠ 0 := by
+    intro heq
+    have hh := congrArg (fun b : BV => b.getLsbD j.toNat) heq
+    simp [ -BitVec.getLsbD_eq_getElem, BitVec.getLsbD_shiftLeft, BitVec.getLsbD_one, hlt] at hh
+  cases hx : x.getLsbD j.toNat <;> simp [hx, hne]
+  exact hne
+
 /-- Round-trip: List Bool → UInt64 → List Bool yields the original list. -/
-axiom lemma_SeqToBitsToSeq (b : List Bool) (h : b.length = 64) :
-    BitwiseToSeqBool (SeqBoolToBitwise b) = b
+theorem lemma_SeqToBitsToSeq (b : List Bool) (h : b.length = 64) :
+    BitwiseToSeqBool (SeqBoolToBitwise b) = b := by
+  change BitsToSeqBool (WordToBits (BitsToWord (SeqBoolToBits b))) = b
+  rw [machineWords_bits_round_cast]
+  apply List.ext_getElem (by simp only [BitsToSeqBool, List.length_ofFn, h])
+  intro i hi hj
+  have hi64 : i < 64 := by omega
+  have hh := machineWords_seq_bit b i hi64
+  simpa only [BitsToSeqBool, List.getElem_ofFn, BitVec.getLsb_eq_getElem,
+    BitVec.getLsbD_eq_getElem hi64, List.getD_eq_getElem?_getD, List.getElem?_eq_getElem hj,
+    Option.getD_some] using hh
 
 /-- Round-trip: UInt64 → List Bool → UInt64 yields the original value. -/
-axiom lemma_BitsToSeqToBits (b : UInt64) :
-    SeqBoolToBitwise (BitwiseToSeqBool b) = b
+theorem lemma_BitsToSeqToBits (b : UInt64) : SeqBoolToBitwise (BitwiseToSeqBool b) = b := by
+  apply UInt64.toBitVec_inj.mp
+  change WordToBits (BitsToWord (SeqBoolToBits (BitsToSeqBool (WordToBits b)))) = WordToBits b
+  rw [machineWords_bits_round_cast]
+  apply BitVec.eq_of_getLsbD_eq
+  intro i hi
+  rw [machineWords_seq_bit _ _ hi, machineWords_bits_get _ _ hi]
 
 /-- If all 64 bits agree, then the two UInt64 values are equal. -/
-axiom lemma_BitwiseAllBitsEqualBVEq (a b : UInt64)
+theorem lemma_BitwiseAllBitsEqualBVEq (a b : UInt64)
     (h : ∀ j : UInt64, j < BitFields.WORD_SIZE →
-      (BitIsSet (WordToBits a) j = BitIsSet (WordToBits b) j)) : a = b
+      (BitIsSet (WordToBits a) j = BitIsSet (WordToBits b) j)) : a = b := by
+  apply UInt64.toBitVec_inj.mp
+  apply BitVec.eq_of_getLsbD_eq
+  intro i hi
+  have hbig : i < 2 ^ 64 := by omega
+  have hj : (UInt64.ofNat i) < BitFields.WORD_SIZE := by
+    simpa [UInt64.lt_iff_toNat_lt, BitFields.WORD_SIZE, Nat.mod_eq_of_lt hbig] using hi
+  have hh := h (UInt64.ofNat i) hj
+  rw [machineWords_bit_is_get _ _ hj, machineWords_bit_is_get _ _ hj] at hh
+  simpa [WordToBits, Nat.mod_eq_of_lt hbig] using hh
 
 /-- Two UInt64 values are equal iff all their bit positions agree. -/
-axiom lemma_BitwiseEq (a b : UInt64) :
+theorem lemma_BitwiseEq (a b : UInt64) :
     (a = b) ↔ (∀ i : UInt64, i < BitFields.WORD_SIZE →
-      (BitIsSet (WordToBits a) i = BitIsSet (WordToBits b) i))
+      (BitIsSet (WordToBits a) i = BitIsSet (WordToBits b) i)) := by
+  constructor
+  · intro h; subst b; intro i hi; rfl
+  · exact lemma_BitwiseAllBitsEqualBVEq a b
 
 -- ── API signatures (no markers — fixed vocabulary) ────────────────────────────
 

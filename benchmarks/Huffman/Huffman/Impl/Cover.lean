@@ -13,10 +13,11 @@ are frozen vocabulary used by downstream specifications.
 -/
 
 inductive cover {A : Type} : List (BTree A) → BTree A → Prop where
-  | cover_leaf : ∀ a : A, cover [BTree.leaf a] (BTree.leaf a)
+  | cover_one : ∀ t, cover [t] t
   | cover_node :
-      ∀ (l1 l2 : List (BTree A)) (t1 t2 : BTree A),
-        cover l1 t1 → cover l2 t2 → cover (l1 ++ l2) (BTree.node t1 t2)
+      ∀ (l1 l2 : List (BTree A)) (t1 t2 t3 : BTree A),
+        List.Perm l1 (t1 :: t2 :: l2) →
+        cover (BTree.node t1 t2 :: l2) t3 → cover l1 t3
 
 def all_cover_aux {A : Type} (l : List (BTree A)) : Nat → List (BTree A)
   | 0 => []

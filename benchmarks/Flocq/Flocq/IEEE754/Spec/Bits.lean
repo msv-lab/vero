@@ -58,9 +58,10 @@ def spec_ternopNanPl64_def (impl : RepoImpl) : Prop :=
 /-- `splitBits` exposes the fixed sign/exponent/mantissa field split helper. -/
 def spec_splitBits_fields (impl : RepoImpl) : Prop :=
   ∀ (mw ew : Nat) (n : Int),
-    let body := n % (2 : Int) ^ (mw + ew + 1)
+    let mm := (2 : Int) ^ mw
+    let em := (2 : Int) ^ ew
     impl.flocq.splitBits mw ew n =
-      (decide (n < 0), body / (2 : Int) ^ mw, body % (2 : Int) ^ mw)
+      (decide (mm * em ≤ n), (n / mm) % em, n % mm)
 
 /-- Splitting an encoded float agrees with the dedicated float splitter. -/
 def spec_split_bits_of_binary_float_correct (impl : RepoImpl) : Prop :=
@@ -74,15 +75,18 @@ def spec_binaryFloatOfBitsAux_agrees (impl : RepoImpl) : Prop :=
     impl.flocq.binaryFloatOfBitsAux mw ew n = impl.flocq.binaryFloatOfBits mw ew n
 
 /-- `binaryFloatOfBits` is a left inverse of `bitsOfBinaryFloat`:
-    decoding the encoding of any `BinaryFloat` recovers the original float. -/
+    decoding the encoding of a valid source-domain `BinaryFloat` recovers it. -/
 def spec_binary_float_of_bits_of_binary_float (impl : RepoImpl) : Prop :=
-  ∀ (mw ew : Int) (x : BinaryFloat (mw + 1) ((2 : Int) ^ (ew - 1).toNat)),
+  ∀ (mw ew : Int), 0 < mw → 0 < ew → mw + 1 < (2 : Int) ^ (ew - 1).toNat →
+  ∀ (x : BinaryFloat (mw + 1) ((2 : Int) ^ (ew - 1).toNat)),
+  BinaryFloat.Valid (mw + 1) ((2 : Int) ^ (ew - 1).toNat) x →
   impl.flocq.binaryFloatOfBits mw ew (impl.flocq.bitsOfBinaryFloat mw ew x) = x
 
 /-- `bitsOfBinaryFloat` is a left inverse of `binaryFloatOfBits`:
-    encoding the decoding of any integer bit pattern recovers the original bits. -/
+    encoding the decoding of an integer in the source bit-width range recovers it. -/
 def spec_bits_of_binary_float_of_bits (impl : RepoImpl) : Prop :=
-  ∀ (mw ew : Int) (n : Int),
+  ∀ (mw ew : Int), 0 < mw → 0 < ew → mw + 1 < (2 : Int) ^ (ew - 1).toNat →
+  ∀ (n : Int), 0 ≤ n → n < (2 : Int) ^ (mw + ew + 1).toNat →
   impl.flocq.bitsOfBinaryFloat mw ew (impl.flocq.binaryFloatOfBits mw ew n) = n
 
 /-- `b32OfBits` is the binary32 specialization of `binaryFloatOfBits`. -/

@@ -282,6 +282,10 @@ def nameConstraints (parent target : AbstractCertificate) (isLeaf : Bool) : Bool
           attr.oid != "2.5.4.3" || dnsConstraints constraints attr.value)) &&
     directoryConstraints constraints target.subject
 
+/-- Certificates carrying extensions use the X.509 v3 wire value, 2. -/
+def checkExtensionVersion (cert : AbstractCertificate) : Bool :=
+  cert.allExts.isNone || cert.version == 2
+
 end Verdict.Policy.Firefox.Reference
 -- !benchmark @end global_aux
 
@@ -309,7 +313,8 @@ def Verdict.firefoxCertVerifiedLeaf : Verdict.FirefoxCertVerifiedLeafSig :=
     Verdict.Policy.Firefox.Reference.extendedKeyUsage cert &&
     Verdict.Policy.checkDuplicateExtensions cert &&
     Verdict.Policy.Firefox.Reference.handledExtensions cert &&
-    Verdict.Policy.Firefox.Reference.subjectKeyIdNoncritical cert
+    Verdict.Policy.Firefox.Reference.subjectKeyIdNoncritical cert &&
+    Verdict.Policy.Firefox.Reference.checkExtensionVersion cert
 -- !benchmark @end code def=firefoxCertVerifiedLeaf
 
 -- !benchmark @start code_aux def=firefoxCertVerifiedIntermediate
@@ -321,7 +326,8 @@ def Verdict.firefoxCertVerifiedIntermediate : Verdict.FirefoxCertVerifiedInterme
     Verdict.Policy.Firefox.Reference.nonLeaf env task cert leaf depth &&
     !env.crl.contains cert.fingerprint &&
     Verdict.Policy.Firefox.Reference.strongSignature cert.sigAlgInner.id &&
-    Verdict.Policy.Firefox.Reference.extendedKeyUsage cert
+    Verdict.Policy.Firefox.Reference.extendedKeyUsage cert &&
+    Verdict.Policy.Firefox.Reference.checkExtensionVersion cert
 -- !benchmark @end code def=firefoxCertVerifiedIntermediate
 
 -- !benchmark @start code_aux def=firefoxCertVerifiedRoot
@@ -333,7 +339,8 @@ def Verdict.firefoxCertVerifiedRoot : Verdict.FirefoxCertVerifiedRootSig :=
     Verdict.Policy.Firefox.Reference.nonLeaf env task cert leaf depth &&
     !(env.symantecRoots.contains cert.fingerprint &&
       !env.symantecExceptions.contains interm.fingerprint && cert.notBefore < 1464739200) &&
-    Verdict.Policy.Firefox.Reference.internationalValid env cert leaf
+    Verdict.Policy.Firefox.Reference.internationalValid env cert leaf &&
+    Verdict.Policy.Firefox.Reference.checkExtensionVersion cert
 -- !benchmark @end code def=firefoxCertVerifiedRoot
 
 -- !benchmark @start code_aux def=firefoxCheckAllNameConstraints

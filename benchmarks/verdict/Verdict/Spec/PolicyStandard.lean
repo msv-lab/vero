@@ -27,16 +27,20 @@ open Verdict.Policy.Standard
 /-! ## § 1  Chrome Conformance -/
 
 def spec_chrome_time_validity (impl : RepoImpl) : Prop :=
-  ∀ (env : Verdict.Policy.ChromePolicyEnv),
-    TimeValidity (impl.verdict.chromeValidChain env)
+  ∀ (env : Verdict.Policy.ChromePolicyEnv) chain task,
+    impl.verdict.chromeValidChain env chain task = true →
+    ∀ i, i + 1 < chain.length →
+      chain[i]!.notBefore ≤ task.now ∧ task.now ≤ chain[i]!.notAfter
 
 def spec_chrome_sig_alg_consistency (impl : RepoImpl) : Prop :=
   ∀ (env : Verdict.Policy.ChromePolicyEnv),
     SigAlgConsistency (impl.verdict.chromeValidChain env)
 
 def spec_chrome_basic_constraints_ca (impl : RepoImpl) : Prop :=
-  ∀ (env : Verdict.Policy.ChromePolicyEnv),
-    BasicConstraintsCA (impl.verdict.chromeValidChain env)
+  ∀ (env : Verdict.Policy.ChromePolicyEnv) chain task,
+    impl.verdict.chromeValidChain env chain task = true →
+    ∀ i, 0 < i → i + 1 < chain.length →
+      chain[i]!.extBasicConstraints.any (·.isCA) = true
 
 def spec_chrome_path_length_enforced (impl : RepoImpl) : Prop :=
   ∀ (env : Verdict.Policy.ChromePolicyEnv),
@@ -47,12 +51,19 @@ def spec_chrome_key_usage_ca (impl : RepoImpl) : Prop :=
     KeyUsageCA (impl.verdict.chromeValidChain env)
 
 def spec_chrome_key_usage_leaf (impl : RepoImpl) : Prop :=
-  ∀ (env : Verdict.Policy.ChromePolicyEnv),
-    KeyUsageLeaf (impl.verdict.chromeValidChain env)
+  ∀ (env : Verdict.Policy.ChromePolicyEnv) chain task,
+    impl.verdict.chromeValidChain env chain task = true → chain.length ≥ 1 →
+    match chain[0]!.extKeyUsage with
+    | some ku => if chain[0]!.extBasicConstraints.any (·.isCA) then ku.keyCertSign = true
+                 else (ku.digitalSignature || ku.keyEncipherment || ku.keyAgreement) = true
+    | none => True
 
 def spec_chrome_extended_key_usage_leaf (impl : RepoImpl) : Prop :=
-  ∀ (env : Verdict.Policy.ChromePolicyEnv),
-    ExtendedKeyUsageLeaf (impl.verdict.chromeValidChain env)
+  ∀ (env : Verdict.Policy.ChromePolicyEnv) chain task,
+    impl.verdict.chromeValidChain env chain task = true → chain.length ≥ 1 →
+    match chain[0]!.extExtendedKeyUsage with
+    | some eku => eku.usages.any (fun u => u == .serverAuth || u == .any) = true
+    | none => True
 
 def spec_chrome_unique_extensions (impl : RepoImpl) : Prop :=
   ∀ (env : Verdict.Policy.ChromePolicyEnv),
@@ -80,8 +91,9 @@ def spec_chrome_authority_key_id_valid (impl : RepoImpl) : Prop :=
     AuthorityKeyIdValid (impl.verdict.chromeValidChain env)
 
 def spec_chrome_not_revoked (impl : RepoImpl) : Prop :=
-  ∀ (env : Verdict.Policy.ChromePolicyEnv),
-    NotRevoked (impl.verdict.chromeValidChain env) (Verdict.Policy.Chrome.notInCrl env)
+  ∀ (env : Verdict.Policy.ChromePolicyEnv) chain task,
+    impl.verdict.chromeValidChain env chain task = true →
+    ∀ i, i + 1 < chain.length → Verdict.Policy.Chrome.notInCrl env chain[i]! = true
 
 def spec_chrome_subject_alt_name_present (impl : RepoImpl) : Prop :=
   ∀ (env : Verdict.Policy.ChromePolicyEnv),
@@ -139,12 +151,19 @@ def spec_firefox_name_constraints_respected (impl : RepoImpl) : Prop :=
       impl.verdict.firefoxCheckAllNameConstraints
 
 def spec_firefox_authority_key_id_valid (impl : RepoImpl) : Prop :=
-  ∀ (env : Verdict.Policy.FirefoxPolicyEnv),
-    AuthorityKeyIdValid (impl.verdict.firefoxValidChain env)
+  ∀ (env : Verdict.Policy.FirefoxPolicyEnv) chain task,
+    (∀ i, i + 1 < chain.length →
+      impl.verdict.firefoxLikelyIssued chain[i + 1]! chain[i]! = true) →
+    impl.verdict.firefoxValidChain env chain task = true →
+    ∀ i, i + 1 < chain.length → checkAuthKeyId chain[i + 1]! chain[i]! = true
 
 def spec_firefox_subject_alt_name_present (impl : RepoImpl) : Prop :=
-  ∀ (env : Verdict.Policy.FirefoxPolicyEnv),
-    SubjectAltNamePresent (impl.verdict.firefoxValidChain env)
+  ∀ (env : Verdict.Policy.FirefoxPolicyEnv) chain task,
+    impl.verdict.firefoxValidChain env chain task = true → chain.length ≥ 1 →
+    ∀ host, task.hostname = some host →
+      chain[0]!.extSubjectAltName.isSome = true ∨
+      (chain[0]!.extSubjectAltName = none ∧
+        Verdict.Policy.Firefox.Reference.hostnameMatches chain[0]! host = true)
 
 def spec_firefox_valid_version (impl : RepoImpl) : Prop :=
   ∀ (env : Verdict.Policy.FirefoxPolicyEnv),
@@ -181,13 +200,22 @@ def spec_openssl_name_constraints_respected (impl : RepoImpl) : Prop :=
     impl.verdict.opensslCheckNameConstraints
 
 def spec_openssl_authority_key_id_valid (impl : RepoImpl) : Prop :=
-  AuthorityKeyIdValid impl.verdict.opensslValidChain
+  ∀ chain task,
+    (∀ i, i + 1 < chain.length →
+      impl.verdict.opensslLikelyIssued chain[i + 1]! chain[i]! = true) →
+    impl.verdict.opensslValidChain chain task = true →
+    ∀ i, i + 1 < chain.length → checkAuthKeyId chain[i + 1]! chain[i]! = true
 
 def spec_openssl_valid_pki (impl : RepoImpl) : Prop :=
   ValidPKI impl.verdict.opensslValidChain Verdict.Policy.OpenSSL.checkCertKeyLevel
 
 def spec_openssl_subject_alt_name_present (impl : RepoImpl) : Prop :=
-  SubjectAltNamePresent impl.verdict.opensslValidChain
+  ∀ chain task,
+    impl.verdict.opensslValidChain chain task = true → chain.length ≥ 1 →
+    ∀ host, task.hostname = some host →
+      chain[0]!.extSubjectAltName.isSome = true ∨
+      (chain[0]!.extSubjectAltName = none ∧
+        impl.verdict.opensslCheckHostname chain[0]! host = true)
 
 def spec_openssl_hostname_match (impl : RepoImpl) : Prop :=
   HostnameMatch impl.verdict.opensslValidChain impl.verdict.opensslCheckHostname
