@@ -4867,8 +4867,6 @@
   ],
   "api_namespace": "DedekindReals",
   "trusted_axioms": [
-    "unfinishedMinMax",
-    "unfinishedOrder",
     "Rplus_lower_bound",
     "Rplus_upper_bound",
     "Rplus_lower_open",
@@ -4893,20 +4891,6 @@
     "Rinv_located"
   ],
   "trusted_axiom_sources": {
-    "unfinishedMinMax": {
-      "source_name": "unfinished",
-      "source_id": "theories/MinMax.v:unfinished:401",
-      "source_file": "theories/MinMax.v",
-      "source_signature": "Axiom unfinished : forall (A : Type), A.",
-      "reason": "Upstream Coq module declares `Axiom unfinished : forall (A : Type), A`; represented explicitly as a trusted external boundary rather than a manifest api_helper def."
-    },
-    "unfinishedOrder": {
-      "source_name": "unfinished",
-      "source_id": "theories/Order.v:unfinished:426",
-      "source_file": "theories/Order.v",
-      "source_signature": "Axiom unfinished : forall (A : Type), A.",
-      "reason": "Upstream Coq module declares `Axiom unfinished : forall (A : Type), A`; represented explicitly as a trusted external boundary rather than a manifest api_helper def."
-    },
     "Rplus_lower_bound": {
       "source_name": "Rplus",
       "source_id": "theories/Additive.v:Rplus:330",
