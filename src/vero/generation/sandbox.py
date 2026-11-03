@@ -142,7 +142,7 @@ def create_sandbox(
             raise ValueError(
                 f"seed_artifact mode {seed_artifact.mode!r} != sandbox mode {mode!r}"
             )
-        n = overlay_artifact_slots(sandbox_dir, seed_artifact)
+        n = overlay_artifact_slots(sandbox_dir, seed_artifact, bench, mode=mode)
         logger.info("resume: seeded {} filled slot(s) from prior artifact", n)
 
     # Drop any feedback copy from prior iterations. If the caller
