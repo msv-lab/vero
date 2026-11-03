@@ -785,6 +785,13 @@ def test_reference_consistency_accepts_impl_rooted_api_reference(
     assert result.status == "pass"
 
 
+def test_reference_consistency_accepts_dedekind_inverse_specs() -> None:
+    from vero.curation.validation.checks import check_reference_consistency
+
+    result = check_reference_consistency(REPO_ROOT / "benchmarks" / "DedekindReals")
+    assert result.status == "pass", result.details
+
+
 def test_reference_consistency_ignores_manifest_spec_names(tmp_path: Path) -> None:
     """The checked symbol set is manifest APIs only, not spec declarations."""
     import shutil
