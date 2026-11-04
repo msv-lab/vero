@@ -141,118 +141,6 @@ abbrev OpensslValidChainSig :=
 end Verdict
 
 -- !benchmark @start global_aux
-namespace Verdict.Policy.OpenSSL
-
-def checkAuthSubjectKeyId (cert : AbstractCertificate) (isRoot isLeaf : Bool) : Bool :=
-  !cert.extAuthorityKeyId.any (fun aki => aki.critical == some true) &&
-  !cert.extSubjectKeyId.any (fun ski => ski.critical == some true) &&
-  if cert.version >= 2 then
-    (isRoot || cert.extAuthorityKeyId.any (fun aki => aki.keyId.isSome)) &&
-    (isLeaf || cert.extSubjectKeyId.isSome)
-  else
-    cert.allExts.isNone && cert.extAuthorityKeyId.isNone &&
-    cert.extSubjectKeyId.isNone && cert.extExtendedKeyUsage.isNone &&
-    cert.extBasicConstraints.isNone && cert.extKeyUsage.isNone &&
-    cert.extSubjectAltName.isNone && cert.extNameConstraints.isNone &&
-    cert.extCertPolicies.isNone && cert.extAuthorityInfoAccess.isNone
-
-def checkPurpose (cert : AbstractCertificate) (isLeaf : Bool) : Bool :=
-  (match cert.extExtendedKeyUsage with
-   | none => true
-   | some eku => eku.usages.contains .serverAuth) &&
-  if isLeaf then
-    match cert.extKeyUsage with
-    | none => true
-    | some ku => ku.digitalSignature || ku.keyEncipherment || ku.keyAgreement
-  else checkCa cert == 1
-
-def checkUnhandledExtensions (cert : AbstractCertificate) : Bool :=
-  match cert.allExts with
-  | none => true
-  | some exts => exts.all fun ext =>
-    ext.critical != some true ||
-      ["2.16.840.1.113730.1.1", "2.5.29.15", "2.5.29.17", "2.5.29.19",
-       "2.5.29.32", "2.5.29.31", "2.5.29.37", "1.3.6.1.5.5.7.48.1.5",
-       "2.5.29.36", "1.3.6.1.5.5.7.1.14", "2.5.29.30", "2.5.29.33",
-       "2.5.29.54"].contains ext.oid
-
-def validCertCommon (task : PolicyTask) (cert : AbstractCertificate)
-    (isLeaf isRoot : Bool) (depth : Nat) : Bool :=
-  checkCertKeyLevel cert && checkCertTime cert task.now &&
-  checkBasicConstraints cert && checkKeyUsage cert &&
-  (if isLeaf then checkCa cert != 2 else checkCa cert == 1) &&
-  !cert.issuer.rdns.isEmpty &&
-  (!cert.subject.rdns.isEmpty ||
-    (cert.extSubjectAltName.any (fun san => !san.names.isEmpty && san.critical == some true) &&
-     !cert.extBasicConstraints.any (fun bc => bc.isCA) &&
-     !cert.extKeyUsage.any (fun ku => ku.keyCertSign))) &&
-  checkSan cert && cert.sigAlgInner.bytes == cert.sigAlgOuter.bytes &&
-  checkPurpose cert isLeaf && checkAuthSubjectKeyId cert isRoot isLeaf &&
-  (match cert.extBasicConstraints with
-   | none => true
-   | some bc => match bc.pathLen with
-     | none => true
-     | some pathLen => pathLen >= 0 && (isLeaf || (depth : Int) <= pathLen)) &&
-  checkUnhandledExtensions cert && checkDuplicateExts cert
-
-def matchDnsName (pattern name : String) : Bool :=
-  pattern.isEmpty ||
-  (name.length > pattern.length &&
-    (name.toList.getD (name.length - pattern.length - 1) ' ' == '.' ||
-     pattern.startsWith ".") &&
-    String.ofList (name.toList.drop (name.length - pattern.length)) == pattern) ||
-  (name.length == pattern.length &&
-    Verdict.Policy.Reference.lowerString pattern == Verdict.Policy.Reference.lowerString name)
-
-def isGeneralSubtreeOf (constraint name : GeneralName) : Bool :=
-  match constraint, name with
-  | .dnsName pattern, .dnsName name => matchDnsName pattern name
-  | .directoryName constraint, .directoryName name =>
-    Verdict.Policy.Reference.isSubtreeOf constraint name true
-  | .ipAddr range, .ipAddr addr => Verdict.Policy.Reference.ipAddrInRange range addr
-  | _, _ => false
-
-def sameGeneralNameType (a b : GeneralName) : Bool :=
-  match a, b with
-  | .dnsName _, .dnsName _ => true
-  | .directoryName _, .directoryName _ => true
-  | .ipAddr _, .ipAddr _ => true
-  | _, _ => false
-
-def ncMatch (name : GeneralName) (nc : NameConstraints) : Bool :=
-  (match name with | .otherName => false | _ => true) &&
-  (!nc.permitted.any (sameGeneralNameType name) ||
-    nc.permitted.any (fun constraint => isGeneralSubtreeOf constraint name)) &&
-  !nc.excluded.any (fun constraint => isGeneralSubtreeOf constraint name)
-
-def checkSanHasDns (cert : AbstractCertificate) : Bool :=
-  cert.extSubjectAltName.any fun san =>
-    san.names.any fun name => match name with | .dnsName _ => true | _ => false
-
--- The source's resource limit saturates sums at the 64-bit usize maximum.
-def addUsize (a b : Nat) : Nat := min (a + b) 18446744073709551615
-
-def checkNameConstraintsHelper (cert : AbstractCertificate)
-    (nc : NameConstraints) (isLeaf : Bool) : Bool :=
-  let sanCount := match cert.extSubjectAltName with
-    | none => 0
-    | some san => san.names.length
-  let nameCount := addUsize cert.subject.rdns.length sanCount
-  let constraintCount := addUsize nc.permitted.length nc.excluded.length
-  (nameCount == 0 || constraintCount <= 1048576 / nameCount) &&
-  ncMatch (.directoryName cert.subject) nc &&
-  (match cert.extSubjectAltName with
-   | none => true
-   | some san => san.names.all (fun name => ncMatch name nc)) &&
-  (!isLeaf || checkSanHasDns cert ||
-    cert.subject.rdns.all (fun rdn => rdn.all (fun attr =>
-      attr.oid != "2.5.4.3" || ncMatch (.dnsName attr.value) nc)))
-
-def checkValidPattern (pattern : String) : Bool :=
-  !pattern.startsWith "*." ||
-    (pattern.length >= 2 && (String.ofList (pattern.toList.drop 2)).any (· == '.'))
-
-end Verdict.Policy.OpenSSL
 -- !benchmark @end global_aux
 
 /-! ## § 3  OpenSSL Per-Certificate Verification (LLM Implements) -/
@@ -262,7 +150,7 @@ end Verdict.Policy.OpenSSL
 
 def Verdict.opensslValidLeaf : Verdict.OpensslValidLeafSig :=
 -- !benchmark @start code def=opensslValidLeaf
-  fun task cert => Verdict.Policy.OpenSSL.validCertCommon task cert true false 0
+  sorry
 -- !benchmark @end code def=opensslValidLeaf
 
 -- !benchmark @start code_aux def=opensslValidIntermediate
@@ -270,7 +158,7 @@ def Verdict.opensslValidLeaf : Verdict.OpensslValidLeafSig :=
 
 def Verdict.opensslValidIntermediate : Verdict.OpensslValidIntermediateSig :=
 -- !benchmark @start code def=opensslValidIntermediate
-  fun task cert depth => Verdict.Policy.OpenSSL.validCertCommon task cert false false depth
+  sorry
 -- !benchmark @end code def=opensslValidIntermediate
 
 -- !benchmark @start code_aux def=opensslValidRoot
@@ -278,7 +166,7 @@ def Verdict.opensslValidIntermediate : Verdict.OpensslValidIntermediateSig :=
 
 def Verdict.opensslValidRoot : Verdict.OpensslValidRootSig :=
 -- !benchmark @start code def=opensslValidRoot
-  fun task cert depth => Verdict.Policy.OpenSSL.validCertCommon task cert false true depth
+  sorry
 -- !benchmark @end code def=opensslValidRoot
 
 -- !benchmark @start code_aux def=opensslCheckNameConstraints
@@ -286,13 +174,7 @@ def Verdict.opensslValidRoot : Verdict.OpensslValidRootSig :=
 
 def Verdict.opensslCheckNameConstraints : Verdict.OpensslCheckNameConstraintsSig :=
 -- !benchmark @start code def=opensslCheckNameConstraints
-  fun chain =>
-    (List.range chain.length).all fun i =>
-      i == 0 || match chain[i]!.extNameConstraints with
-      | none => true
-      | some nc => (List.range i).all fun j =>
-        Verdict.Policy.Reference.sameDN chain[j]!.subject chain[j]!.issuer true ||
-        Verdict.Policy.OpenSSL.checkNameConstraintsHelper chain[j]! nc (j == 0)
+  sorry
 -- !benchmark @end code def=opensslCheckNameConstraints
 
 -- !benchmark @start code_aux def=opensslCheckHostname
@@ -300,18 +182,7 @@ def Verdict.opensslCheckNameConstraints : Verdict.OpensslCheckNameConstraintsSig
 
 def Verdict.opensslCheckHostname : Verdict.OpensslCheckHostnameSig :=
 -- !benchmark @start code def=opensslCheckHostname
-  fun cert hostname =>
-    let hostname := Verdict.Policy.Reference.lowerString hostname
-    cert.extSubjectAltName.any (fun san => san.names.any (fun name =>
-      match name with
-      | .dnsName dnsName =>
-        Verdict.Policy.OpenSSL.checkValidPattern dnsName &&
-        Verdict.Policy.matchName (Verdict.Policy.Reference.lowerString dnsName) hostname
-      | _ => false)) ||
-    (!Verdict.Policy.OpenSSL.checkSanHasDns cert &&
-      cert.subject.rdns.any (fun rdn => rdn.any (fun attr =>
-        attr.oid == "2.5.4.3" && Verdict.Policy.OpenSSL.checkValidPattern attr.value &&
-        Verdict.Policy.matchName (Verdict.Policy.Reference.lowerString attr.value) hostname)))
+  sorry
 -- !benchmark @end code def=opensslCheckHostname
 
 /-! ## § 4  OpenSSL Policy Composition (LLM Implements) -/
@@ -321,9 +192,7 @@ def Verdict.opensslCheckHostname : Verdict.OpensslCheckHostnameSig :=
 
 def Verdict.opensslLikelyIssued : Verdict.OpensslLikelyIssuedSig :=
 -- !benchmark @start code def=opensslLikelyIssued
-  fun issuer subject =>
-    Verdict.Policy.Reference.sameDN issuer.subject subject.issuer true &&
-    Verdict.Policy.checkAuthKeyId issuer subject
+  sorry
 -- !benchmark @end code def=opensslLikelyIssued
 
 -- !benchmark @start code_aux def=opensslValidChain
@@ -331,14 +200,5 @@ def Verdict.opensslLikelyIssued : Verdict.OpensslLikelyIssuedSig :=
 
 def Verdict.opensslValidChain : Verdict.OpensslValidChainSig :=
 -- !benchmark @start code def=opensslValidChain
-  fun chain task =>
-    chain.length >= 2 &&
-    Verdict.opensslValidLeaf task chain[0]! &&
-    ((List.range (chain.length - 2)).all fun offset =>
-      Verdict.opensslValidIntermediate task chain[offset + 1]! offset) &&
-    Verdict.opensslValidRoot task chain[chain.length - 1]! (chain.length - 2) &&
-    Verdict.opensslCheckNameConstraints chain &&
-    (match task.hostname with
-     | none => true
-     | some hostname => Verdict.opensslCheckHostname chain[0]! hostname)
+  sorry
 -- !benchmark @end code def=opensslValidChain
