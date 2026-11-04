@@ -17,21 +17,18 @@ from typing import Literal
 from loguru import logger
 
 from vero.generation.benchmark import Benchmark, load_slots
-from vero.generation.extractor import Artifact, ExtractedSlot, expected_slots
+from vero.generation.extractor import Artifact, ExtractedSlot
 from vero.generation.sandbox import SandboxResult, create_sandbox
 
 Mode = Literal["proof", "codeproof"]
 
 
-def overlay_artifact_slots(
-    sandbox_dir: Path, artifact: Artifact, bench: Benchmark, *, mode: Mode
-) -> int:
+def overlay_artifact_slots(sandbox_dir: Path, artifact: Artifact) -> int:
     """Overlay an artifact's filled slot bodies onto an existing sandbox.
 
     Edits the marker regions of files already present under ``sandbox_dir``
     in place; does NOT create the sandbox (the caller owns that). Slots are
-    limited to the trusted benchmark + mode schedule and matched by
-    ``(prefix, key, def_name)`` — never by line number — so the
+    matched by ``(prefix, key, def_name)`` — never by line number — so the
     fresh sandbox's own marker positions govern. Only ``found`` slots with a
     non-empty ``body_lines`` are applied. Returns the count applied.
 
@@ -40,22 +37,8 @@ def overlay_artifact_slots(
     continues from a prior trial's filled slots).
     """
     sandbox_dir = Path(sandbox_dir)
-    allowed = {
-        (s.file, s.prefix, s.key, s.def_name, s.expected_kind, s.expected_target)
-        for s in expected_slots(bench, mode)
-    }
     by_file: dict[str, list[ExtractedSlot]] = {}
     for s in artifact.slots:
-        identity = (
-            s.file,
-            s.prefix,
-            s.key,
-            s.def_name,
-            s.expected_kind,
-            s.expected_target,
-        )
-        if identity not in allowed:
-            continue
         if not s.found:
             continue
         # Pure comments with no real body are effectively identical to the
@@ -144,7 +127,7 @@ def render_sandbox(
     )
     bench = Benchmark(sandbox.sandbox_dir)
 
-    filled = overlay_artifact_slots(sandbox.sandbox_dir, artifact, bench, mode=mode)
+    filled = overlay_artifact_slots(sandbox.sandbox_dir, artifact)
 
     # Sanity: every non-default slot from the artifact should have landed.
     logger.info(
