@@ -60,7 +60,5 @@ end Verdict
 
 def Verdict.toHexUpper : Verdict.ToHexUpperSig :=
 -- !benchmark @start code def=toHexUpper
-  fun data => data.foldl (fun (result : String) (byte : UInt8) =>
-    (result.push (Verdict.hexUpperDigit (byte >>> 4))).push
-      (Verdict.hexUpperDigit (byte &&& 0x0f))) ""
+  sorry
 -- !benchmark @end code def=toHexUpper
