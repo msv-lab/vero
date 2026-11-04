@@ -41,18 +41,17 @@ def codeproof_sandbox(tmp_path: Path) -> Path:
 def test_expected_slots_proof_mode_counts() -> None:
     bench = Benchmark(REF)
     sched = expected_slots(bench, mode="proof")
-    # Impl: 4 modules × (imports + global_aux) + 10 APIs × (code_aux + code) = 28
     # Proof: 4 modules × (imports + global_aux) + 11 specs × 2 kinds × (proof_aux + proof) = 52
-    assert len(sched) == 28 + 52
+    assert len(sched) == 52
     counts = {
         k: sum(1 for e in sched if e.key == k)
         for k in {"imports", "global_aux", "code", "code_aux", "proof", "proof_aux"}
     }
     assert counts == {
-        "imports": 8,
-        "global_aux": 8,  # 4 impl + 4 proof files
-        "code": 10,
-        "code_aux": 10,
+        "imports": 4,
+        "global_aux": 4,
+        "code": 0,
+        "code_aux": 0,
         "proof": 22,
         "proof_aux": 22,
     }
@@ -167,12 +166,14 @@ def test_extract_codeproof_blank_impl_code_slots(codeproof_sandbox: Path) -> Non
         assert s.contains_sorry, f"{s.def_name} should contain sorry"
 
 
-def test_extract_proof_mode_keeps_impl_bodies(proof_sandbox: Path) -> None:
-    a = extract(proof_sandbox, Benchmark(REF), mode="proof")
-    code_slots = slots_by(a, key="code")
-    assert len(code_slots) == 10
-    non_sorry = [s for s in code_slots if not s.contains_sorry]
-    assert len(non_sorry) == 10
+def test_extract_proof_mode_excludes_impl_slots(proof_sandbox: Path) -> None:
+    bench = Benchmark(REF)
+    for impl in bench.all_impl_files():
+        (proof_sandbox / impl.relative_to(REF)).write_text("malformed impl markers")
+    a = extract(proof_sandbox, bench, mode="proof")
+    assert all("/Proof/" in s.file for s in a.slots)
+    assert all(s.found for s in a.slots)
+    assert a.file_errors == {}
 
 
 def test_artifact_json_round_trip(proof_sandbox: Path) -> None:
