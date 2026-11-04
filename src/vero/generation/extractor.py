@@ -163,10 +163,10 @@ def expected_slots(bench: Benchmark, mode: Mode) -> list[ExpectedSlot]:
     """
     out: list[ExpectedSlot] = []
 
-    # Impl/<Module>.lean — codeproof only; per module: imports, global_aux, and per API:
+    # Impl/<Module>.lean — per module: imports, global_aux, and per API:
     # code_aux + code. Spec-only modules (impl_rel is None) have no impl
     # file, so they contribute no impl slots.
-    for m in bench.iter_modules() if mode == "codeproof" else ():
+    for m in bench.iter_modules():
         if m.impl_rel is None:
             continue
         out.append(
